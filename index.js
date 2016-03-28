@@ -12,7 +12,7 @@
         timestamp: true,
         filename: "./logs/error.log",
         maxsize: 10240,
-        level: "info"
+        level: "error"
       })
     ]
   });
