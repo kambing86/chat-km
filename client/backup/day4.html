@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<!-- saved from url http://www.bootstraptor.com ####################################################################
+Don't remove this attribution. 
+This template build on DevKit http://www.bootstraptor.com 
+##########################################################################
+-->
+<html lang="en">
+	<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <title>DBS BE A CHAMPION</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+  <script src="js/lib/jquery-1.11.3.min.js"></script>
+  <script src="js/lib/jquery.browser.js"></script>
+  <script src="js/lib/jquery.ba-hashchange.min.js"></script>
+  <script src="js/lib/bootstrap.min.js"></script>
+  <script src="js/lib/modernizr-custom.js"></script>
+  <script src="js/lib/moment.min.js"></script>
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="js/mobile-sidebar.js"></script>
+  <script src="js/chat.js"></script>
+<script src="assets/js/script.js"></script>
+
+<link href="assets/css/theme-flat-ui.css" rel="stylesheet">
+<link href="http://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.min.css" rel="stylesheet">
+
+<!--[if lt IE 7]>
+	<link href="http://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome-ie7.min.css" rel="stylesheet">
+	<![endif]-->
+    <!-- Fav and touch icons -->
+	
+    <!-- Le styles -->
+<!-- GOOGLE FONT-->
+<link href='http://fonts.googleapis.com/css?family=Roboto:400,300,700italic,700,500&amp;subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+
+<!-- /GOOGLE FONT-->	
+<!-- SOME BOOTSTRAP OVERRIDES STYLES -->
+
+<style type="text/css">
+      body {
+       
+        padding-bottom: 0px;
+		background-color:#000000;
+	
+      }
+		.wrapper{
+		max-width:570px;
+		margin-left:auto;
+		margin-right:auto;
+		overflow:hidden;
+		
+	}
+
+	.navbar {
+		margin-bottom: 0px;
+	}
+
+ #foot-sec .jumbotron{
+		-webkit-border-radius: 0px;
+		-moz-border-radius: 0px;
+		border-radius: 0px;
+		-webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
+		-moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
+		box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
+		border-right:0px;
+		border-left:0px;
+		background-color:#358cce;
+		color:#fff;
+		margin-top:-40px;
+	}
+
+	.thumbnail{
+		margin-bottom:30px;
+	}
+	
+	footer{
+		padding-top:40px;
+		border-top:1px solid rgba(0,0,0, .3);
+
+	}
+	
+	.related-projects{
+		padding-top:20px;
+		margin-top:20px;
+		
+	}
+	.hamburger{
+	background-color: transparent;
+	border: 1px solid transparent;
+	border-radius: 4px;
+	position: relative;
+	float: left;
+	margin-right: 15px;
+	padding: 3px 10px 0 20px;
+	/*margin-top: 8px;*/
+	margin-bottom: 8px;
+	background-color: transparent;
+	border: 1px solid transparent;
+	border-radius: 0px;
+ 
+  }
+  
+	.black-text {
+		color:#262626;}
+	
+	.red-text {
+		color:#ed1b24;}
+	.black-set {
+		background-color:#000000;}
+	.grey{
+		background-color:#d1d2d4;
+		}
+	.lightgrey {
+		background:#e7e7e8}
+	.border-bot {
+		border-bottom: 1px solid #808080;}	
+		
+	.jumbotron {
+		background:url(images/background.jpg);}	
+	form-group {
+		min-height: 300px;}
+		
+	.navbar-fixed-top {
+		max-width:570px;
+		margin:0 auto;
+		}	
+			
+
+	@media only screen 
+  and (min-device-width: 320px) 
+  and (max-device-width: 568px)
+  and (-webkit-min-device-pixel-ratio: 2) {
+	  .dbs-banner {
+		  float:right;
+		 }
+		
+		
+}
+
+a.accordion-toggle{
+	text-decoration:none;}
+.highlight:hover {
+	background-color:#393939;}	
+
+ 
+	.menu_footer{
+		background-color:#f72c32;}
+
+a.menu_select:hover{
+		 color:695858 !important;}
+ 
+ textarea {
+	 resize:vertical !important;}
+
+
+    </style>
+
+<link href="assets/css/font-awesome.min.css" rel="stylesheet"> 
+
+
+<!--[if lt IE 7]>
+	<link href="assets/css/font-awesome-ie7.min.css" rel="stylesheet">
+	<![endif]-->
+    <!-- Fav and touch icons -->
+
+
+<!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+<!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js" type="text/javascript"></script>
+    <![endif]-->
+<!-- Le fav and touch icons -->
+<link rel="shortcut icon" href="assets/ico/favicon.ico">
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="assets/ico/apple-touch-icon-144-precomposed.png">
+<link rel="apple-touch-icon-precomposed" sizes="114x114" href="assets/ico/apple-touch-icon-114-precomposed.png">
+<link rel="apple-touch-icon-precomposed" sizes="72x72" href="assets/ico/apple-touch-icon-72-precomposed.png">
+<link rel="apple-touch-icon-precomposed" href="assets/ico/apple-touch-icon-57-precomposed.png">
+</head>
+<body>
+  
+<!-- MAIN WRAPPER class="wrapper" max-width="1110px"-->
+<div class="wrapper">
+<header id="head-top">	
+	<!-- NAVBAR-->
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation" onclick="updateMenuProfile()">
+		
+	  <!-- Brand and toggle get grouped for better mobile display -->
+	  <div class="navbar-header">
+		<button id="hamburger"  type="button" class="navbar-toggle"  >
+		  <span class="sr-only">Toggle navigation</span>
+		  <span class="icon-bar"></span>
+		  <span class="icon-bar"></span>
+		  <span class="icon-bar"></span>
+		</button>
+			
+        <a class="navbar-brand" href="#">Be a CHAMPION</a>
+        
+	  </div>
+     
+	
+</nav>
+	
+
+		
+
+</header>
+
+
+<div class="container" style="background:#b50b13; padding-top:48px;">
+        <div class="row " id="navtest" style="display: none">
+        		<ul  class="nav nav-pills nav-stacked">
+                	<li><a href="menu.html">Home</a></li>
+			  <li><a href="haiku.html">Write a haiku and win a grand prize</a></li>
+              		  <li><a href="ask.html">Ask Sim & SGMC anything</a></li>
+             
+                          <li class="menu_footer"><a href="profile.html">
+                                        <span id="menuUsername">test@dbs.com</span>
+                                        <span style="float:right" id="menuUserPoints">10 points</span>
+                                </a>
+                        </li>
+			
+                </ul>
+        		
+        </div>
+</div>
+
+
+<div class="jumbotron">
+		<h2 class="grey_text" style="margin:5px 0">DAY 4</h2>
+		<h1  class="red-text" style="margin:5px 0"> PRIDE!</h1>
+        <h3>Can we truly live our PRIDE! values? Yes, we can!</h3>
+<h5>Our values determine our actions, which determine our habits, which determine our character. When we truly live our PRIDE! values, we will make banking joyful, and make DBS a great place to work.</h5>
+       	<h5>
+   
+       	<ul style="list-style:none">
+       	  <li><em class="icon-bolt"></em> Purpose-driven</li>
+          <li><em class="icon-bolt"></em> Relationship-led</li>
+          <li><em class="icon-bolt"></em> Innovative</li>
+          <li><em class="icon-bolt"></em> Decisive</li>
+          <li><em class="icon-bolt"></em> E!verything Fun</li>
+    </ul>
+       </h5>
+       <h4>Today, we focus on the R and D in PRIDE! </h4>
+       
+       <!-- Button trigger modal -->
+  <a data-toggle="modal" href="#myModal1" class="btn btn-primary btn-lg">Read More</a>  
+ </div>
+
+ 
+
+<div class="container grey">
+	<div class="row" style="padding-top:10px;">
+	
+	
+	<!-- ITEM-->
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+			<div class="row">
+            	<div class="panel grey" style="margin-bottom: 0px;" >
+				</div>
+			</div>
+           </div> 
+           
+           
+            <!-- Example row of columns -->
+      <div class="row" style="margin-top:10px;">
+        <div class="container">
+         <div class="col-xs-12 col-sm-12  col-md-12 col-lg-12">
+			<div class="panel ">
+				<div class="panel-heading" style="background:#e7e7e8">
+				  <h5 class="black-text">In DBS, you are first and foremost paid to think, then to make a judgment call to take a decisions and to stand up and take accountability.
+                  <br/>
+                  
+                  
+                  </h5> <small class="red-text">Want to be empowered and trusted to make decisions? Watch this view to earn 25 points</small>
+				 
+				</div>
+                <div class="panel-body lightgrey">
+                	<div class="row text-center">
+                    						<video width="100%" controls>
+							<source src="http://develop-sg.3radical.com:3001/pictures/2e68f52af0b10e517bed4b5e14774b9d.mp4" type="video/mp4" />
+							Your browser does not support HTML5 video.
+						</video>
+                    </div>	
+                    <div class="panel-footer text-right lightgrey">
+                        <div class="row">
+
+      <div id="chat">
+        <div class="chatArea">
+          <div align="left" id="previousmsg"> </em><a href="#" onclick="loadPreviousMessage();return false;" class="red-text"><em class="icon-caret-right"></em> View previous comments <span id="totalmessage"></span></a></div>
+          <div class="messages"></div>
+        </div>
+        <input class="inputMessage form-control" placeholder="Write your comment..." />
+      </div>
+
+
+                        </div>
+                        </div>
+                </div>
+               
+			
+		  </div>
+         
+		  </div>
+        </div>
+        </div>
+        
+        
+     
+        </div>
+        
+        
+        <div class="row" style="padding-top:10px;">
+	
+	
+	<!-- ITEM-->
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+			<div class="row">
+            	<div class="panel grey" style="margin-bottom: 0px;" >
+				</div>
+			</div>
+           </div> 
+           
+           
+            <!-- Example row of columns -->
+      <div class="row" style="margin-top:10px;">
+        <div class="container">
+         <div class="col-xs-12 col-sm-12  col-md-12 col-lg-12">
+			<div class="panel ">
+				<div class="panel-heading" style="background:#e7e7e8">
+				  <h5 class="black-text"> Ever held back your views in discussions or meetings? Here’s how to disagree respectfully, speak up and challenge the status quo.</h5>
+				  <small class="red-text">Remember, your views matter. 25 points</small>
+				</div>
+                <div class="panel-body lightgrey">
+                	<div class="row text-center">
+                    						<video width="100%" controls>
+							<source src="http://develop-sg.3radical.com:3001/pictures/2e68f52af0b10e517bed4b5e14774b9d.mp4" type="video/mp4" />
+							Your browser does not support HTML5 video.
+						</video>
+                    </div>	
+                    <div class="panel-footer text-right lightgrey">
+                        <div class="row">
+
+                        
+                        </div>
+                        </div>
+                    
+                </div>
+               
+			
+		  </div>
+         
+		  </div>
+        </div>
+        </div>
+        
+        
+     
+        </div>
+        
+        
+  
+	</div><!--/container-->
+    
+    
+    
+    
+    <div class="container">
+    			<div class="row">
+                   <div class="panel panel-default lightgrey">
+           
+				<div class="panel-body">
+					<div class="panel-group" id="accordion">
+					  <div class="panel" style="background:#ee1c24">
+						
+                        <div class="panel-heading highlight">
+                          <h3 class="panel-title"> <a class="btn_accordion accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseOne"> <span style="float:right" class="icon icon-plus-sign"></span> Take the quiz of the day <small style=" color:#FFFFFF">(Earn 10 points for each correct answer)</small> </a> </h3>
+                        </div>
+                        
+						<div id="collapseOne" class="panel-collapse collapse">
+						  <div class="panel-body grey black-text">
+							 	<div class="row" style="padding:0 15px">
+                                <p><strong>Q1.</strong> How can we develop our critical thinking abilities to arrive at better decisions?</p>
+                             <form role="form">
+                              <div class="radio">
+                                <label><input type="radio" name="optradio">  Leave the decision making to the boss</label>
+                              </div>
+                              <div class="radio">
+                                <label><input type="radio" name="optradio"> Agree with the majority opinion</label>
+                              </div>
+                              <div class="radio">
+                                <label><input type="radio" name="optradio">   Put forward at least two suggestions and make a recommendation</label>
+                              </div>
+                              
+                              
+                             <button class="btn btn-lg btn-primary  pull-right" type="submit"><strong>Submit</strong></button>           
+                            </form>
+                            </div>
+                            
+                              <hr>
+                              
+                              <div class="form-group">
+                                <p><strong>Q2.</strong> There are three components to being Decisive: Think, Act and Own. Which component do you struggle most with and why? </p>
+                                 <form role="form">
+                                <textarea type="text" class="form-control" id="tellusmore" > </textarea>
+                               <p style="text-align:right" class="red-text">[10 points per entry]</p>
+                              
+                               <button class="btn btn-lg btn-primary  pull-right" type="submit"><b>Submit</b></button>                           
+                            </form>
+                            </div>
+                            
+						  </div>
+                          
+                          
+						</div>
+					  </div>
+					  <div class="panel" style="background:#d1161c">
+						<div class="panel-heading highlight">
+						  <h3 class="panel-title"> <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo"> <span style="float:right" class="icon icon-plus-sign"></span> Today is Haiku voting day! </a></h3>
+						</div>
+						<div id="collapseTwo" class="panel-collapse collapse">
+						  <div class="panel-body grey black-text">
+							
+ 
+<p>Vote for your favourite Haikus today by clicking on the thumbs up icon of the Haikus that inspire you. Stand to win an attractive mystery prize if you voted for the winning Haiku.</p>
+							
+						
+
+						
+                      
+                      <div class="form-group" style="min-height:50px">
+                     
+                      
+                      <button class="btn btn-lg btn-primary  pull-right" type="submit" style="margin-top:20px"><strong>Vote Now</strong></button>
+                       </div>
+
+
+						  </div>
+						</div>
+					  </div>
+                      
+                        <div class="panel" style="background:#ab1015">
+						<div class="panel-heading highlight">
+						  <h3 class="panel-title">
+							<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
+                              <span style="float:right" class="icon icon-plus-sign"></span>	
+							 Reminder message: Meet Sim and SGMC at DAC
+							</a>
+						  </h3>
+						</div>
+						<div id="collapseThree" class="panel-collapse collapse">
+						  <div class="panel-body grey black-text">
+							<p style="padding-bottom:20px">Sim and the members of the SGMC will be at DAC today from (time) to (time). Come by to engage with them. Hear their answers to your questions and learn from their experiences.  See you at the auditorium on Level 3, MBFC Tower 3.
+</p>
+					  </div>
+						</div>
+					  </div>
+                      
+					  
+					</div>
+				<!--	<div class="panel-footer grey">
+                      <div class="col-xs-12">
+                	<h3 class="red-text text-center"><strong>DAILY PRIZES</strong></h3>
+<p class="black-text">All quiz participants will be entered for a lucky draw. 20 lucky winners will walk away with SGD 20 each, in their Paylah accounts. So take the quiz now!</p>
+                	</div>
+                    </div>	-->
+                </div>       
+        </div>
+    </div>
+      
+    </div>
+    
+    
+    
+<div class="container">
+	
+
+  <!-- Modal -->
+  <div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true" style="color:#000">×</button>
+          <h4 class="modal-title red-text">Empowerment begins with me</h4>
+        </div>
+        <div class="modal-body">
+          <p class="black-text">Empowering oneself is an attitude and the strongest source of that can be found in one place - ourselves.  Don’t get me wrong, there are many things within your scope of work that may not necessarily be within your realm of influence. But you’ll find that oftentimes, there is a good 15 percent  that you have the power to change and to transform those choices into desired actions and outcomes.</p>
+          <p class="black-text">Empowerment is really a two-step process – it starts with taking ownership and then taking action, not just withinyour immediate area of responsibility but also within your sphere of influence. It’s about empowering oneself and empowering others.</p>
+         
+          <p class="black-text">I remember a few years ago, DBS had an issue with the administration of student loans.  I was in CB operations then and my staff who had some experience with the portfolio, came to me with a detailed analysis of the situation.  We knew it was an area where we could offer our expertise.  So we discussed with the business and 
+
+deployed three of our staff and worked with them over a period of four months to resolve the issues.  Taking action especially when it is beyond our immediate area of responsibility is the hallmark of empowering oneself. Simply ask the question “How can I be of help to you?”.  Imagine how powerful that is if every one of us goes into a meeting with this attitude.</p>
+        
+           <p class="black-text">Empowering others on the other hand, is simply an act of increasing the space for others to make sensible decisions. As the person empowering others, one has to learn to let go.  Give simple instructions and broad parameters so that the person can carry forward that responsibility with assurance.  Otherwise, you’ll just get in the way of their experimentation and learning.  With success, comes confidence.  How can we apply this at work?  Start simple.  Push decision making one level down.</p>
+           
+              <p class="black-text">My experience with empowerment is that when you let people decide the best way to achieve an outcome with some simple guidance; they tend to amaze you with their creativity.  That’s the energy you will create when you empower others.</p>
+              <hr>
+              <p class="red-text">What specific actions can we commit to in order to empower ourselves and/or our teams?</p>
+              <small class="black-text">(adapted from Jimmy Ng, DBS Housewarming editorial post)</small>
+              
+        </div>
+        <div class="modal-footer">
+         
+          <button type="button" class="btn btn-primary"  data-dismiss="modal">Close</button>
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div><!-- /.modal -->
+
+
+
+</div>
+
+ 
+
+
+
+
+</div><!--/wrapper-->
+	
+	
+	
+
+    <!-- Le javascript
+    ================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="assets/js/jquery.js" type="text/javascript"></script>
+
+ 
+<!-- Latest compiled and minified JavaScript -->
+<script src="assets/js/bootstrap.min.js"></script>
+<script src="assets/js/script.js"></script>
+ 
+
+</body>
+</html>

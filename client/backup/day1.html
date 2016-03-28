@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<!-- saved from url http://www.bootstraptor.com ####################################################################
+Don't remove this attribution. 
+This template build on DevKit http://www.bootstraptor.com 
+##########################################################################
+-->
+<html lang="en">
+	<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <title>DBS BE A CHAMPION</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+  <script src="js/lib/jquery-1.11.3.min.js"></script>
+  <script src="js/lib/jquery.browser.js"></script>
+  <script src="js/lib/jquery.ba-hashchange.min.js"></script>
+  <script src="js/lib/bootstrap.min.js"></script>
+  <script src="js/lib/modernizr-custom.js"></script>
+  <script src="js/lib/moment.min.js"></script>
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="js/mobile-sidebar.js"></script>
+  <script src="js/chat.js"></script>
+<script src="assets/js/script.js"></script>
+
+
+<link href="assets/css/theme-flat-ui.css" rel="stylesheet">
+<link href="http://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.min.css" rel="stylesheet">
+
+<!--[if lt IE 7]>
+	<link href="http://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome-ie7.min.css" rel="stylesheet">
+	<![endif]-->
+    <!-- Fav and touch icons -->
+	
+    <!-- Le styles -->
+<!-- GOOGLE FONT-->
+<link href='http://fonts.googleapis.com/css?family=Roboto:400,300,700italic,700,500&amp;subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+<!-- /GOOGLE FONT-->	
+<!-- SOME BOOTSTRAP OVERRIDES STYLES -->
+
+<style type="text/css">
+      body {
+       
+        padding-bottom: 0px;
+		background-color:#000000;
+	
+      }
+		.wrapper{
+		max-width:570px;
+		margin-left:auto;
+		margin-right:auto;
+		overflow:hidden;
+		
+	}
+
+	.navbar {
+		margin-bottom: 0px;
+	}
+
+ #foot-sec .jumbotron{
+		-webkit-border-radius: 0px;
+		-moz-border-radius: 0px;
+		border-radius: 0px;
+		-webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
+		-moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
+		box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
+		border-right:0px;
+		border-left:0px;
+		background-color:#358cce;
+		color:#fff;
+		margin-top:-40px;
+	}
+
+	.thumbnail{
+		margin-bottom:30px;
+	}
+	
+	footer{
+		padding-top:40px;
+		border-top:1px solid rgba(0,0,0, .3);
+
+	}
+	
+	.related-projects{
+		padding-top:20px;
+		margin-top:20px;
+		
+	}
+	.hamburger{
+	background-color: transparent;
+	border: 1px solid transparent;
+	border-radius: 4px;
+	position: relative;
+	float: left;
+	margin-right: 15px;
+	padding: 3px 10px 0 20px;
+	/*margin-top: 8px;*/
+	margin-bottom: 8px;
+	background-color: transparent;
+	border: 1px solid transparent;
+	border-radius: 0px;
+ 
+  }
+  
+	.black-text {
+		color:#262626;}
+	
+	.red-text {
+		color:#ed1b24;}
+	.black-set {
+		background-color:#000000;}
+	.grey{
+		background-color:#d1d2d4;
+		}
+	.grey_text {
+		color:#d1d2d4;}	
+	.lightgrey_text {
+		color:#e7e7e8}	
+	.lightgrey {
+		background:#e7e7e8}
+	.border-bot {
+		border-bottom: 1px solid #808080;}	
+		
+	.jumbotron {
+		background:url(images/background.jpg);}	
+	form-group {
+		min-height: 300px;}
+		
+	.navbar-fixed-top {
+		max-width:570px;
+		margin:0 auto;
+		}	
+	@media only screen 
+  and (min-device-width: 320px) 
+  and (max-device-width: 568px)
+  and (-webkit-min-device-pixel-ratio: 2) {
+	  .dbs-banner {
+		  float:right;
+		 }
+		
+		
+}
+
+.menu_footer{
+		background-color:#f72c32;}
+
+a.menu_select:hover{
+		 color:695858 !important;}
+a.accordion-toggle{
+	text-decoration:none;}
+.highlight:hover {
+	background-color:#393939;}	
+
+ textarea{
+	 resize:vertical !important;}
+ 
+    </style>
+
+<link href="assets/css/font-awesome.min.css" rel="stylesheet"> 
+
+
+<!--[if lt IE 7]>
+	<link href="assets/css/font-awesome-ie7.min.css" rel="stylesheet">
+	<![endif]-->
+    <!-- Fav and touch icons -->
+
+
+<!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+<!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js" type="text/javascript"></script>
+    <![endif]-->
+<!-- Le fav and touch icons -->
+<link rel="shortcut icon" href="assets/ico/favicon.ico">
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="assets/ico/apple-touch-icon-144-precomposed.png">
+<link rel="apple-touch-icon-precomposed" sizes="114x114" href="assets/ico/apple-touch-icon-114-precomposed.png">
+<link rel="apple-touch-icon-precomposed" sizes="72x72" href="assets/ico/apple-touch-icon-72-precomposed.png">
+<link rel="apple-touch-icon-precomposed" href="assets/ico/apple-touch-icon-57-precomposed.png">
+</head>
+<body>
+  
+<!-- MAIN WRAPPER class="wrapper" max-width="1110px"-->
+<div class="wrapper">
+
+<div class="modal fade" id="sm-alertbox" tabindex="-1" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title red-text">Alert</h4>
+      </div>
+      <div class="modal-body black-text" id="alertbox"></div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<header id="head-top">	
+	<!-- NAVBAR-->
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation" onclick="updateMenuProfile()">
+		
+	  <!-- Brand and toggle get grouped for better mobile display -->
+	  <div class="navbar-header">
+		<button id="hamburger"  type="button" class="navbar-toggle"  >
+		  <span class="sr-only">Toggle navigation</span>
+		  <span class="icon-bar"></span>
+		  <span class="icon-bar"></span>
+		  <span class="icon-bar"></span>
+		</button>
+			
+        <a class="navbar-brand" href="#">Be a CHAMPION</a>
+        
+	  </div>
+     
+	
+</nav>
+	
+
+		
+
+</header>
+
+
+
+<div class="container" style="background:#b50b13; padding-top:48px;">
+        <div class="row " id="navtest" style="display: none">
+        		<ul  class="nav nav-pills nav-stacked">
+                	<li><a href="menu.html">Home</a></li>
+			  <li><a href="haiku.html">Write a haiku and win a grand prize</a></li>
+              		  <li><a href="ask.html">Ask Sim & SGMC anything</a></li>
+             
+                          <li class="menu_footer"><a href="profile.html">
+                                        <span id="menuUsername">test@dbs.com</span>
+                                        <span style="float:right" id="menuUserPoints">10 points</span>
+                                </a>
+                        </li>
+			
+                </ul>
+        		
+        </div>
+</div>
+
+
+<div class="jumbotron">
+		<h2 class="grey_text" style="margin:5px 0" >DAY 1</h2>
+	<h1  class="red-text" style="margin:5px 0"> You are Empowered</h1>
+        <h3><span class="icon-quote-left"></span> <em>To be passionate at your work, you must have fun, and you can only have fun if you can make a difference, when you are enabled and empowered to make decisions. </em><span class="icon-quote-right"></span></h3><h4 class="text-right">- Sim Lim</h4>
+     
+</div>
+
+ 
+
+<div class="container grey">
+	<div class="row" style="padding-top:30px;">
+	
+	
+	<!-- ITEM-->
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+			<div class="row">
+            	<div class="panel grey" style="margin-bottom: 0px;" >
+				</div>
+			</div>
+           </div> 
+           
+           
+            <!-- Example row of columns -->
+      <div class="row">
+        <div class="container">
+         <div class="col-xs-12 col-sm-12  col-md-12 col-lg-12">
+			<div class="panel ">
+				<div class="panel-heading" style="background:#e7e7e8">
+				  <h5 class="black-text">All of you matter. Country Head Sim  Lim tells us why the Vice Presidents in the bank are so vital to the success of DBS. He talks about the DBS House and how we can execute on our strategic priorities.</h5>
+                   <div class="text-right"><small class="red-text">Watch this view to earn 25 points</small></div>
+				</div>
+                <div class="panel-body lightgrey">
+                	<div class="row text-center">
+                    						<video id="day1vid1" width="100%" controls>
+							<source src="http://develop-sg.3radical.com:3001/pictures/2e68f52af0b10e517bed4b5e14774b9d.mp4" type="video/mp4" />
+							Your browser does not support HTML5 video.
+						</video>
+                    </div>	
+                    	<div class="panel-footer text-right lightgrey">
+                        <div class="row">
+      <div id="chat">
+        <div class="chatArea"> 
+	  <div align="left" id="previousmsg"> </em><a href="#" onclick="loadPreviousMessage();return false;" class="red-text"><em class="icon-caret-right"></em> View previous comments <span id="totalmessage"></span></a></div>
+          <div class="messages"></div>
+        </div>
+        <input class="inputMessage form-control" placeholder="Write your comment..." />
+      </div>
+
+                        </div>
+                        </div>
+                  	  
+                </div>
+                <div class="panel-footer text-right grey">
+                	 	<div class="row">
+                        	<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                            </div>
+                            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                            		
+                                      <!--<button class="btn btn-lg btn-primary  pull-right" type="submit"><b> <i class="icon-play"></i> Watch</b></button>-->
+                            </div>
+                        </div>
+                    
+                 
+                </div>
+			
+		  </div>
+         
+		  </div>
+        </div>
+        </div>
+        
+        
+     
+        </div>
+        
+        
+        
+  
+	</div><!--/container-->
+    
+    
+    <div class="container">
+    			<div class="row">
+                   <div class="panel panel-default lightgrey">
+           
+				<div class="panel-body">
+					<div class="panel-group" id="accordion">
+					  <div class="panel" style="background:#ee1c24">
+						<div class="panel-heading highlight">
+						  <h3 class="panel-title">
+							<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" onclick="day1poll1();">         <span style="float:right" class="icon icon-plus-sign"></span>	
+							Poll Question
+							</a>
+                            
+						  </h3>
+                           
+						</div>
+						<div id="collapseOne" class="panel-collapse collapse">
+						  <div class="panel-body grey black-text">
+							 	 	<p><strong>Q1:</strong> How empowered are you?</p>
+                             <form role="form" id="day1poll1form">
+                              <div class="radio">
+                                <label id="day1poll1label1"><input type="radio" name="optradio" value="1"> Totally, my boss trusts me <span id="res1"></span></label>
+                              </div>
+                              <div class="radio">
+                                <label id="day1poll1label2"><input type="radio" name="optradio" value="2">Somewhat, my boss sometimes lets me make decisions <span id="res2"></span></label>
+                              </div>
+                              <div class="radio">
+                                <label id="day1poll1label3"><input type="radio" name="optradio" value="3">Rarely, my boss prefers to be in control <span id="res3"></span></label>
+                              </div>
+                              <div class="radio">
+                                <label id="day1poll1label4"><input type="radio" name="optradio" value="4">What empowerment? <span id="res4"></span></label>
+                              </div>
+                              
+                               <button id="day1poll1submit" class="btn btn-lg btn-primary  pull-right" type="button" onclick="submitday1poll1()"><b>Submit</b></button>                           
+                            </form>
+						  </div>
+						</div>
+					  </div>
+					  <div class="panel" style="background:#d1161c">
+						<div class="panel-heading highlight">
+						  <h3 class="panel-title"> <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo"> 
+                            <span style="float:right" class="icon icon-plus-sign"></span>	
+                          Write a haiku and win a grand prize </a> </h3>
+						</div>
+						<div id="collapseTwo" class="panel-collapse collapse">
+						  <div class="panel-body grey black-text">
+							<h4 class="black-text">Get creative, inspire your fellow VPs.</h4>
+ 
+<p>Send in a ‘Haiku’ about empowerment. A Haiku is a poem that is developed in syllables/lines of five, seven and five to make up a total of seventeen syllables. Here’s an example:</p>
+							<blockquote><p>‘I am decisive (5 syllables)</p>
+<p>I can make decisions now (7 syllables)</p>
+<p>Empowered I am’ (5 syllables)</p></blockquote>
+							
+							<p>Or</p>	
+							<blockquote><p>I am first with five (5 syllables)</p>
+<p>Then seven in the middle (7 syllables)</p>
+<p>Five again to end (5 syllables)</p></blockquote>
+
+						<p>Remember, the theme is on EMPOWERMENT. You may submit your entry as an individual, or as a team of up to 5 members.
+ </p>
+ <p>
+Submit Haikus from Mon to Thu this week. Voting for your favourite Haikus opens on Fri. Top voted Haiku entry wins SGD250 worth of shopping vouchers.</p>
+                      
+                      <div class="form-group" style="min-height:50px">
+                     
+                      
+                      <button class="btn btn-lg btn-primary  pull-right" type="button" onclick="window.location=('haiku.html')" style="margin-top:20px"><strong>Go Now</strong></button>
+                       </div>
+
+
+						  </div>
+						</div>
+					  </div>
+					  <div class="panel" style="background:#ab1015">
+						<div class="panel-heading highlight">
+						  <h3 class="panel-title">
+							<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
+                              <span style="float:right" class="icon icon-plus-sign"></span>	
+							  Ask Sim & SGMC anything
+							</a>
+						  </h3>
+						</div>
+						<div id="collapseThree" class="panel-collapse collapse">
+						  <div class="panel-body grey black-text">
+							<p style="padding-bottom:20px">Ask Sim and the Singapore Management Committee (SGMC) anything. They will take these questions on during any one of the face-to-face sessions this week.</p>
+                            
+                            
+                            <p>Ask questions on empowerment, career advice, challenges, suggestions, ideas, and more. They want to hear about what drives you and what you’d like to achieve at DBS. They will also share from their experiences and answer your questions. So tell them what’s on your mind here. <br/><span class="red-text">[10 points per entry]</span></p>
+                            
+                         
+                               <button class="btn btn-lg btn-primary  pull-right" type="button" onclick="window.location=('ask.html')" style="margin-top:20px"><strong>Ask Now</strong></button>
+                         	   
+                         
+						  </div>
+						</div>
+					  </div>
+					</div>
+				</div>
+        </div>
+                
+                
+                
+                
+                
+                </div>
+    
+    			
+    
+    </div>
+    
+   
+    
+ <!-- call to action -->
+
+ <!-- call to action -->
+
+
+
+</div><!--/wrapper-->
+<script>
+var vid = document.getElementById("day1vid1");
+vid.onpause = function() {
+	pauseVideo();
+};
+vid.onended = function() {
+	submitAnswer({day:1,question:1,answer:1,points:25});
+};
+function processAnswer(data) {
+	if(data == null)
+		return;
+	if(data.day == 1) {
+		if(data.question == 1) {
+			if(data.status && data.points > 0)
+				alertbox("Congratulations! You have earned "+data.points+" points");
+			else if (data.status)
+				alertbox("You have completed watching this video earlier, no extra points will be earned");
+		} else if (data.question == 2) {
+			alertbox("Thank you! Your answer has been submitted!");
+			day1poll1();
+		}
+	}
+}
+function day1poll1() {
+	checkPoll({day:1,question:2,answer:0,points:0});
+}
+function showday1poll1(data) {
+	$("#day1poll1form input[name=optradio][value="+data.answer+"]").prop("checked",true);
+        $("#day1poll1label"+data.answer).addClass("red-text");
+	//$("#day1poll1submit").attr("disabled", "disabled");
+	$("#day1poll1submit").hide();
+}
+function showday1poll1results(a1,a2,a3,a4) {
+        $("#res1").text(" ("+a1+")");
+        $("#res2").text(" ("+a2+")");
+        $("#res3").text(" ("+a3+")");
+        $("#res4").text(" ("+a4+")");
+}
+function submitday1poll1() {
+	var day1poll1form = document.forms[0];
+	var pollvalue = 0;
+	for(var i=0; i<day1poll1form.length; i++) {
+		if(day1poll1form[i].checked) {
+			pollvalue = day1poll1form[i].value;
+		}
+	}
+	pollvalue = parseInt(pollvalue);
+	if(pollvalue==0)
+		alertbox("Please select one answer");
+	else
+		submitPoll({day:1,question:2,answer:pollvalue,points:0});
+	return false;
+}
+</script>
+</body>
+</html>

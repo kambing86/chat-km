@@ -1,0 +1,143 @@
+  body {
+    background: #3c3c3c;
+    color: #fff;
+  }
+  li:not(.log) {
+    list-style-type: none;
+  }
+  .fullpage {
+    /*display: none;*/
+    background: #3c3c3c;
+    z-index: 1040;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    /*backface-visibility: hidden;*/
+  }
+  .loginForm {
+    width: 100%;
+    position: absolute;
+    /*backface-visibility: hidden;*/
+    margin-top: -100px;
+    text-align: center;
+    top: 50%;
+  }
+  .loginForm .title {
+    font-size: 200%;
+  }
+  .loginForm .usernameInput {
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid #fff;
+    outline: none;
+    padding-bottom: 15px;
+    text-align: center;
+    width: 80%;
+    font-size: 150%;
+  }
+  /*chat page*/
+
+  .chatArea {
+    height: 100%;
+    padding-bottom: 60px;
+  }
+  .messages {
+    height: 100%;
+    margin: 0;
+    overflow-y: scroll;
+    padding: 10px 20px 10px 20px;
+  }
+  .message.typing .messageBody {
+    color: gray;
+  }
+  .username {
+    float: left;
+    font-weight: 700;
+    overflow: hidden;
+    padding-right: 15px;
+    text-align: right;
+  }
+  .inputMessage {
+    position: absolute;
+    bottom: 0;
+    color: #000;
+    border: 10px solid #000;
+    height: 60px;
+    outline: none;
+    padding: 0 0 0 10px;
+    width: 100%;
+  }
+  .likesDiv {
+    margin-left: 10px;
+  }
+  .likesDiv a {
+    margin-left: 10px;
+    color: #3B88EB;
+    cursor: pointer;
+    font-weight: bold;
+  }
+  /*room page*/
+
+  #room {
+    overflow: auto;
+  }
+  .btnCreateRoom {
+    background: rgba(255, 255, 255, 0.2);
+    height: 40px;
+    margin: 10px;
+    border: none;
+    padding: 0 10px 0 10px;
+  }
+  .roomlist {
+    padding-left: 0;
+    margin-bottom: 0;
+    text-indent: 20px;
+    height: 100%;
+    padding-top: 60px;
+    margin-top: -60px;
+  }
+  .roomlist li a {
+    display: block;
+    width: 100%;
+    padding: 5px;
+    color: #fff;
+    line-height: 40px;
+    text-decoration: none;
+  }
+  .roomlist li a:active, .roomlist li a:hover {
+    color: #fff;
+    background: rgba(255, 255, 255, 0.2);
+  }
+  /*profile page*/
+
+  #profile {
+    padding: 10px;
+    overflow: auto;
+  }
+  .profileChats {
+    padding-left: 20px;
+  }
+  .profileChats li {
+    list-style-type: circle;
+  }
+  /*comments page*/
+
+  #comments {
+    padding: 10px;
+  }
+  #comments .row {
+    height: 100%;
+    overflow: auto;
+  }
+  .recentLikes {
+    padding-left: 20px;
+  }
+  .recentLikes li {
+    list-style-type: circle;
+  }
+  .mostLikes {
+    padding-left: 20px;
+  }
+  .mostLikes li {
+    list-style-type: circle;
+  }

@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Admin Example</title>
+  <link rel="stylesheet" href="admin.css" />
+</head>
+
+<body>
+  <ul class="pages">
+    <li class="chat page">
+      <div style="float:left;width:20%;height:100%;">
+        <div style="height:100%;overflow-y:scroll;padding:5px;">
+          <form action="/admin/upload" method="post" enctype="multipart/form-data">
+            <input type="file" name="upload" accept=".csv" />
+            <input type="submit" value="Submit" />
+          </form>
+        </div>
+      </div>
+      <div style="float:left;width:80%;height:100%;padding:5px;overflow-y:scroll;">
+        Click to kick
+        <div class="userArea" style="height:auto;"></div>
+      </div>
+    </li>
+    <li class="login page">
+      <div class="form">
+        <h3 class="title">Password</h3>
+        <input class="usernameInput" type="text" />
+      </div>
+    </li>
+  </ul>
+  <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="/admin.js"></script>
+</body>
+
+</html>

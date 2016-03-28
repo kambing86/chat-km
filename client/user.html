@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+  <!--<meta name="apple-mobile-web-app-capable" content="yes">-->
+  <!--<meta name="apple-mobile-web-app-status-bar-style" content="black">-->
+  <meta name="description" content="" />
+  <meta name="author" content="" />
+  <title>Chat</title>
+  <link href="css/bootstrap.min.css" rel="stylesheet" />
+  <link href="css/mobile-sidebar.css" rel="stylesheet" />
+  <link href="css/style.css" rel="stylesheet" />
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+  <div class="fullpage">
+    <div class="loginForm">
+      <h3 class="title">Email</h3>
+      <input class="usernameInput" type="email" />
+    </div>
+  </div>
+  <div id="wrapper">
+<div class="modal fade" id="sm-alertbox" tabindex="-1" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title red-text">Alert</h4>
+      </div>
+      <div class="modal-body black-text" id="alertbox"></div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
+      </div>
+    </div>
+  </div>
+</div>
+    <div id="sidebar-background"></div>
+    <div id="sidebar-wrapper">
+      <div class="sidebar-top">
+        <button type="button" class="navbar-toggle left">
+          <span class="glyphicon glyphicon-th-list"></span>
+        </button>
+        <span class="sidebar-title">Page</span>
+      </div>
+      <ul class="sidebar-nav">
+        <li>
+          <a href="#chat">Chat</a>
+        </li>
+        <li>
+          <a href="#room">Room</a>
+        </li>
+        <li>
+          <a href="#profile">Profile</a>
+        </li>
+        <li>
+          <a href="#comments">Comments</a>
+        </li>
+      </ul>
+    </div>
+    <div id="sidebar-wrapper-right">
+      <div class="sidebar-top">
+        <button type="button" class="navbar-toggle left">
+          <span class="glyphicon glyphicon-user"></span>
+        </button>
+        <span class="sidebar-title">User List</span>
+      </div>
+      <ul class="sidebar-nav">
+      </ul>
+    </div>
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle left">
+          <span class="glyphicon glyphicon-th-list"></span>
+        </button>
+        <button type="button" class="navbar-toggle">
+          <span class="glyphicon glyphicon-user"></span>
+        </button>
+        <span id="pageSpan" class="navbar-brand"></span>
+      </div>
+    </nav>
+    <div id="page-content-wrapper">
+      <div id="chat">
+        <div class="chatArea">
+          <ul class="messages"></ul>
+        </div>
+        <input class="inputMessage" placeholder="Type here..." />
+      </div>
+      <div id="room">
+        <button class="btnCreateRoom">Create Room</button>
+        <ul class="roomlist"></ul>
+      </div>
+      <div id="profile">
+        Username:
+        <span class="profileUsername"></span>
+        <br/> User Type:
+        <span class="profileUserType"></span>
+        <br/> Points:
+        <span class="profilePoints"></span>
+        <br/> Comments:
+        <br/>
+        <ul class="profileChats"></ul>
+      </div>
+      <div id="comments">
+        <div class="row">
+          <div class="col-md-6">
+            Top 100 Recent Likes
+            <ul class="recentLikes">
+            </ul>
+          </div>
+          <div class="col-md-6">
+            Top 100 Most Likes
+            <ul class="mostLikes">
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="js/lib/jquery-1.11.3.min.js"></script>
+  <script src="js/lib/jquery.browser.js"></script>
+  <script src="js/lib/jquery.ba-hashchange.min.js"></script>
+  <script src="js/lib/bootstrap.min.js"></script>
+  <script src="js/lib/modernizr-custom.js"></script>
+  <script src="js/lib/moment.min.js"></script>
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="js/mobile-sidebar.js"></script>
+  <script src="js/chat.js"></script>
+</body>
+
+</html>

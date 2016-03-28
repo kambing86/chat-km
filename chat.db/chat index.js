@@ -1,0 +1,10 @@
+var db;
+db.dropDatabase();
+db.chat.createIndex( { room: 1, msg: "text" }, { default_language: "none" } );
+db.chat.createIndex( { room: 1, time: 1 } );
+db.chat.createIndex( { username: 1, time: 1 } );
+db.chat.createIndex( { likesCount: 1 } );
+db.chat.createIndex( { lastLikeDate: -1 } );
+db.user.createIndex( { username: 1 }, { unique: true } );
+db.room.createIndex( { roomName: 1 }, { unique: true } );
+// db.user.createIndex( { teamId: 1, points: 1 } );
