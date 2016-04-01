@@ -154,7 +154,7 @@ $(function() {
 
     //console.log(localusername);
     if(localusername && localusername.length > 0)
-	username = localusername;
+    	username = localusername;
     else
     	username = cleanInput($(".usernameInput").val().trim());
 
@@ -544,6 +544,7 @@ $(function() {
 	}
     }
 
+    console.log("good to go: " + data);
     if(username == "hello1@123.com")
       toChatPage(data);
     else

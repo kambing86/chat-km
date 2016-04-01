@@ -1,4 +1,5 @@
-var url = "mongodb://" + process.env.IP;
+//var url = "mongodb://" + process.env.IP;
+var url = "mongodb://develop-sg";
 var userCollection = null;
 var chatCollection = null;
 var roomCollection = null;
