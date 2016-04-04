@@ -10,7 +10,7 @@ $(function() {
   ];
   var daysarray = ["day1", "day2", "day3", "day4", "day5"];
 
-  var username, userId, joinedRoom, onProfile = false, onComments = false;
+  var username, usertype, userteam, userId, joinedRoom, onProfile = false, onComments = false;
   var sortbylike=false;
   var stopBlinking=false;
   var reconnect_count=0;
@@ -18,6 +18,8 @@ $(function() {
   var socket = io();
 
   var localusername = getCookie("username");
+  var localusertype = getCookie("usertype");
+  var localuserteam = getCookie("userteam");
   var currentLoc = window.location.pathname;
 
 /*
@@ -463,7 +465,7 @@ $(function() {
   // Socket events
 
   // Whenever the server emits "login", log the login message
-  function toCorrectPage(data) {
+  function toCorrectPage() {
     $messages.empty();
 
     if(currentLoc == "/login.html") {
@@ -472,6 +474,7 @@ $(function() {
       window.location = "menu.html";
     }
 
+    /*
     if(data.isAdmin == false ) {
     	if(currentLoc == "/day2.html" && data.dow < 2)
       		window.location = "menu.html";
@@ -500,6 +503,7 @@ $(function() {
     } else {
         onProfile = false;
     }
+    */
   }
   function toChatPage(data) {
     $messages.empty();
@@ -523,8 +527,14 @@ $(function() {
     //$fullpage.off("click").fadeOut();
     //$usernameInput.off("keydown");
     userId = data._id;
-    joinedRoom = data.roomName;
+    usertype = data.userType;
+    userteam = data.teamId;
+    console.log("userId: " + userId);
+    console.log("usertype: " + usertype);
+    console.log("userteam: " + userteam);
+    //joinedRoom = data.roomName;
 
+    /*
     var isAdmin = data.isAdmin;
     var dow = data.dow;
     
@@ -544,11 +554,11 @@ $(function() {
 	}
     }
 
-    console.log("good to go: " + data);
     if(username == "hello1@123.com")
       toChatPage(data);
     else
-      toCorrectPage(data);
+    */
+      toCorrectPage();
 
   });
 
@@ -790,6 +800,22 @@ $(function() {
         }
         processAnswer(data);
       }
+  });  
+  socket.on("checkteamanswers", function(data) {
+    if(data == null)
+      return;      
+    console.log("checkteamanswers: " + data.length);
+    var count = 0;
+    var day = question = 0;
+    for(var i = 0; i<data.length; i++) {
+    	if(data[i] && data[i].status === true) {
+    		day = data[i].day;
+    		question = data[i].question;
+    		count++;
+    	}
+    }
+    $("#d"+day+"q"+question).text(count + " of " + data.length + " Completed");
+    	
   });
   socket.on("checkpoll", function(data) {
       if(data == null)
@@ -968,9 +994,13 @@ $(function() {
     		setCookie("pausevideo", 1, 1);
 	}
   }
+  window.checkTeamAnswers = function(day,question) {
+  	  var data = {userteam:userteam, username:username, day:day, question:question};
+        socket.emit("checkteamanswers", data);
+  }  
   window.checkPoll = function(data) {
         socket.emit("checkpoll", data);
-  }
+  }  
   window.submitPoll = function(data) {
         socket.emit("new answer", data);
   }
@@ -1067,7 +1097,6 @@ $(function() {
       $(".messages").empty();
       return false;
   }
-
   $window.hashchange(function() {
     if (username && location.hash == "#chat") {
       location.hash = "#chat@" + encodeURI(joinedRoom);

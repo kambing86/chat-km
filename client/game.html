@@ -12,7 +12,7 @@
     <link href="assets/css/style.css" rel="stylesheet">
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet">    
     <link href='http://fonts.googleapis.com/css?family=Roboto:400,300,700italic,700,500&amp;subset=latin,latin-ext' rel='stylesheet' type='text/css'>
-   <!--[if lt IE 9]>
+<!--[if lt IE 9]>
       <script src="http://html5shim.googlecode.com/svn/trunk/html5.js" type="text/javascript"></script>
     <![endif]-->
 <!-- Le fav and touch icons -->
@@ -20,6 +20,7 @@
 </head>
 <body>
 <div class="fixed-img"></div>
+
 <div class="wrapper">
 <div class="navbar navbar-fixed-top">
 	<div class="navbar-toggle">
@@ -35,6 +36,7 @@
 		<b>GAME</b>
 	</div>
 </div>
+
 <div class="modal fade" id="sm-alertbox" tabindex="-1" role="dialog">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -58,68 +60,14 @@
                        <span style="float:right" id="menuUserPoints"></span>
                     </a>
                 </li>            	
-           		<li><a href="#">Leaderboard</a></li>
+           		<li><a href="#">Ask SGMC anything</a></li>
+           		<li><a href="#">Help</a></li>
         </ul>
 </nav>
+
 <br><br>
-<div class="container">
-	<div class="row">
-       	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-			<div class="panel">
-				<div class="panel-heading">
-					<h2>0: Take Off!</h2>
-					A word from our Captain. Watch Captain Sim to be inspired.
-				</div>
-			</div>
-		</div>
-	</div>
-	<div class="row">
-       	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-			<div class="panel text-center">
-				<div class="panel-heading">
-					<button class="btn btn-primary text-center" onclick="window.location='sim.html'">Watch Captain Sim</button>
-				</div>
-				<div class="small">
-					<div id="d0q1">Checking status...</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<div class="row">
-       	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-			<div class="panel">
-				<div class="panel-heading">
-					<h4>Prepare for launch! </h4>
-					<ul>
-						<li type="square">
-							You have been assigned into units and a team leader randomly assigned
-						</li>
-						<li type="square">
-							Get in touch through any means necessary – email, phone, whatsapp, face-to-face
-						</li>						
-						<li type="square">
-							Decide on your unit’s name
-						</li>										
-						<li type="square">
-							Team leaders – submit the unit name by (date) (time) 
-						</li>
-					</ul>
-				</div>
-			</div>
-		</div>
-	</div>
-	<div class="row">
-       	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-			<div class="panel text-center">
-				<div class="panel-heading">	
-						<button class="btn btn-primary"><i class="fa fa-lock fa-lg"></i> &nbsp;Name your battle unit</button>
-				</div>
-			</div>
-		</div>
-	 </div>
-</div><!-- /.container --> 
- <!-- call to action -->
-</div>
+<iframe class="pigeonholes" frameborder="0" height="0px" overflow="auto" scrolling="no" onload="$('#waiting').hide();updatesize();" src="http://dbslifestyle.vocohub.com/space/?level=1"></iframe>
+	
   <script src="js/lib/jquery-1.11.3.min.js"></script>
   <script src="js/lib/jquery.browser.js"></script>
   <script src="js/lib/jquery.ba-hashchange.min.js"></script>
@@ -132,14 +80,24 @@
   <script src="assets/js/script.js"></script>
 <script>
   $(function(){
-  $('.navbar-chat, nav').click(function(){
-    //$('.navbar-chat').toggleClass('navbar-on');
-    $('nav').slideToggle();
-    $('nav').removeClass('nav-hide');
+  	$('.navbar-chat, nav').click(function(){
+  		//$('.navbar-chat').toggleClass('navbar-on');
+  		$('nav').slideToggle();
+  		$('nav').removeClass('nav-hide');
+    });
+  
+    var $window = $(window).on('resize', function(){
+       var height = $(this).height();
+       //var height = $(this).height() - 50;
+       //console.log(height);
+       $(".pigeonholes").height(height);
+    }).trigger('resize'); //on page load
   });
-});
-//var data = {userteam:userteam, day:0, question:1 }; 
-setTimeout(function(){ checkTeamAnswers(0,1) }, 1000);
+  
+  function updatesize() {
+       var height = $(document).height();
+       $(".pigeonholes").height(height);  	  
+  }
 </script>
 
 </body>

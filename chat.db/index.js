@@ -105,7 +105,11 @@ exports.updateAnswer = function(data) {
     }
   });
 };
-
+exports.getTeam = function(data) {
+  return userCollection.find({
+    teamId: data.userteam
+  }).toArray();
+};
 exports.getAnswer = function(user,data) {
   return answerCollection.find({
     username: user,

@@ -95,7 +95,7 @@ if (cluster.isMaster) {
 
       	var oldUser = usernames[username];
         oldUser.emit("forcelogout");
-	oldUser.disconnect();
+        oldUser.disconnect();
 
         socket.emit("dologin", {username});
         //socket.emit("already login", username);
@@ -108,7 +108,7 @@ if (cluster.isMaster) {
       if (usernames[username] != null) {
       	var oldUser = usernames[username];
         oldUser.emit("forcelogout");
-	oldUser.disconnect();
+        oldUser.disconnect();
 
         socket.emit("dologin", {username});
         //socket.emit("already login", username);
@@ -118,12 +118,15 @@ if (cluster.isMaster) {
         socket.emit("already ban");
         return;
       }
-      var getUser = yield chatDb.getUserId(username);
+      //var getUser = yield chatDb.getUserId(username);
+      var getUser = yield chatDb.getUser(username);
       if (getUser == null) {
         socket.emit("username not exists");
         return;
       }
       yield chatDb.updateUserLogintime(username);
+
+      socket.emit("login", getUser);
 
       userId = getUser._id;
       socket.username = username;
@@ -133,18 +136,19 @@ if (cluster.isMaster) {
         roomName = generalRoom;
       yield joinRoom(roomName);
 
+      /*
       var isadmin = false;
       if(username == "admin1@dbs.com" || username == "admin2@dbs.com" || username == "admin3@dbs.com" || username == "admin4@dbs.com" || username == "admin5@dbs.com")
-	isadmin = true;
+      	  isadmin = true;
 
       var d = new Date();
       d.setHours(d.getHours() + 8);
 
       var dow = d.getDay();
       if(dow == 0 || dow == 6)
-	dow = 1;
+      	  dow = 1;
       dow=3;
-
+      
       socket.emit("login", {
         _id: userId,
         roomName: roomName,
@@ -158,6 +162,8 @@ if (cluster.isMaster) {
           username: socket.username,
           users: rooms[joinedRoom].users
         });
+        
+      */
     }));
 
     socket.on("gettotalmessage", Q.async(function*(roomName) {
@@ -407,6 +413,23 @@ if (cluster.isMaster) {
       var answerUser = usernames[socket.username];
       answerUser.emit("checkpoll", getAnswer[0]);
     }));
+    
+    socket.on("checkteamanswers", Q.async(function*(data) {
+      console.log("checkteamanswers: " + data.userteam);
+      var teamusers = yield chatDb.getTeam(data);
+      
+      var answerlist=[];
+      for(var i in teamusers) {
+      	var getAnswer = yield chatDb.getAnswer(teamusers[i].username, data);
+      	//if(getAnswer[0])
+      	answerlist.push(getAnswer[0]);
+      	console.log("user: " + teamusers[i].username + ", answer: " + getAnswer[0]);
+      };
+      
+      var answerUser = usernames[socket.username];
+      answerUser.emit("checkteamanswers", answerlist);
+      
+    }));    
 
     socket.on("getpollresults", Q.async(function*(data) {
       //logger.info("getpoolresults! " + data.day + ", " + data.question);
