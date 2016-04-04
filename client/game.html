@@ -69,7 +69,7 @@
            		<li><a href="#">Help</a></li>
         </ul>
 </nav>
-<iframe class="pigeonholes" frameborder="0" overflow="auto" scrolling="no" style="height:100%;padding-top:50px;" src="http://dbslifestyle.vocohub.com/space/?level=1"></iframe>
+<iframe class="pigeonholes" frameborder="0" overflow="auto" scrolling="no" style="padding-top:50px;" src="http://dbslifestyle.vocohub.com/space/?level=1"></iframe>
 
   <script src="js/lib/jquery-1.11.3.min.js"></script>
   <script src="js/lib/jquery.browser.js"></script>
@@ -90,10 +90,10 @@
     });
 
 		var pigeonholes = $(".pigeonholes");
-		var height = $(window).innerHeight();
 
-    var $window = $(window).on('resize', function(){
-       pigeonholes.height(height)
+    var $window = $(window).on('resize', function() {
+       var height = $(window).innerHeight();
+       pigeonholes.height(height - 50);
     }).trigger('resize'); //on page load
   });
 
