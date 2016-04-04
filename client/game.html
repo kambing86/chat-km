@@ -64,10 +64,9 @@
            		<li><a href="#">Help</a></li>
         </ul>
 </nav>
+<div style="padding-top: 50px">
+<iframe class="pigeonholes" frameborder="0" height="0px" overflow="auto" scrolling="no" onload="$('#waiting').hide();updatesize();" src="http://dbslifestyle.vocohub.com/space/?level=1"></iframe></div>
 
-<br><br>
-<iframe class="pigeonholes" frameborder="0" height="0px" overflow="auto" scrolling="no" onload="$('#waiting').hide();updatesize();" src="http://dbslifestyle.vocohub.com/space/?level=1"></iframe>
-	
   <script src="js/lib/jquery-1.11.3.min.js"></script>
   <script src="js/lib/jquery.browser.js"></script>
   <script src="js/lib/jquery.ba-hashchange.min.js"></script>
@@ -95,8 +94,8 @@
   });
   
   function updatesize() {
-       var height = $(document).height();
-       $(".pigeonholes").height(height);  	  
+       var height = $(window).innerHeight();
+       $(".pigeonholes").height(height - 50);
   }
 </script>
 
