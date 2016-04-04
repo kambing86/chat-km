@@ -65,7 +65,7 @@
         </ul>
 </nav>
 <div style="padding-top: 50px">
-<iframe class="pigeonholes" frameborder="0" height="0px" overflow="auto" scrolling="no" onload="$('#waiting').hide();updatesize();" src="http://dbslifestyle.vocohub.com/space/?level=1"></iframe></div>
+<iframe class="pigeonholes" frameborder="0" height="0px" overflow="auto" scrolling="no" src="http://dbslifestyle.vocohub.com/space/?level=1"></iframe></div>
 
   <script src="js/lib/jquery-1.11.3.min.js"></script>
   <script src="js/lib/jquery.browser.js"></script>
@@ -92,11 +92,11 @@
        $(".pigeonholes").height(height);
     }).trigger('resize'); //on page load
   });
-  
-  function updatesize() {
-       var height = $(window).innerHeight();
-       $(".pigeonholes").height(height - 50);
-  }
+
+	var height = $(window).innerHeight();
+	$(".pigeonholes").height(height - 50).load(function() {
+		$('#waiting').hide();
+	});
 </script>
 
 </body>
