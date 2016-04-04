@@ -17,6 +17,11 @@
     <![endif]-->
 <!-- Le fav and touch icons -->
 <link rel="shortcut icon" href="assets/ico/favicon.ico">
+<style>
+	html, body, .wrapper {
+		height: 100%;
+	}
+</style>
 </head>
 <body>
 <div class="fixed-img"></div>
@@ -64,8 +69,7 @@
            		<li><a href="#">Help</a></li>
         </ul>
 </nav>
-<div style="padding-top: 50px">
-<iframe class="pigeonholes" frameborder="0" height="0px" overflow="auto" scrolling="no" src="http://dbslifestyle.vocohub.com/space/?level=1"></iframe></div>
+<iframe class="pigeonholes" frameborder="0" overflow="auto" scrolling="no" style="height:100%;padding-top:50px;" src="http://dbslifestyle.vocohub.com/space/?level=1"></iframe>
 
   <script src="js/lib/jquery-1.11.3.min.js"></script>
   <script src="js/lib/jquery.browser.js"></script>
@@ -89,10 +93,9 @@
 		var height = $(window).innerHeight();
 
     var $window = $(window).on('resize', function(){
-       pigeonholes.height(height - 50)
+       pigeonholes.height(height)
     }).trigger('resize'); //on page load
   });
-
 
 	pigeonholes.load(function() {
 		$('#waiting').hide();
