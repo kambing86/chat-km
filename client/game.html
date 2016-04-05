@@ -105,7 +105,7 @@
           var origin = event.origin;
           if (origin == location.origin) {
             var data = event.data;
-            alertBox("You scored " + data.score + " and Mission " + ((data.success) ? "Success" : "Failed"));
+            alertbox("You scored " + data.score + " and Mission " + ((data.success) ? "Success" : "Failed"));
             window.history.back();
           }
         }
