@@ -801,16 +801,6 @@ $(function() {
         processAnswer(data);
       }
   });  
-  socket.on("getteam", function(data) {
-    if(data == null)
-      return;
-    var members = "";
-    for(var i = 0; i<data.length; i++) {
-    	members += data[i].username + "<br>";
-    }
-    $("#myteam").text(userteam);
-    $("#teammembers").html(members);    	
-  });  
   socket.on("checkteamanswers", function(data) {
     if(data == null)
       return;      
@@ -1004,10 +994,6 @@ $(function() {
     		setCookie("pausevideo", 1, 1);
 	}
   }
-  window.getTeam = function() {
-  	  var data = {userteam:userteam, username:username};
-      socket.emit("getteam", data);
-  }    
   window.checkTeamAnswers = function(day,question) {
   	  var data = {userteam:userteam, username:username, day:day, question:question};
         socket.emit("checkteamanswers", data);

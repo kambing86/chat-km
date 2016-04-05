@@ -206,7 +206,7 @@ nav ul li {
 }
 
 nav ul li a, a:hover{
-  font-size: 1.5em;
+  font-size: 1.0em;
   color: inherit;
   text-decoration: none;
 }

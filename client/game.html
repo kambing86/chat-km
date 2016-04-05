@@ -75,7 +75,7 @@
         <li><a href="#">Help</a></li>
       </ul>
     </nav>
-    <iframe id="gameiframe" class="pigeonholes" frameborder="0" overflow="auto" scrolling="no" style="position:absolute;top:50px;left:0;width:1px;min-width:100%;" src=""></iframe>
+    <iframe class="pigeonholes" frameborder="0" overflow="auto" scrolling="no" style="position:absolute;top:50px;left:0;width:1px;min-width:100%;" src="http://dbslifestyle.vocohub.com/space/?level=1"></iframe>
 
     <script src="js/lib/jquery-1.11.3.min.js"></script>
     <script src="js/lib/jquery.browser.js"></script>
@@ -106,24 +106,8 @@
           $('#waiting').hide();
         });
       });
-
-    $.urlParam = function(name) {
-      var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
-      if (results === null) {
-        return '';
-      } else {
-        return results[1] || '';
-      }
-    }; 
-    
-    $(document).ready(function() {
-    	var level = 1;
-    	level = decodeURIComponent($.urlParam('level'));
-    	$("#gameiframe").attr("src", "http://dbslifestyle.vocohub.com/space/?level="+level);
-    });
     </script>
   </div>
-  
 </body>
 
 </html>
