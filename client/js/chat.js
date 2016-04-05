@@ -124,7 +124,12 @@ $(function() {
       $('#sm-alertbox').on('hidden.bs.modal', function (e) {
         window.location = "menu.html";
       })
+    } else if(options.goback == true) {
+      $('#sm-alertbox').on('hidden.bs.modal', function (e) {
+        window.history.back();
+      })
     }
+    
   }
 
   function blink(selector) {
@@ -1018,7 +1023,11 @@ $(function() {
   window.submitPoll = function(data) {
         socket.emit("new answer", data);
   }
-  window.alertbox = function(msg) {
+  window.alertbox = function(msg, goback) {
+  	  
+  	  if(goback ==1)
+  	  	alertBox(msg, {goback:true});
+  	  else
         alertBox(msg);
   }
   window.day1submit = function() {
