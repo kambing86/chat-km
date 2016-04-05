@@ -413,7 +413,14 @@ if (cluster.isMaster) {
       var answerUser = usernames[socket.username];
       answerUser.emit("checkpoll", getAnswer[0]);
     }));
-    
+
+    socket.on("getteam", Q.async(function*(data) {
+      var teamusers = yield chatDb.getTeam(data);
+      
+      var answerUser = usernames[socket.username];
+      answerUser.emit("getteam", teamusers);
+      
+    }));       
     socket.on("checkteamanswers", Q.async(function*(data) {
       console.log("checkteamanswers: " + data.userteam);
       var teamusers = yield chatDb.getTeam(data);
