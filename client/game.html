@@ -112,7 +112,7 @@
           var origin = event.origin;
           if (origin == location.origin) {
             var data = event.data;
-            alert("You scored " + data.score + " and Mission " + (data.success) ? "Success" : "Failed");
+            alert("You scored " + data.score + " and Mission " + ((data.success) ? "Success" : "Failed"));
             window.history.back();
           }
         }
