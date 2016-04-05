@@ -1004,6 +1004,10 @@ $(function() {
     		setCookie("pausevideo", 1, 1);
 	}
   }
+  window.getTeam = function() {
+  	  var data = {userteam:userteam, username:username};
+        socket.emit("getteam", data);
+  }    
   window.checkTeamAnswers = function(day,question) {
   	  var data = {userteam:userteam, username:username, day:day, question:question};
         socket.emit("checkteamanswers", data);

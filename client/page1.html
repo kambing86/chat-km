@@ -10,8 +10,7 @@
     <meta name="author" content="">
     <link href="assets/css/theme-flat-ui.css" rel="stylesheet">
     <link href="assets/css/style.css" rel="stylesheet">
-    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet">    
-    <link href='http://fonts.googleapis.com/css?family=Roboto:400,300,700italic,700,500&amp;subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet">
    <!--[if lt IE 9]>
       <script src="http://html5shim.googlecode.com/svn/trunk/html5.js" type="text/javascript"></script>
     <![endif]-->
@@ -25,15 +24,15 @@
 	<div class="navbar-toggle">
 		<a href="instructions.html"><b>Agenda</b></a>
 	</div>
+	<div class="navbar-toggle" id="gamebutton">
+		<b>Game</b>
+	</div>		
 	<div class="navbar-toggle">
 		<a href="chat.html"><b>Chat</b></a>
 	</div>	
 	<div class="navbar-toggle">
 		<a href="pigeonholes.html"><b>Q&A</b></a>
 	</div>		
-	<div class="navbar-chat">
-		<b>GAME</b>
-	</div>
 </div>
 <div class="modal fade" id="sm-alertbox" tabindex="-1" role="dialog">
   <div class="modal-dialog">
@@ -53,11 +52,7 @@
 <nav class="nav-hide" id="navtest">
   		<ul>
             	<li><a href="menu.html">Missions</a></li>
-                <li><a href="#">
-                       <span id="menuUsername">My Team</span>
-                       <span style="float:right" id="menuUserPoints"></span>
-                    </a>
-                </li>            	
+                <li><a href="team.html">My Team</a></li>            	
            		<li><a href="#">Leaderboard</a></li>
         </ul>
 </nav>
@@ -120,7 +115,7 @@
   <script src="assets/js/script.js"></script>
 <script>
   $(function(){
-  $('.navbar-chat, nav').click(function(){
+  $('#gamebutton, nav').click(function(){
     //$('.navbar-chat').toggleClass('navbar-on');
     $('nav').slideToggle();
     $('nav').removeClass('nav-hide');
