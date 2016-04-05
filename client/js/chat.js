@@ -801,6 +801,16 @@ $(function() {
         processAnswer(data);
       }
   });  
+  socket.on("getteam", function(data) {
+    if(data == null)
+      return;
+    var members = "";
+    for(var i = 0; i<data.length; i++) {
+    	members += data[i].username + "<br>";
+    }
+    $("#myteam").text(userteam);
+    $("#teammembers").html(members);    	
+  });  
   socket.on("checkteamanswers", function(data) {
     if(data == null)
       return;      

@@ -11,8 +11,8 @@
     <link href="assets/css/theme-flat-ui.css" rel="stylesheet">
     <link href="assets/css/style.css" rel="stylesheet">
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet">    
-    <link href='http://fonts.googleapis.com/css?family=Roboto:400,300,700italic,700,500&amp;subset=latin,latin-ext' rel='stylesheet' type='text/css'>
-   <!--[if lt IE 9]>
+    <link href='http://fonts.googleapis.com/css?family=Roboto:400,300,700italic,700,500&amp;subset=latin,latin-ext' rel='stylesheet' type='text/css'>    
+<!--[if lt IE 9]>
       <script src="http://html5shim.googlecode.com/svn/trunk/html5.js" type="text/javascript"></script>
     <![endif]-->
 <!-- Le fav and touch icons -->
@@ -21,20 +21,25 @@
 <body>
 <div class="fixed-img"></div>
 <div class="wrapper">
+<div class="navbar navbar-fixed-top back">
+	<a href="javascript:history.go(-1);"><i class="fa fa-chevron-left fa-lg"></i> Back</a>
+</div>
+<!--
 <div class="navbar navbar-fixed-top">
 	<div class="navbar-toggle">
-		<a href="instructions.html"><b>Agenda</b></a>
+		<div class="bar1"></div>
+		<div class="bar2"></div>
+		<div class="bar3"></div>
 	</div>
-	<div class="navbar-toggle">
-		<a href="chat.html"><b>Chat</b></a>
-	</div>	
-	<div class="navbar-toggle">
-		<a href="pigeonholes.html"><b>Q&A</b></a>
-	</div>		
 	<div class="navbar-chat">
-		<b>GAME</b>
+		<em class="icon-comment"></em> 
 	</div>
+	<div class="navbar-info">
+		<em class="icon-info"></em> 
+	</div>	
 </div>
+-->
+
 <div class="modal fade" id="sm-alertbox" tabindex="-1" role="dialog">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -58,7 +63,8 @@
                        <span style="float:right" id="menuUserPoints"></span>
                     </a>
                 </li>            	
-           		<li><a href="#">Leaderboard</a></li>
+           		<li><a href="#">Ask SGMC anything</a></li>
+           		<li><a href="#">Help</a></li>
         </ul>
 </nav>
 <br><br>
@@ -67,69 +73,66 @@
        	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 			<div class="panel">
 				<div class="panel-heading">
-					<h2>2: Making a Difference</h2>
-					<p>
-					The battle is getting fiercer. Destroy all asteroids and enemies but don’t shoot at DBS! Earn at least 500 points each to unlock Mission 2.
-					</p>
-				</div>
-			</div>
-		</div>
-	</div>
-	<div class="row">
-       	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-			<div class="panel text-center">
-				<div class="panel-heading">
-					<button class="btn btn-primary text-center" onclick="window.location='game.html?level=2'"><img src="images/dbs.png" style="height:20px;float:left"> Enter battle zone <img src="images/dbs.png" style="height:20px;float:right"></button>
-				</div>
-				<div class="small">
-					<div id="d0q1">Checking status...</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<div class="row">
-       	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-			<div class="panel">
-				<div class="panel-heading">
-				<br>	
-				<p>Your second mission is to identify ways we can make a difference to our customers. 
-					</p>
-				</div>
-			</div>
-		</div>
-	</div>
-	<div class="row">
-       	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-			<div class="panel text-center">
-				<div class="panel-heading">	
-						<button class="btn btn-primary" onclick="window.location='https://dev-sg-app.vocohub.com/sgConf/main/app/index.html?id=hello5@123.com&quiz=1908'">Mission 2: Make a Difference</button>
+				
+				
+				  <h5 class="">Submit your unbelievable Lyrics here!</h5>
+                	<div class="row text-center">
+						  	<textarea rows="5" type="text" class="inputComment form-control"></textarea> 
+						  	<button class="btn btn-primary btn-enabled pull-right" type="button" id="submitComment" style="margin-top:20px"><strong>Submit</strong></button>                	
+                    </div>	
+                    <br>
+                   	<div class="panel-footer text-right lightgrey" style="padding:35px;">
+                    <div class="row">
+						  <div id="chat">
+    							<div class="chatArea"> 
+						<ul class="nav nav-tabs navbar nav" role="tablist">
+								<li role="presentation" class="active like-tab"><a class="like" href="#" aria-controls="home" role="tab" data-toggle="tab"  onclick="loadMostLikes();return false;">Recent</a></li>
+								<li role="presentation" class="like-tab"><a class="like" href="#" aria-controls="profile" role="tab" data-toggle="tab"  onclick="loadMostLikes();return false;">Most Likes</a></li>
+						</ul>
+						</div>
+						<div class="messages"></div>
+					<br>
+					<div align="right" id="previousmsg"> </em><a href="#" onclick="loadPreviousMessage();return false;" class="red-text"><em class="icon-caret-right"></em> <span id="loadpreviousmsg">View earlier Lyrics</span> <span id="totalmessage"></span></a>
+					</div>
+					</div>
+                        
+                        </div>
+                        </div>
+				
 				</div>
 			</div>
 		</div>
 	 </div>
-</div><!-- /.container --> 
+</div><!-- /.container -->
+
+<div style="height:20px"></div>
+ 
  <!-- call to action -->
 </div>
+
+<footer class="">
+</footer>
+
+</div><!--/wrapper-->
+	
   <script src="js/lib/jquery-1.11.3.min.js"></script>
   <script src="js/lib/jquery.browser.js"></script>
   <script src="js/lib/jquery.ba-hashchange.min.js"></script>
   <script src="js/lib/bootstrap.min.js"></script>
   <script src="js/lib/modernizr-custom.js"></script>
   <script src="js/lib/moment.min.js"></script>
-  <script src="/socket.io/socket.io.js"></script>
+  <!-- <script src="/socket.io/socket.io.js"></script>
   <script src="js/mobile-sidebar.js"></script>
-  <script src="js/chat.js"></script>
+  <script src="js/chat.js"></script> -->
   <script src="assets/js/script.js"></script>
 <script>
   $(function(){
-  $('.navbar-chat, nav').click(function(){
-    //$('.navbar-chat').toggleClass('navbar-on');
+  $('.navbar-toggle, nav').click(function(){
+    $('.navbar-toggle').toggleClass('navbar-on');
     $('nav').slideToggle();
     $('nav').removeClass('nav-hide');
   });
 });
-//var data = {userteam:userteam, day:0, question:1 }; 
-setTimeout(function(){ checkTeamAnswers(0,1) }, 1000);
 </script>
 
 </body>

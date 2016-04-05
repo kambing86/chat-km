@@ -55,88 +55,52 @@
 <nav class="nav-hide" id="navtest">
   		<ul>
             	<li><a href="menu.html">Missions</a></li>
-                <li><a href="#">
+                <li><a href="team.html">
                        <span id="menuUsername">My Team</span>
                     </a>
                 </li>            	
            		<li><a href="#">Leaderboard</a></li>
         </ul>
 </nav>
+
 <br><br><br>
 <div class="container">
 	<div class="row">
-       	<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6"></div>
-       	<div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
+       	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
 			<div class="panel">
-				<div class="panel-heading text-center">
-					<a class="btn btn-primary btn-menu btn-locked" href="page0.html"><strong><h5>5</h5></strong></a>
-					<br>
-					<i class="fa fa-lock"></i> <span id="step5" class="menutext">Success and onward!</span>
+				<div class="panel-heading">
+					<h2 id="myteam">Team 000</h2>
 				</div>
 			</div>
 		</div>
 	 </div>
 	<div class="row">
-       	<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2"></div>
-       	<div style="margin-top: -50px;" class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
+       	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 			<div class="panel">
-				<div class="panel-heading text-center">
-					<a class="btn btn-primary btn-menu btn-locked" href="page0.html"><strong><h5>4</h5></strong></a>
-					<br>
-					<i class="fa fa-lock"></i> <span id="step4" class="menutext">Journey thinking</span>
-				</div>
-			</div>
-		</div>
-	 </div>
-	<div class="row">
-       	
-       	<div style="margin-top: -5px;" class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
-			<div class="panel">
-				<div class="panel-heading text-center">
-					<a class="btn btn-primary btn-menu btn-locked" href="page0.html"><strong><h5>3</h5></strong></a>
-					<br>
-					<i class="fa fa-lock"></i> <span id="step3" class="menutext">Taking charge</span>
+				<div class="panel-heading">
+					<h4>Team Members</h4>
+					<div id="teammembers" style="border:1px solid #fff;padding:10px;border-radius:10px;"></div>
 				</div>
 			</div>
 		</div>
 	 </div>	 
 	<div class="row">
-       	<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4"></div>
-       	<div style="margin-top: 15px;" class="col-xs-6 col-sm-6 col-md-6 col-lg-6 text-center">
+       	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
 			<div class="panel">
-				<div class="panel-heading text-center">
-					<a class="btn btn-primary btn-menu btn-enabled" href="page2.html"><strong><h5>2</h5></strong></a>
-					<br>
-					<span id="step2" class="menutext">Make a difference</span>
+				<div class="panel-heading">
+					<h4>Name your battleship</h4>
+					<p>
+					<input type="text" class="form-control" id="teamname" placeholder="Your Team Name here"	><br>
+					<button class="btn btn-primary" onclick="window.location='menu.html'"><b>Submit </b></button>
+					</p>
 				</div>
 			</div>
 		</div>
-	 </div>	 
-	<div class="row">
-       	<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6"></div>
-       	<div style="margin-top: 5px;" class="col-xs-6 col-sm-6 col-md-6 col-lg-6 text-center">
-			<div class="panel">
-				<div class="panel-heading text-center">
-					<a class="btn btn-primary btn-menu btn-locked" href="page1.html"><strong><h5>1</h5></strong></a>
-					<br>
-					<i class="fa fa-lock"></i> <span id="step1" class="menutext">Unbelievable!</span>
-				</div>
-			</div>
-		</div>
-	 </div>	 	 
-	<div class="row">
-       	<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 text-center"></div>
-       	<div style="margin-top: 65px;" class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
-			<div class="panel">
-				<div class="panel-heading text-center">
-					<a class="btn btn-primary btn-menu btn-enabled" href="page0.html"><strong><h5>0</h5></strong></a>
-					<br>
-					<span id="step0" class="menutext">Take Off!</span>
-				</div>
-			</div>
-		</div>
-	 </div>	 	 	 
-</div><!-- /.container --> 
+	 </div>	 	 	 	 
+</div>
+
+<div style="height:20px"></div>
+ 
  <!-- call to action -->
 </div>
 
@@ -158,19 +122,12 @@
 <script>
   $(function(){
   $('.navbar-chat, nav').click(function(){
-    //$('.navbar-toggle').toggleClass('navbar-on');
+    //$('.navbar-chat').toggleClass('navbar-on');
     $('nav').slideToggle();
     $('nav').removeClass('nav-hide');
   });
 });
-  
-var topx = $("#step2").offset().top;
-topx = topx - 200;
-var speed = topx + 1000;
-console.log("top: " + topx);
-$('html, body').animate({
-    scrollTop: topx 
-}, speed);
+setTimeout(function(){ getTeam() }, 500);
 </script>
 
 </body>
