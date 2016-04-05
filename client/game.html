@@ -75,7 +75,7 @@
         <li><a href="#">Help</a></li>
       </ul>
     </nav>
-    <iframe class="pigeonholes" frameborder="0" overflow="auto" scrolling="no" style="position:absolute;top:50px;left:0;width:1px;min-width:100%;" src="http://dbslifestyle.vocohub.com/space/?level=1"></iframe>
+    <iframe class="pigeonholes" frameborder="0" overflow="auto" scrolling="no" style="position:absolute;top:50px;left:0;width:1px;min-width:100%;" src="space/?level=1"></iframe>
 
     <script src="js/lib/jquery-1.11.3.min.js"></script>
     <script src="js/lib/jquery.browser.js"></script>
@@ -105,6 +105,17 @@
         pigeonholes.load(function() {
           $('#waiting').hide();
         });
+
+        window.addEventListener("message", receiveMessage, false);
+
+        function receiveMessage(event) {
+          var origin = event.origin;
+          if (origin == location.origin) {
+            var data = event.data;
+            alert("You scored " + data.score + " and Mission " + (data.success) ? "Success" : "Failed");
+            window.history.back();
+          }
+        }
       });
     </script>
   </div>
