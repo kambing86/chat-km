@@ -94,6 +94,7 @@ if (cluster.isMaster) {
       } else {
 
       	var oldUser = usernames[username];
+        delete usernames[username];
         oldUser.emit("forcelogout");
         oldUser.disconnect();
 
@@ -107,6 +108,7 @@ if (cluster.isMaster) {
     socket.on("login", Q.async(function*(username, roomName) {
       if (usernames[username] != null) {
       	var oldUser = usernames[username];
+        delete usernames[username];
         oldUser.emit("forcelogout");
         oldUser.disconnect();
 
@@ -148,7 +150,7 @@ if (cluster.isMaster) {
       if(dow == 0 || dow == 6)
       	  dow = 1;
       dow=3;
-      
+
       socket.emit("login", {
         _id: userId,
         roomName: roomName,
@@ -162,7 +164,7 @@ if (cluster.isMaster) {
           username: socket.username,
           users: rooms[joinedRoom].users
         });
-        
+
       */
     }));
 
@@ -190,7 +192,8 @@ if (cluster.isMaster) {
     socket.on("disconnect", function() {
       // remove the username from global usernames list
       if (addedUser) {
-        delete usernames[socket.username];
+        if (usernames[socket.username])
+          delete usernames[socket.username];
         if (adminSocket)
           adminSocket.emit("admin user left", {
             username: socket.username,
@@ -416,15 +419,15 @@ if (cluster.isMaster) {
 
     socket.on("getteam", Q.async(function*(data) {
       var teamusers = yield chatDb.getTeam(data);
-      
+
       var answerUser = usernames[socket.username];
       answerUser.emit("getteam", teamusers);
-      
-    }));       
+
+    }));
     socket.on("checkteamanswers", Q.async(function*(data) {
       console.log("checkteamanswers: " + data.userteam);
       var teamusers = yield chatDb.getTeam(data);
-      
+
       var answerlist=[];
       for(var i in teamusers) {
       	var getAnswer = yield chatDb.getAnswer(teamusers[i].username, data);
@@ -432,11 +435,11 @@ if (cluster.isMaster) {
       	answerlist.push(getAnswer[0]);
       	console.log("user: " + teamusers[i].username + ", answer: " + getAnswer[0]);
       };
-      
+
       var answerUser = usernames[socket.username];
       answerUser.emit("checkteamanswers", answerlist);
-      
-    }));    
+
+    }));
 
     socket.on("getpollresults", Q.async(function*(data) {
       //logger.info("getpoolresults! " + data.day + ", " + data.question);
@@ -457,7 +460,7 @@ if (cluster.isMaster) {
       var getAnswer = yield chatDb.getAnswer(socket.username, data);
 
       if (getAnswer.length == 0) {
-        // it is a poll, all answers are correct! 
+        // it is a poll, all answers are correct!
         if(data.day == 1) {
 	  correctanswer = true;
 
@@ -492,8 +495,8 @@ if (cluster.isMaster) {
         } else if (data.day == 6) {
 	  	correctanswer = true;
 	}
-      } 
-      
+      }
+
       var answerdata = {
         username: socket.username,
         day: data.day,
@@ -506,7 +509,7 @@ if (cluster.isMaster) {
 
       //if(correctanswer == true) {
 	/*
-        if(data.day == 1 && data.question == 2) 
+        if(data.day == 1 && data.question == 2)
         	yield chatDb.updateAnswer(answerdata);
 	else
 	*/
@@ -514,7 +517,7 @@ if (cluster.isMaster) {
 
       if(correctanswer == true) {
         yield chatDb.updateUserpoints(socket.username, answerdata.points);
-      } 
+      }
 
       if (getAnswer.length > 0) {
 	if(getAnswer[0].answer == data.answer)
@@ -522,7 +525,7 @@ if (cluster.isMaster) {
 	else
 		answerdata.status = false;
 	answerdata.points = 0;
-      } 
+      }
 
       //io.to(joinedRoom).emit("new answer", answerdata);
       var answerUser = usernames[socket.username];
