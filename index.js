@@ -444,7 +444,7 @@ if (cluster.isMaster) {
     
     socket.on("updatescore", Q.async(function*(data) {
       var highscore = yield chatDb.getAnswer(socket.username, data);
-      console.log("highscore: " + highscore);
+      console.log("highscore: " + highscore + ", len " + highscore.length);
       
       if(highscore == "undefined" || highscore.length == 0) {
 		  var answerdata = {
