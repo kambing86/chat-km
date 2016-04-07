@@ -446,7 +446,7 @@ if (cluster.isMaster) {
       var highscore = yield chatDb.getAnswer(socket.username, data);
       console.log("highscore: " + highscore);
       
-      if(highscore == "undefined") {
+      if(highscore == "undefined" || highscore.length == 0) {
 		  var answerdata = {
 			username: socket.username,
 			day: data.day,
