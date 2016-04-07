@@ -444,6 +444,7 @@ if (cluster.isMaster) {
     
     socket.on("updatescore", Q.async(function*(data) {
       var highscore = yield chatDb.getAnswer(socket.username, data);
+      console.log("highscore: " + highscore);
       
       if(highscore == "undefined") {
 		  var answerdata = {
@@ -457,8 +458,10 @@ if (cluster.isMaster) {
 		  };
 		  yield chatDb.addAnswer(answerdata);      	  
       } else if(highscore[0].points < data.score) {
+      	  console.log("highscore0: " + highscore[0].points);
       	  yield chatDb.updateScore(socket.username, data);
       } else {
+      	  console.log("highscore1: " + highscore[0].points);
       	  //do nothing!
       }
     }));    
