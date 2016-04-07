@@ -49,7 +49,7 @@
       </div>
       <div class="modal-body black-text" id="alertbox"></div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
+        <button type="button" class="btn btn-primary btn-enabled" data-dismiss="modal">OK</button>
       </div>
     </div>
   </div>
@@ -121,13 +121,13 @@
   <script src="js/lib/bootstrap.min.js"></script>
   <script src="js/lib/modernizr-custom.js"></script>
   <script src="js/lib/moment.min.js"></script>
-  <!-- <script src="/socket.io/socket.io.js"></script>
+  <script src="/socket.io/socket.io.js"></script>
   <script src="js/mobile-sidebar.js"></script>
-  <script src="js/chat.js"></script> -->
+  <script src="js/chat.js"></script>
   <script src="assets/js/script.js"></script>
 <script>
   $(function(){
-  $('.navbar-toggle, nav').click(function(){
+  $('#gamebutton, nav').click(function(){
     $('.navbar-toggle').toggleClass('navbar-on');
     $('nav').slideToggle();
     $('nav').removeClass('nav-hide');

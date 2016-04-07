@@ -29,9 +29,6 @@
 		<b>Game</b>
 	</div>	
 	<div class="navbar-toggle">
-		<a href="chat.html"><b>Chat</b></a>
-	</div>	
-	<div class="navbar-toggle">
 		<a href="pigeonholes.html"><b>Q&A</b></a>
 	</div>		
 </div>
@@ -77,9 +74,9 @@
        	<div style="margin-top: -50px;" class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
 			<div class="panel">
 				<div class="panel-heading text-center">
-					<a class="btn btn-primary btn-menu btn-locked" href="#"><strong><h5>4</h5></strong></a>
+					<a class="btn btn-primary btn-menu btn-enabled" href="page4.html"><strong><h5>4</h5></strong></a>
 					<br>
-					<i class="fa fa-lock"></i> <span id="step4" class="menutext">Journey thinking</span>
+					<span id="step4" class="menutext">Journey thinking</span>
 				</div>
 			</div>
 		</div>
@@ -89,9 +86,9 @@
        	<div style="margin-top: -5px;" class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
 			<div class="panel">
 				<div class="panel-heading text-center">
-					<a class="btn btn-primary btn-menu btn-locked" href="#"><strong><h5>3</h5></strong></a>
+					<a class="btn btn-primary btn-menu btn-enabled" href="page3.html"><strong><h5>3</h5></strong></a>
 					<br>
-					<i class="fa fa-lock"></i> <span id="step3" class="menutext">Taking charge</span>
+					<span id="step3" class="menutext">Taking charge</span>
 				</div>
 			</div>
 		</div>
@@ -160,7 +157,7 @@
   });
 });
   
-var topx = $("#step2").offset().top;
+var topx = $("#step4").offset().top;
 topx = topx - 200;
 var speed = topx + 1000;
 console.log("top: " + topx);

@@ -37,10 +37,7 @@
       </div>
       <div class="navbar-toggle" id="gamebutton">
 		<b>Game</b>
-	  </div>	      
-      <div class="navbar-toggle">
-        <a href="chat.html"><b>Chat</b></a>
-      </div>
+	  </div>
       <div class="navbar-toggle">
         <a href="pigeonholes.html"><b>Q&A</b></a>
       </div>
@@ -82,7 +79,7 @@
     <script src="assets/js/script.js"></script>
     <script>
       $(function() {
-        $('.navbar-chat, nav').click(function() {
+        $('#gamebutton, nav').click(function() {
           //$('.navbar-chat').toggleClass('navbar-on');
           $('nav').slideToggle();
           $('nav').removeClass('nav-hide');

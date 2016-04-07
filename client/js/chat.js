@@ -80,8 +80,9 @@ $(function() {
     }
   });
   var $submitComment = $("#submitComment");
+  
   $submitComment.on("click", function() {
-	//console.log("Comment clicked");
+	console.log("Comment clicked " + joinedRoom);
       sendMessage("inputComment",joinedRoom);
       //socket.emit("stop typing");
       typing = false;
@@ -174,7 +175,7 @@ $(function() {
       var dayRoom = window.location.pathname.split(".html");
       dayRoom = dayRoom[0];
 
-      //console.log("socket emit login: " + username + ", room: " + dayRoom);
+      console.log("socket emit login: " + username + ", room: " + dayRoom);
       socket.emit("login", username, dayRoom);
 
     } else {
@@ -258,10 +259,11 @@ $(function() {
         return;
       }
 
-      var givepoints = 5;
+      var givepoints = 0;
       if(room == "/ask" || room == "/haiku" || room == "/day2quiz" || room == "/day3quiz" || room == "/day4quiz" )
 	givepoints = 10;
 	
+	console.log("new message: " + message + ": " + room);
       socket.emit("new message", message, room, givepoints);
     }
   }
@@ -525,19 +527,20 @@ $(function() {
       refreshRoomList(data.rooms);
   }
 
-  socket.on("login", function(data) {
+  socket.on("login", function(user, data) {
     setCookie("username", username, 1);
 
     $("#usernameSpan").text(username);
     //$fullpage.off("click").fadeOut();
     //$usernameInput.off("keydown");
-    userId = data._id;
-    usertype = data.userType;
-    userteam = data.teamId;
+    userId = user._id;
+    usertype = user.userType;
+    userteam = user.teamId;
     console.log("userId: " + userId);
     console.log("usertype: " + usertype);
     console.log("userteam: " + userteam);
-    //joinedRoom = data.roomName;
+    console.log("joinedRoom: " + data.roomName);
+    joinedRoom = data.roomName;
 
     /*
     var isAdmin = data.isAdmin;
@@ -582,6 +585,9 @@ $(function() {
 
   // Whenever the server emits "new message", update the chat body
   socket.on("new message", function(data, givepoints) {
+  		  
+  	console.log("data.room: ", data.room);
+  	console.log("joinedRoom: ", joinedRoom);
     if(data.room == joinedRoom) {
 	if(data.username == username) {
 		if(givepoints>0)

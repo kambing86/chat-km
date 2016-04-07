@@ -128,7 +128,14 @@ if (cluster.isMaster) {
       }
       yield chatDb.updateUserLogintime(username);
 
-      socket.emit("login", getUser);
+      var dow = 1;
+      console.log("roomName: " + roomName);
+      var data = {
+        roomName: roomName,
+        dow: dow
+      }
+
+      socket.emit("login", getUser, data);
 
       userId = getUser._id;
       socket.username = username;
@@ -138,6 +145,13 @@ if (cluster.isMaster) {
         roomName = generalRoom;
       yield joinRoom(roomName);
 
+      socket.emit("history", yield chatDb.getHistory(joinedRoom, 0, 0, 5));
+      if (adminSocket)
+        adminSocket.emit("admin user joined", {
+          username: socket.username,
+          users: rooms[joinedRoom].users
+        });
+      
       /*
       var isadmin = false;
       if(username == "admin1@dbs.com" || username == "admin2@dbs.com" || username == "admin3@dbs.com" || username == "admin4@dbs.com" || username == "admin5@dbs.com")
@@ -246,11 +260,14 @@ if (cluster.isMaster) {
     // when the client emits "new message", this listens and executes
     socket.on("new message", Q.async(function*(data, roomName, givepoints) {
       // we tell the client to execute "new message"
+      
+      console.log("roomName: " + roomName);
       if(roomName == null)
-	roomName = joinedRoom;
+      	  roomName = joinedRoom;
       if(givepoints == null)
-	givepoints = 0;
+      	  givepoints = 0;
 
+      console.log("roomName: " + roomName);
       var msg = {
         username: socket.username,
         msg: data,
