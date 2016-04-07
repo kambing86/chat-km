@@ -105,7 +105,7 @@
             var data = event.data;
             var option = (data.success) ? {goback:true}:{reload:true};
             if(data.success) {
-           		updateScore(level, score);
+           		updateScore(level, data.score);
             }            
             alertbox("You scored " + data.score + " and Mission " + ((data.success) ? "Success" : "Failed"), option);
           }
