@@ -812,6 +812,21 @@ $(function() {
         processAnswer(data);
       }
   });  
+  socket.on("loadlb", function(data) {
+  	console.log("loadlb data " + data.length);
+    if(data == null)
+      return;
+    var members = "";
+    for(var i = 0; i<data.length; i++) {
+    	members += data[i].username + " - " + data[i].points + "<br>";
+    }
+    $("#lbdetails").html(members);    	
+  });
+  socket.on("getscore", function(data) {
+    if(data == null)
+      return;
+    $("#lbdetails").html(members);    	
+  });  
   socket.on("getteam", function(data) {
     if(data == null)
       return;
@@ -1023,18 +1038,22 @@ $(function() {
   	  var data = {userteam:userteam, username:username, day:day, question:question};
         socket.emit("checkteamanswers", data);
   }  
+  window.loadLB = function(d,q) {
+  	  var data = {day:d, question:q};
+        socket.emit("loadlb", data);
+  }    
+  window.updateScore = function(level, score) {
+  	  var data = {day:level, question:1, score:score};
+        socket.emit("updatescore", data);
+  }  
   window.checkPoll = function(data) {
         socket.emit("checkpoll", data);
   }  
   window.submitPoll = function(data) {
         socket.emit("new answer", data);
   }
-  window.alertbox = function(msg, goback) {
-  	  
-  	  if(goback ==1)
-  	  	alertBox(msg, {goback:true});
-  	  else
-        alertBox(msg);
+  window.alertbox = function(msg, option) {
+  	  alertBox(msg, option);
   }
   window.day1submit = function() {
 	var msg = $("#day1submitask").val();

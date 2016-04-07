@@ -105,9 +105,29 @@ exports.updateAnswer = function(data) {
     }
   });
 };
+exports.updateScore = function(username, data) {
+  return answerCollection.findOneAndUpdate({
+      username: username,
+      day: data.day,
+      question: data.question
+  }, {
+    $set: {
+      score: data.score,
+      time: new Date()
+    }
+  });
+};
 exports.getTeam = function(data) {
   return userCollection.find({
     teamId: data.userteam
+  }).toArray();
+};
+exports.loadLB = function(data) {
+  return answerCollection.find({
+    day: data.day,
+    question: data.question
+  }).sort({
+  	points: -1
   }).toArray();
 };
 exports.getAnswer = function(user,data) {
