@@ -459,6 +459,7 @@ if (cluster.isMaster) {
 		  yield chatDb.addAnswer(answerdata);      	  
       } else if(highscore[0].points < data.score) {
       	  console.log("highscore0: " + highscore[0].points);
+      	  console.log("data.score: " + data.score);
       	  yield chatDb.updateScore(socket.username, data);
       } else {
       	  console.log("highscore1: " + highscore[0].points);

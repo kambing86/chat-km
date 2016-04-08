@@ -112,7 +112,7 @@ exports.updateScore = function(username, data) {
       question: data.question
   }, {
     $set: {
-      score: data.score,
+      points: data.score,
       time: new Date()
     }
   });
