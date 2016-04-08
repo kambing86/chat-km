@@ -1043,6 +1043,7 @@ $(function() {
         socket.emit("loadlb", data);
   }    
   window.updateScore = function(level, score) {
+  	  level = parseInt(level);
   	  var data = {day:level, question:1, score:score};
         socket.emit("updatescore", data);
   }  
