@@ -10,7 +10,7 @@ $(function() {
   ];
   var daysarray = ["day1", "day2", "day3", "day4", "day5"];
 
-  var username, usertype, userteam, userId, joinedRoom, onProfile = false, onComments = false;
+  var username, usertype, userteamId, userteamName, userId, joinedRoom, onProfile = false, onComments = false;
   var sortbylike=false;
   var stopBlinking=false;
   var reconnect_count=0;
@@ -19,7 +19,7 @@ $(function() {
 
   var localusername = getCookie("username");
   var localusertype = getCookie("usertype");
-  var localuserteam = getCookie("userteam");
+  var localuserteamId = getCookie("userteamId");
   var currentLoc = window.location.pathname;
   var viewingLB = 1;
 
@@ -536,11 +536,13 @@ $(function() {
     //$usernameInput.off("keydown");
     userId = user._id;
     usertype = user.userType;
-    userteam = user.teamId;
+    userteamId = user.teamId;
+    userteamName = user.teamName;
     console.log("userId: " + userId);
     console.log("username: " + username);
     console.log("usertype: " + usertype);
-    console.log("userteam: " + userteam);
+    console.log("userteamId: " + userteamId);
+    console.log("userteamName: " + userteamName);
     console.log("joinedRoom: " + data.roomName);
     joinedRoom = data.roomName;
 
@@ -838,6 +840,16 @@ $(function() {
       return;
     $("#lbdetails").html(members);    	
   });  
+  socket.on("updateteamname", function(teamname) {
+    if(teamname == null || teamname.length==0)
+      return;
+  	
+  	userteamName = teamname;
+  	$("#teamname").val("");
+    $("#myteam").text(userteamName);
+    
+    alertBox("Your battleship is now named as \"" + userteamName + "\"");
+  });    
   socket.on("getteam", function(data) {
     if(data == null)
       return;
@@ -845,7 +857,7 @@ $(function() {
     for(var i = 0; i<data.length; i++) {
     	members += data[i].username + "<br>";
     }
-    $("#myteam").text(userteam);
+    $("#myteam").text(userteamName);
     $("#teammembers").html(members);    	
   });  
   socket.on("checkteamanswers", function(data) {
@@ -1042,11 +1054,11 @@ $(function() {
 	}
   }
   window.getTeam = function() {
-  	  var data = {userteam:userteam, username:username};
+  	  var data = {userteamId:userteamId, username:username};
         socket.emit("getteam", data);
   }    
   window.checkTeamAnswers = function(day,question) {
-  	  var data = {userteam:userteam, username:username, day:day, question:question};
+  	  var data = {userteamId:userteamId, username:username, day:day, question:question};
         socket.emit("checkteamanswers", data);
   }  
   window.loadLB = function(d,q) {
@@ -1065,6 +1077,12 @@ $(function() {
   	  var data = {day:level, question:1, score:score};
         socket.emit("updatescore", data);
   }  
+  window.updateTeamname = function() {
+  	  var teamname = $("#teamname").val();
+  	  console.log("update team: " + teamname);
+  	  var data = {userteamId:userteamId, username:username, teamname:teamname};
+        socket.emit("updateteamname", data);
+  }    
   window.checkPoll = function(data) {
         socket.emit("checkpoll", data);
   }  

@@ -14,7 +14,8 @@ exports.readCsv = Q.async(function*(path) {
         username: dataAry[0],
         userType: parseInt(dataAry[1]),
         points: parseInt(dataAry[2]),
-        teamId: dataAry[3]
+        teamId: dataAry[3],
+        teamName: "Team " + dataAry[3]
       });
     }
   }

@@ -80,11 +80,13 @@
        	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
 			<div class="panel">
 				<div class="panel-heading">
+				<form onsubmit="updateTeamname();return false">
 					<h4>Name your battleship</h4>
 					<p>
 					<input type="text" class="form-control" id="teamname" placeholder="Your Team Name here"	><br>
-					<button class="btn btn-primary" onclick="window.location='menu.html'"><b>Submit </b></button>
+					<button class="btn btn-primary" onclick="updateTeamname();return false;"><b>Submit </b></button>
 					</p>
+				</form>
 				</div>
 			</div>
 		</div>

@@ -117,9 +117,20 @@ exports.updateScore = function(username, data) {
     }
   });
 };
+exports.updateTeamname = function(data) {
+  return userCollection.update({
+      teamId: data.userteamId
+  }, {
+    $set: {
+      teamName: data.teamname
+  }},
+    { 
+    	multi: true     
+  });
+};
 exports.getTeam = function(data) {
   return userCollection.find({
-    teamId: data.userteam
+    teamId: data.userteamId
   }).toArray();
 };
 exports.loadLB = function(data) {

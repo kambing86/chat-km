@@ -454,6 +454,7 @@ if (cluster.isMaster) {
       var highscore = yield chatDb.getAnswer(socket.username, data);
       console.log("highscore: " + highscore + ", len " + highscore.length);
       
+      var updateteam = 0;
       if(highscore == "undefined" || highscore.length == 0) {
 		  var answerdata = {
 			username: socket.username,
@@ -464,17 +465,29 @@ if (cluster.isMaster) {
 			status: true,
 			time: new Date()
 		  };
-		  yield chatDb.addAnswer(answerdata);      	  
+		  yield chatDb.addAnswer(answerdata);
+      	  updateteam = 1;
       } else if(highscore[0].points < data.score) {
       	  console.log("highscore0: " + highscore[0].points);
       	  console.log("data.score: " + data.score);
       	  yield chatDb.updateScore(socket.username, data);
+      	  updateteam = 1;
       } else {
       	  console.log("highscore1: " + highscore[0].points);
       	  //do nothing!
       }
+      
+      if(updateteam === 1) {
+      	  
+      }
     }));    
+    socket.on("updateteamname", Q.async(function*(data) {
+      yield chatDb.updateTeamname(data);
 
+      var answerUser = usernames[socket.username];
+      answerUser.emit("updateteamname", data.teamname);
+
+    }));
     socket.on("getteam", Q.async(function*(data) {
       var teamusers = yield chatDb.getTeam(data);
 
@@ -483,7 +496,7 @@ if (cluster.isMaster) {
 
     }));
     socket.on("checkteamanswers", Q.async(function*(data) {
-      console.log("checkteamanswers: " + data.userteam);
+      console.log("checkteamanswers: " + data.userteamId);
       var teamusers = yield chatDb.getTeam(data);
 
       var answerlist=[];
