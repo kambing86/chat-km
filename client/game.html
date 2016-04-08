@@ -35,8 +35,7 @@
   	<div class="navbar-toggle">
 		<a href="javascript:history.go(-1);"><i class="fa fa-chevron-left fa-lg"></i> Back</a>
 	</div>
-	<div class="navbar-toggle right" id="highscore">Highscore: 0</div>	
-	<div class="navbar-toggle right" id="targetscore">Target: 0</div>	
+	<div class="navbar-toggle right smaller"><span id="highscore">Highscore: 0</span><br><span id="targetscore">Target: 0</span></div>	
   </div>
   
 <!--
@@ -115,6 +114,7 @@
             var option = (data.success) ? {goback:true}:{reload:true};
             if(data.success) {
            		updateScore(level, data.score);
+           		loadLB(parseInt(level),1);
             }            
             alertbox("You scored " + data.score + " and Mission " + ((data.success) ? "Success" : "Failed"), option);
           }

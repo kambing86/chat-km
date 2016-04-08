@@ -439,7 +439,7 @@ if (cluster.isMaster) {
       //console.log("lbdata " + lbdata.length);
       //var answerUser = usernames[socket.username];
       //answerUser.emit("loadlb", lbdata);
-      io.to(joinedRoom).emit("loadlb", lbdata);      
+      io.to("/leaderboard").emit("loadlb", lbdata);      
     }));    
     
     socket.on("gethighscore", Q.async(function*(data) {
