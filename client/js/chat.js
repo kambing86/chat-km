@@ -21,6 +21,7 @@ $(function() {
   var localusertype = getCookie("usertype");
   var localuserteam = getCookie("userteam");
   var currentLoc = window.location.pathname;
+  var viewingLB = 1;
 
 /*
   if( currentLoc == "/menu.html") {
@@ -537,6 +538,7 @@ $(function() {
     usertype = user.userType;
     userteam = user.teamId;
     console.log("userId: " + userId);
+    console.log("username: " + username);
     console.log("usertype: " + usertype);
     console.log("userteam: " + userteam);
     console.log("joinedRoom: " + data.roomName);
@@ -813,15 +815,24 @@ $(function() {
       }
   });  
   socket.on("loadlb", function(data) {
-  	console.log("loadlb data " + data.length);
-    if(data == null)
+  	//console.log("loadlb data " + data.length);
+    if(data == null || data.length==0)
       return;
+  
+    if(viewingLB != data[0].day)
+    	return;
+    
     var members = "";
     for(var i = 0; i<data.length; i++) {
     	members += data[i].username + " - " + data[i].points + "<br>";
     }
     $("#lbdetails").html(members);    	
   });
+  socket.on("gethighscore", function(data) {
+    if(data == null)
+      return;
+    $("#highscore").html("Highscore: " + data.points);    	
+  });    
   socket.on("getscore", function(data) {
     if(data == null)
       return;
@@ -1040,8 +1051,15 @@ $(function() {
   }  
   window.loadLB = function(d,q) {
   	  var data = {day:d, question:q};
-        socket.emit("loadlb", data);
+  	  viewingLB = d;
+  	  $("#lbdetails").empty();
+      socket.emit("loadlb", data);
   }    
+  window.getHighscore = function(level) {
+  	  level = parseInt(level);
+  	  var data = {day:level, question:1};
+        socket.emit("gethighscore", data);
+  }      
   window.updateScore = function(level, score) {
   	  level = parseInt(level);
   	  var data = {day:level, question:1, score:score};

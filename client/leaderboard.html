@@ -60,11 +60,11 @@
 			<div class="panel">
 				<div class="panel-heading text-center">
 					<h2>Leaderboard</h2>
-				  <div class="btn-group-justified" >
-					<button type="button" class="btn btn-primary" onclick="loadLB(1,1);return false;">1</button>
-					<button type="button" class="btn btn-primary" onclick="loadLB(2,1);return false;">2</button>
-					<button type="button" class="btn btn-primary" onclick="loadLB(3,1);return false;">3</button>
-					<button type="button" class="btn btn-primary" onclick="loadLB(4,1);return false;">4</button>
+				  <div class="btn-group-justified">
+					<button type="button" class="btn btn-primary" onclick="loadLeaderboard(1,1);">1</button>
+					<button type="button" class="btn btn-primary" onclick="loadLeaderboard(2,1);">2</button>
+					<button type="button" class="btn btn-primary" onclick="loadLeaderboard(3,1);">3</button>
+					<button type="button" class="btn btn-primary" onclick="loadLeaderboard(4,1);">4</button>
 				  </div>				
 				</div>
 			</div>
@@ -74,7 +74,7 @@
        	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 			<div class="panel text-center">
 				<div class="panel-heading">
-					<div>Level 1</div>
+					<div id="level">Level 1</div>
 					<div id="lbdetails" style="border:1px solid #fff;padding:10px;border-radius:10px;">Loading...</div>
 				</div>
 			</div>
@@ -108,6 +108,11 @@ $(function(){
     $('nav').removeClass('nav-hide');
   });
 });
+function loadLeaderboard(d,q) {
+	$("#level").text("Level " + d);
+	loadLB(d,q);
+	return false;
+}
 $( document ).ready(function() {
 		setTimeout(function(){ loadLB(1,1) }, 1000);
 		//loadLB(data);

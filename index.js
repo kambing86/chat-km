@@ -436,11 +436,19 @@ if (cluster.isMaster) {
     
     socket.on("loadlb", Q.async(function*(data) {
       var lbdata = yield chatDb.loadLB(data);    
-      console.log("lbdata " + lbdata.length);
+      //console.log("lbdata " + lbdata.length);
       //var answerUser = usernames[socket.username];
       //answerUser.emit("loadlb", lbdata);
       io.to(joinedRoom).emit("loadlb", lbdata);      
     }));    
+    
+    socket.on("gethighscore", Q.async(function*(data) {
+      console.log("gethighscore: " + data.day + ", " + data.question + ", " + socket.username);
+      var highscore = yield chatDb.getAnswer(socket.username, data);
+      console.log("highscore: " + highscore[0].points);
+      var answerUser = usernames[socket.username];
+      answerUser.emit("gethighscore", highscore[0]);      
+    }));        
     
     socket.on("updatescore", Q.async(function*(data) {
       var highscore = yield chatDb.getAnswer(socket.username, data);

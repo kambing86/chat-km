@@ -300,3 +300,6 @@ nav ul li a, a:hover{
 .message {
 	font-size: 0.9em;
 }
+.right {
+	float: right;
+}
