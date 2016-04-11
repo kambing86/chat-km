@@ -72,10 +72,13 @@
 	</div>
 	<div class="row">
        	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-			<div class="panel text-center">
+			<div class="panel">
 				<div class="panel-heading">
-					<div id="level">Level 1</div>
+					<div id="level" class="text-center">Level 1</div>
+					<h4>Individual</h4>
 					<div id="lbdetails" style="border:1px solid #fff;padding:10px;border-radius:10px;">Loading...</div>
+					<h4>Team</h4>
+					<div id="teamlbdetails" style="border:1px solid #fff;padding:10px;border-radius:10px;">Loading...</div>
 				</div>
 			</div>
 		</div>
@@ -110,12 +113,11 @@ $(function(){
 });
 function loadLeaderboard(d,q) {
 	$("#level").text("Level " + d);
-	loadLB(d,q);
+	loadLB(d,q,1);
 	return false;
 }
 $( document ).ready(function() {
-		setTimeout(function(){ loadLB(1,1) }, 1000);
-		//loadLB(data);
+		setTimeout(function(){ loadLB(1,1,1) }, 1000);
 });
 </script>
 

@@ -436,9 +436,6 @@ if (cluster.isMaster) {
     
     socket.on("loadlb", Q.async(function*(data) {
       var lbdata = yield chatDb.loadLB(data);    
-      //console.log("lbdata " + lbdata.length);
-      //var answerUser = usernames[socket.username];
-      //answerUser.emit("loadlb", lbdata);
       io.to("/leaderboard").emit("loadlb", lbdata);      
     }));    
     
@@ -489,6 +486,7 @@ if (cluster.isMaster) {
       	  	  console.log("No record found, adding as new ");
       	  	  var answerdata = {
       	  	  	  username: team_username,
+      	  	  	  teamname: data.userteamName,
       	  	  	  day: data.day,
       	  	  	  question: data.question,
       	  	  	  answer: 2,

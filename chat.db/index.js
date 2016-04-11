@@ -136,7 +136,8 @@ exports.getTeam = function(data) {
 exports.loadLB = function(data) {
   return answerCollection.find({
     day: data.day,
-    question: data.question
+    question: data.question,
+    answer: data.type
   }).sort({
   	points: -1
   }).toArray();

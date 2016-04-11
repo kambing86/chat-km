@@ -817,7 +817,7 @@ $(function() {
       }
   });  
   socket.on("loadlb", function(data) {
-  	//console.log("loadlb data " + data.length);
+  	console.log("loadlb data " + data.length);
     if(data == null || data.length==0)
       return;
   
@@ -826,9 +826,20 @@ $(function() {
     
     var members = "";
     for(var i = 0; i<data.length; i++) {
-    	members += data[i].username + " - " + data[i].points + "<br>";
+    	if(data[0].answer == 1)
+    		members += data[i].username + " - " + data[i].points + "<br>";
+    	else
+    		members += data[i].teamname + " - " + data[i].points + "<br>";
     }
-    $("#lbdetails").html(members);    	
+    if(data[0].answer == 1)
+    	$("#lbdetails").html(members);
+    else if(data[0].answer == 2)
+  		$("#teamlbdetails").html(members);
+    
+    if(data[0].answer == 1) { // load team later
+    	var teamdata = {day:data[0].day, question:data[0].question, type:2};
+    	socket.emit("loadlb", teamdata);    	
+    }
   });
   socket.on("gethighscore", function(data) {
     if(data == null)
@@ -1061,10 +1072,11 @@ $(function() {
   	  var data = {userteamId:userteamId, username:username, day:day, question:question};
         socket.emit("checkteamanswers", data);
   }  
-  window.loadLB = function(d,q) {
-  	  var data = {day:d, question:q};
+  window.loadLB = function(d,q,t) {
+  	  var data = {day:d, question:q, type:t};
   	  viewingLB = d;
   	  $("#lbdetails").empty();
+  	  $("#teamlbdetails").empty();
       socket.emit("loadlb", data);
   }    
   window.getHighscore = function(level) {
@@ -1074,7 +1086,7 @@ $(function() {
   }      
   window.updateScore = function(level, score) {
   	  level = parseInt(level);
-  	  var data = {day:level, question:1, score:score, userteamId:userteamId};
+  	  var data = {day:level, question:1, score:score, userteamId:userteamId, userteamName:userteamName};
         socket.emit("updatescore", data);
   }  
   window.updateTeamname = function() {
