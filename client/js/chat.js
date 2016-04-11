@@ -867,7 +867,23 @@ $(function() {
       return;
     var members = "";
     for(var i = 0; i<data.length; i++) {
-    	members += data[i].username + "<br>";
+    	
+    	members += "<div class='col-xs-9 col-sm-9 col-md-9 col-lg-9'>";
+    	if(data[i].userType === 1)
+    		members += "* ";
+    	if(data[i].username == username)
+    		members += "<span class='red-text'>"+data[i].username+"</span>";
+    	else 
+    		members += data[i].username;
+    	members += "</div>";
+    	
+    	members += "<div class='col-xs-3 col-sm-3 col-md-3 col-lg-3'>";
+    	if(data[i].username == username)
+    		members += "<span class='red-text'>"+data[i].points+"</span>";
+    	else 
+    		members += data[i].points;
+    	
+    	members += "</div>";
     }
     $("#myteam").text(userteamName);
     $("#teammembers").html(members);    	

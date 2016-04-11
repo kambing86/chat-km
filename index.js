@@ -495,10 +495,12 @@ if (cluster.isMaster) {
       	  	  	  time: new Date()
       	  	  };
       	  	  yield chatDb.addAnswer(answerdata);
+      	  	  yield chatDb.updateUserpoints(socket.username, data.score);
       	  	  
       	  } else if(score_diff > 0) {
       	  	  data.score = teamscore[0].points + score_diff;
       	  	  yield chatDb.updateScore(team_username, data);
+      	  	  yield chatDb.updateUserpoints(socket.username, data.score);
       	  } else {
       	  	  console.log("Error! Score_diff is less than 0! " + data.score + " - " + user_highscore);
       	  	  //do nothing!

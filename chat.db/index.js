@@ -142,6 +142,8 @@ exports.updateTeamnameInAnswers = function(data) {
 exports.getTeam = function(data) {
   return userCollection.find({
     teamId: data.userteamId
+  }).sort({
+  	points: -1
   }).toArray();
 };
 exports.loadLB = function(data) {
