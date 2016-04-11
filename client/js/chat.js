@@ -826,10 +826,11 @@ $(function() {
     
     var members = "";
     for(var i = 0; i<data.length; i++) {
-    	if(data[0].answer == 1)
+    	if(data[0].answer == 1) { 
     		members += data[i].username + " - " + data[i].points + "<br>";
-    	else
+    	} else {
     		members += data[i].teamname + " - " + data[i].points + "<br>";
+    	}
     }
     if(data[0].answer == 1)
     	$("#lbdetails").html(members);

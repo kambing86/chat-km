@@ -497,7 +497,7 @@ if (cluster.isMaster) {
       	  	  yield chatDb.addAnswer(answerdata);
       	  	  
       	  } else if(score_diff > 0) {
-      	  	  data.score = teamscore[0].points + data.score;
+      	  	  data.score = teamscore[0].points + score_diff;
       	  	  yield chatDb.updateScore(team_username, data);
       	  } else {
       	  	  console.log("Error! Score_diff is less than 0! " + data.score + " - " + user_highscore);
@@ -508,6 +508,12 @@ if (cluster.isMaster) {
     
     socket.on("updateteamname", Q.async(function*(data) {
       yield chatDb.updateTeamname(data);
+      
+      var userteam = "team" + data.userteamId;
+      var teamdata = {userteamId:userteam, teamname:data.teamname};
+      
+      console.log("teamdata: " + teamdata.userteamId + ", " + teamdata.teamname);
+      yield chatDb.updateTeamnameInAnswers(teamdata);
 
       var answerUser = usernames[socket.username];
       answerUser.emit("updateteamname", data.teamname);

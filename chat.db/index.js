@@ -128,6 +128,17 @@ exports.updateTeamname = function(data) {
     	multi: true     
   });
 };
+exports.updateTeamnameInAnswers = function(data) {
+  return answerCollection.update({
+      username: data.userteamId
+  }, {
+    $set: {
+      teamname: data.teamname
+  }},
+    { 
+      multi: true     
+  });
+};
 exports.getTeam = function(data) {
   return userCollection.find({
     teamId: data.userteamId
@@ -140,7 +151,7 @@ exports.loadLB = function(data) {
     answer: data.type
   }).sort({
   	points: -1
-  }).toArray();
+  }).skip(0).limit(10).toArray();
 };
 exports.getAnswer = function(user,data) {
   return answerCollection.find({
