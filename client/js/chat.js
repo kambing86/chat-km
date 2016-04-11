@@ -1074,12 +1074,15 @@ $(function() {
   }      
   window.updateScore = function(level, score) {
   	  level = parseInt(level);
-  	  var data = {day:level, question:1, score:score};
+  	  var data = {day:level, question:1, score:score, userteamId:userteamId};
         socket.emit("updatescore", data);
   }  
   window.updateTeamname = function() {
   	  var teamname = $("#teamname").val();
-  	  console.log("update team: " + teamname);
+  	  if(teamname.length == 0) {
+  	  	  alertBox("Please enter a valid name.");
+  	  	  return;
+  	  }
   	  var data = {userteamId:userteamId, username:username, teamname:teamname};
         socket.emit("updateteamname", data);
   }    

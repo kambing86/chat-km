@@ -452,9 +452,10 @@ if (cluster.isMaster) {
     
     socket.on("updatescore", Q.async(function*(data) {
       var highscore = yield chatDb.getAnswer(socket.username, data);
-      console.log("highscore: " + highscore + ", len " + highscore.length);
-      
+      //console.log("highscore: " + highscore + ", len " + highscore.length);
+
       var updateteam = 0;
+      var user_highscore = 0;
       if(highscore == "undefined" || highscore.length == 0) {
 		  var answerdata = {
 			username: socket.username,
@@ -468,8 +469,7 @@ if (cluster.isMaster) {
 		  yield chatDb.addAnswer(answerdata);
       	  updateteam = 1;
       } else if(highscore[0].points < data.score) {
-      	  console.log("highscore0: " + highscore[0].points);
-      	  console.log("data.score: " + data.score);
+      	  user_highscore = highscore[0].points;
       	  yield chatDb.updateScore(socket.username, data);
       	  updateteam = 1;
       } else {
@@ -478,9 +478,36 @@ if (cluster.isMaster) {
       }
       
       if(updateteam === 1) {
+      	  // for team, make username= "team"+teamId, answer=2 
+      	  var team_username = "team"+data.userteamId;
       	  
+      	  var teamscore = yield chatDb.getAnswer(team_username, data);
+      	  var score_diff = data.score - user_highscore;
+      	  console.log("Adding points for " + team_username + " - " + score_diff);
+      	  
+      	  if(teamscore == "undefined" || teamscore.length == 0) {
+      	  	  console.log("No record found, adding as new ");
+      	  	  var answerdata = {
+      	  	  	  username: team_username,
+      	  	  	  day: data.day,
+      	  	  	  question: data.question,
+      	  	  	  answer: 2,
+      	  	  	  points: data.score,
+      	  	  	  status: true,
+      	  	  	  time: new Date()
+      	  	  };
+      	  	  yield chatDb.addAnswer(answerdata);
+      	  	  
+      	  } else if(score_diff > 0) {
+      	  	  data.score = teamscore[0].points + data.score;
+      	  	  yield chatDb.updateScore(team_username, data);
+      	  } else {
+      	  	  console.log("Error! Score_diff is less than 0! " + data.score + " - " + user_highscore);
+      	  	  //do nothing!
+      	  }      	  
       }
-    }));    
+    }));
+    
     socket.on("updateteamname", Q.async(function*(data) {
       yield chatDb.updateTeamname(data);
 
