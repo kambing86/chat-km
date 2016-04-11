@@ -315,7 +315,7 @@ $(function() {
     	var $usernameDiv = roomDiv;
     }
 
-    var $messageTs = $("<small class='black-text'>").text(displayDate);
+    var $messageTs = $("<small class='grey-text'>").text(displayDate);
 
     var newmsg = data.msg.replace(/\n/g, "<br>");
     var $messageBodyDiv = $("<span class='messageBody black-text'/>")
@@ -367,7 +367,7 @@ $(function() {
     var $usernameDiv = $("<span class='black-text'/>")
       .html("<b>"+ data.username + "</b> ");
 
-    var $messageTs = $("<small class='black-text'>").text(displayDate);
+    var $messageTs = $("<small class='grey-text'>").text(displayDate);
 
     var newmsg = data.msg.replace(/\n/g, "<br>");
     var $messageBodyDiv = $("<span class='messageBody black-text'/>")
@@ -891,7 +891,7 @@ $(function() {
   socket.on("checkteamanswers", function(data) {
     if(data == null)
       return;      
-    console.log("checkteamanswers: " + data.length);
+    //console.log("checkteamanswers: " + data.length);
     var count = 0;
     var day = question = 0;
     for(var i = 0; i<data.length; i++) {
@@ -901,9 +901,15 @@ $(function() {
     		count++;
     	}
     }
-    $("#d"+day+"q"+question).text(count + " of " + data.length + " Completed");
+    $("#d"+day+"q"+question).html(count + " of " + data.length + " members completed <i class='fa fa-info-circle'></i>");
     	
   });
+  socket.on("checkteamscore", function(data) {
+    if(data == null)
+      return;      
+    //console.log("checkteamanswers: " + data.length);
+    $("#d"+data.day+"q"+data.question).html(data.points + " of 800 points earned");    	
+  });  
   socket.on("checkpoll", function(data) {
       if(data == null)
     	return;
@@ -1089,6 +1095,10 @@ $(function() {
   	  var data = {userteamId:userteamId, username:username, day:day, question:question};
         socket.emit("checkteamanswers", data);
   }  
+  window.checkTeamScore = function(day,question) {
+  	  var data = {userteamId:userteamId, username:username, day:day, question:question};
+        socket.emit("checkteamscore", data);
+  }    
   window.loadLB = function(d,q,t) {
   	  var data = {day:d, question:q, type:t};
   	  viewingLB = d;

@@ -529,7 +529,8 @@ if (cluster.isMaster) {
 
     }));
     socket.on("checkteamanswers", Q.async(function*(data) {
-      console.log("checkteamanswers: " + data.userteamId);
+      
+      //console.log("checkteamanswers: " + data.userteamId);
       var teamusers = yield chatDb.getTeam(data);
 
       var answerlist=[];
@@ -537,13 +538,23 @@ if (cluster.isMaster) {
       	var getAnswer = yield chatDb.getAnswer(teamusers[i].username, data);
       	//if(getAnswer[0])
       	answerlist.push(getAnswer[0]);
-      	console.log("user: " + teamusers[i].username + ", answer: " + getAnswer[0]);
+      	//console.log("user: " + teamusers[i].username + ", answer: " + getAnswer[0]);
       };
 
       var answerUser = usernames[socket.username];
       answerUser.emit("checkteamanswers", answerlist);
 
     }));
+    
+    socket.on("checkteamscore", Q.async(function*(data) {
+      
+      var teamusername = "team" + data.userteamId;
+      var teamScore = yield chatDb.getTeamScore(teamusername, data);
+
+      var answerUser = usernames[socket.username];
+      answerUser.emit("checkteamscore", teamScore[0]);
+
+    }));    
 
     socket.on("getpollresults", Q.async(function*(data) {
       //logger.info("getpoolresults! " + data.day + ", " + data.question);
@@ -565,40 +576,40 @@ if (cluster.isMaster) {
 
       if (getAnswer.length == 0) {
         // it is a poll, all answers are correct!
-        if(data.day == 1) {
-	  correctanswer = true;
+        if(data.day == 0) {
+        	correctanswer = true;
 
         } else if (data.day == 2) {
-	  if(data.question == 1 || data.question == 2)
-	  	correctanswer = true;
-	  else if(data.question == 3 && data.answer == 2)
-	  	correctanswer = true;
-	  else if(data.question == 4 && data.answer == 1)
-	  	correctanswer = true;
+		  if(data.question == 1 || data.question == 2)
+			correctanswer = true;
+		  else if(data.question == 3 && data.answer == 2)
+			correctanswer = true;
+		  else if(data.question == 4 && data.answer == 1)
+			correctanswer = true;
 
         } else if (data.day == 3) {
-	  if(data.question == 1 || data.question == 2)
-	  	correctanswer = true;
-	  else if(data.question == 3 && data.answer == 2)
-	  	correctanswer = true;
+		  if(data.question == 1 || data.question == 2)
+			correctanswer = true;
+		  else if(data.question == 3 && data.answer == 2)
+			correctanswer = true;
 
         } else if (data.day == 4) {
-	  if(data.question == 1 || data.question == 2)
-	  	correctanswer = true;
-	  else if(data.question == 3 && data.answer == 3)
-	  	correctanswer = true;
+		  if(data.question == 1 || data.question == 2)
+			correctanswer = true;
+		  else if(data.question == 3 && data.answer == 3)
+			correctanswer = true;
 
         } else if (data.day == 5) {
-	  if(data.question == 1)
-	  	correctanswer = true;
-	  else if(data.question == 2 && data.answer == 2)
-	  	correctanswer = true;
-	  else if(data.question == 3 && data.answer == 1)
-	  	correctanswer = true;
+		  if(data.question == 1)
+			correctanswer = true;
+		  else if(data.question == 2 && data.answer == 2)
+			correctanswer = true;
+		  else if(data.question == 3 && data.answer == 1)
+			correctanswer = true;
 
         } else if (data.day == 6) {
-	  	correctanswer = true;
-	}
+			correctanswer = true;
+		}
       }
 
       var answerdata = {
@@ -624,11 +635,11 @@ if (cluster.isMaster) {
       }
 
       if (getAnswer.length > 0) {
-	if(getAnswer[0].answer == data.answer)
-		answerdata.status = true;
-	else
-		answerdata.status = false;
-	answerdata.points = 0;
+		if(getAnswer[0].answer == data.answer)
+			answerdata.status = true;
+		else
+			answerdata.status = false;
+		answerdata.points = 0;
       }
 
       //io.to(joinedRoom).emit("new answer", answerdata);

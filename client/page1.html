@@ -60,7 +60,7 @@
 			<div class="panel">
 				<div class="panel-heading">
 					<h2>1: Unbelievable!</h2>
-					<p>Your first mission is to come up with your team’s Unbelievable lyrics. To unlock this mission, take the battle simulation to test and develop your reflexes. Each crew member must earn at least 100 points to unlock the mission.</p>
+					<p>Your first mission is to come up with your team’s Unbelievable lyrics. To unlock this mission, take the battle simulation to test and develop your reflexes. Every team must earn at least 800 points to unlock the mission.</p>
 				</div>
 			</div>
 		</div>
@@ -72,7 +72,7 @@
 					<button class="btn btn-primary text-center" onclick="window.location='game.html?level=1'"><img src="images/dbs.png" style="height:20px;float:left"> Enter Battle Simulation <img src="images/dbs.png" style="height:20px;float:right"></button>
 				</div>
 				<div class="small">
-					<div id="d0q1">Checking status...</div>
+					<div id="d1q1">Target: 800 total team score</div>
 				</div>
 			</div>
 		</div>
@@ -119,7 +119,7 @@
   });
 });
 //var data = {userteam:userteam, day:0, question:1 }; 
-setTimeout(function(){ checkTeamAnswers(0,1) }, 1000);
+setTimeout(function(){ checkTeamScore(1,1) }, 1000);
 </script>
 
 </body>

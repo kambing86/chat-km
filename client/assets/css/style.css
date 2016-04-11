@@ -75,7 +75,10 @@ footer{
         text-shadow: none;
         font-weight: bold;
 }
-
+.grey-text {
+        color:#d1d2d4;
+        text-shadow: 1px 1px #000000;
+}
 .red-text {
 		color:#ed1b24;
 }

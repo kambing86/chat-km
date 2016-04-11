@@ -162,6 +162,13 @@ exports.getAnswer = function(user,data) {
     question: data.question
   }).toArray();
 };
+exports.getTeamScore = function(user,data) {
+  return answerCollection.find({
+    username: user,
+    day: data.day,
+    question: data.question
+  }).toArray();
+};
 exports.getPollResults = function(data, a) {
   return answerCollection.find({
    day: data.day,
