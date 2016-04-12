@@ -440,8 +440,8 @@ if (cluster.isMaster) {
     }));    
     socket.on("loadchallenge", Q.async(function*(data) {
       var lbdata = yield chatDb.loadLB(data);    
-      console.log("loadchallenge " + lbdata.length);
-      io.to(joinedRoom).emit("loadlb", lbdata);      
+      //console.log("loadchallenge " + lbdata.length);
+      io.to(joinedRoom).emit("loadchallenge", lbdata);      
     }));        
     
     socket.on("gethighscore", Q.async(function*(data) {
@@ -519,9 +519,11 @@ if (cluster.isMaster) {
       var userteam = "team" + data.userteamId;
       var teamdata = {userteamId:userteam, teamname:data.teamname};
       
-      console.log("teamdata: " + teamdata.userteamId + ", " + teamdata.teamname);
+      //console.log("teamdata: " + teamdata.userteamId + ", " + teamdata.teamname);
       yield chatDb.updateTeamnameInAnswers(teamdata);
-
+      yield chatDb.updateTeamnameInChallengeTeam1(teamdata);
+      yield chatDb.updateTeamnameInChallengeTeam2(teamdata);
+      
       var answerUser = usernames[socket.username];
       answerUser.emit("updateteamname", data.teamname);
 

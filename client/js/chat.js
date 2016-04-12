@@ -856,7 +856,7 @@ $(function() {
     }
   });
   socket.on("loadchallenge", function(data) {
-  	console.log("loadlb data " + data.length);
+  	console.log("loadchallenge data " + data.length);
     if(data == null || data.length==0)
       return;
   
@@ -956,9 +956,9 @@ $(function() {
     	teams += "<div class='col-xs-5 col-sm-5 col-md-5 col-lg-5 text-center'>" + data[i].team2name + "</div>";
     	var team1id = "team" + data[i].team1;
     	var team2id = "team" + data[i].team2;
-    	teams += "<div class='col-xs-5 col-sm-5 col-md-5 col-lg-5 text-center red-text'><span id='"+team1id+"'></span></div>";
+    	teams += "<div class='col-xs-5 col-sm-5 col-md-5 col-lg-5 text-center red-text'><span id='"+team1id+"'>0</span></div>";
     	teams += "<div class='col-xs-2 col-sm-2 col-md-2 col-lg-2 text-center'></div>";
-    	teams += "<div class='col-xs-5 col-sm-5 col-md-5 col-lg-5 text-center red-text'><span id='"+team2id+"'></div>";    	
+    	teams += "<div class='col-xs-5 col-sm-5 col-md-5 col-lg-5 text-center red-text'><span id='"+team2id+"'>0</span></div>";    	
     }
     $("#teamchallenge").html(teams);
     

@@ -144,6 +144,28 @@ exports.updateTeamnameInAnswers = function(data) {
       multi: true     
   });
 };
+exports.updateTeamnameInChallengeTeam1 = function(data) {
+  return answerCollection.update({
+      team1: data.userteamId
+  }, {
+    $set: {
+      teamn1ame: data.teamname
+  }},
+    { 
+      multi: true     
+  });
+};
+exports.updateTeamnameInChallengeTeam2 = function(data) {
+  return answerCollection.update({
+      team2: data.userteamId
+  }, {
+    $set: {
+      team2name: data.teamname
+  }},
+    { 
+      multi: true     
+  });
+};
 exports.getChallenge = function(data) {
   return challengeCollection.findOne({
     team1: data.teamid,
