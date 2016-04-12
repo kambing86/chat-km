@@ -60,9 +60,8 @@
 			<div class="panel">
 				<div class="panel-heading">
 					<h2>2: Making a Difference</h2>
-					<p>
-					The battle is getting fiercer. Destroy all asteroids and enemies but don’t shoot at DBS! Earn at least 500 points each to unlock Mission 2.
-					</p>
+					<p>The battle is getting fiercer. Destroy all oncoming asteroids and enemies!</p>
+					<p>Earn at least 4000 points to unlock Mission 2.</p>
 				</div>
 			</div>
 		</div>
@@ -74,7 +73,8 @@
 					<button class="btn btn-primary text-center" onclick="window.location='game.html?level=2'"><img src="images/dbs.png" style="height:20px;float:left"> Enter battle zone <img src="images/dbs.png" style="height:20px;float:right"></button>
 				</div>
 				<div class="small">
-					<div id="d0q1">Checking status...</div>
+					<a href="#" onclick="$('#info').show();return false"><div id="d2q1">...</div></a>
+					<div id="info" style="display:none"></div>
 				</div>
 			</div>
 		</div>
@@ -94,7 +94,7 @@
        	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 			<div class="panel text-center">
 				<div class="panel-heading">	
-						<button class="btn btn-primary" onclick="window.location='https://dev-sg-app.vocohub.com/sgConf/main/app/index.html?id=hello5@123.com&quiz=1908'">Mission 2: Make a Difference</button>
+						<button class="btn btn-primary" id="mission2"><i id="lock2" class="fa fa-lock fa-lg"></i> Mission 2: Make a Difference</button>
 				</div>
 			</div>
 		</div>
@@ -120,8 +120,11 @@
     $('nav').removeClass('nav-hide');
   });
 });
-//var data = {userteam:userteam, day:0, question:1 }; 
-setTimeout(function(){ checkTeamAnswers(0,1) }, 1000);
+//var data = {userteam:userteam, day:0, question:1 };
+$("#mission2").click(function() {
+	alertbox("Mission 2: Your team has to earn at least 4000 points to unlock this mission."); 
+});
+setTimeout(function(){ checkTeamScore(2,1) }, 1000);
 </script>
 
 </body>

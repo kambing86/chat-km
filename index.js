@@ -559,7 +559,7 @@ if (cluster.isMaster) {
       var teamScore = yield chatDb.getTeamScore(teamusername, data);
 
       var answerUser = usernames[socket.username];
-      answerUser.emit("checkteamscore", teamScore[0]);
+      answerUser.emit("checkteamscore", teamScore[0], data);
 
     }));    
     

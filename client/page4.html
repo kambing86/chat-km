@@ -77,7 +77,8 @@
 					<button class="btn btn-primary text-center" onclick="window.location='game.html?level=4'"><img src="images/dbs.png" style="height:20px;float:left"> Enter battle zone <img src="images/dbs.png" style="height:20px;float:right"></button>
 				</div>
 				<div class="small">
-					<div id="d0q1">Checking status...</div>
+					<a href="#" onclick="$('#info').show();return false"><div id="d4q1">...</div></a>
+					<div id="info" style="display:none"></div>
 				</div>
 			</div>
 		</div>
@@ -96,7 +97,7 @@
        	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 			<div class="panel text-center">
 				<div class="panel-heading">	
-						<button class="btn btn-primary" onclick="window.location='https://dev-sg-app.vocohub.com/sgConf/main/app/index.html?id=hello5@123.com&quiz=1909'">Mission 4: Taking Charge</button>
+						<button class="btn btn-primary" id="mission4"><i id="lock4" class="fa fa-lock fa-lg"></i> Mission 4: Taking Charge</button>
 				</div>
 			</div>
 		</div>
@@ -129,8 +130,10 @@
     $('nav').removeClass('nav-hide');
   });
 });
-//var data = {userteam:userteam, day:0, question:1 }; 
-setTimeout(function(){ checkTeamAnswers(0,1) }, 1000);
+$("#mission4").click(function() {
+	alertbox("Mission 4: Your team has to earn at least 16000 points to unlock this mission."); 
+});  
+setTimeout(function(){ checkTeamScore(4,1) }, 1000);
 </script>
 
 </body>

@@ -913,24 +913,84 @@ $(function() {
   socket.on("checkteamanswers", function(data) {
     if(data == null)
       return;      
-    //console.log("checkteamanswers: " + data.length);
+    
     var count = 0;
     var day = question = 0;
+    var completed = "";
     for(var i = 0; i<data.length; i++) {
     	if(data[i] && data[i].status === true) {
     		day = data[i].day;
     		question = data[i].question;
+    		if(day == 0)
+    			completed += "<i class='fa fa-check-circle-o'></i> "+data[i].username + "<br>";
+    		else 
+    			completed += data[i].username + " - " + data[i].points + " points<br>";
     		count++;
     	}
     }
-    $("#d"+day+"q"+question).html(count + " of " + data.length + " members completed <i class='fa fa-info-circle'></i>");
+    
+    $("#info").html(completed);
+    
+    if(day == 0) {
+    	$("#d"+day+"q"+question).html(count + " of " + data.length + " members completed <i class='fa fa-info-circle'></i>");
+    
+    	if(count == data.length) {
+    		$("#namebattle").unbind("click");
+			$("#namebattle").click(function() {
+				window.location = "team.html"; 
+			});
+			$("#lock0").empty().remove();
+		}
+    }
     	
   });
-  socket.on("checkteamscore", function(data) {
-    if(data == null)
-      return;      
-    //console.log("checkteamanswers: " + data.length);
-    $("#d"+data.day+"q"+data.question).html(data.points + " of 800 points earned");    	
+  socket.on("checkteamscore", function(data, oridata) {
+    var minpoints = 0;
+  	if(oridata.day == 1) {
+  		minpoints = 800;
+  	} else if(oridata.day == 2) {
+  		minpoints = 4000;
+  	} else if(oridata.day == 3) {
+  		minpoints = 8000;
+  	} else if(oridata.day == 4) {
+  		minpoints = 16000;  		
+  	}
+  	//data = {day:4,question:1,points:16200}
+    if(data == null) {
+    	$("#d"+oridata.day+"q"+oridata.question).html("0 of "+minpoints+" points earned");
+    	return;
+    }
+    
+    $("#d"+data.day+"q"+data.question).html(data.points + " of "+minpoints+" points earned <i class='fa fa-info-circle'></i>");
+    
+    if(data.points >= minpoints) {
+    	if(data.day == 1) {
+    		$("#mission1").unbind("click");
+    		$("#mission1").click(function() {
+    			window.location = "unbelievable.html"; 
+    		});
+    	} else if(data.day == 2) {
+    		$("#mission2").unbind("click");
+    		$("#mission2").click(function() {
+    			window.location = "https://dev-sg-app.vocohub.com/sgConf/main/app/index.html?id="+username+"&quiz=1908"; 
+    		});
+    	} else if(data.day == 3) {
+    		$("#mission3").unbind("click");
+    		$("#mission3").click(function() {
+    			window.location = "https://dev-sg-app.vocohub.com/sgConf/main/app/index.html?id="+username+"&quiz=1910"; 
+    		});    		
+    	} else if(data.day == 4) {
+    		$("#mission4").unbind("click");
+    		$("#mission4").click(function() {
+    			window.location = "https://dev-sg-app.vocohub.com/sgConf/main/app/index.html?id="+username+"&quiz=1909"; 
+    		});    		    		
+    	}    		
+		$("#lock"+data.day).empty().remove();		
+    }    
+
+	var data = {userteamId:userteamId, username:username, day:data.day, question:data.question};
+    socket.emit("checkteamanswers", data);
+    
   });  
   socket.on("checkteampairs", function(pairedlist, unpairedlist, round) {
     var teams = "";

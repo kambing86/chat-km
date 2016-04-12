@@ -72,7 +72,8 @@
 					<button class="btn btn-primary text-center" onclick="window.location='sim.html'"><img src="images/dbs.png" style="height:20px;float:left"> Watch Captain Sim <img src="images/dbs.png" style="height:20px;float:right"></button>
 				</div>
 				<div class="small">
-					<a href="team.html"><div id="d0q1">All members to complete... <i class="fa fa-info-circle"></i></div></a>
+					<a href="#" onclick="$('#info').show();return false"><div id="d0q1">...</div></a>
+					<div id="info" style="display:none"></div>
 				</div>
 			</div>
 		</div>
@@ -104,7 +105,7 @@
        	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 			<div class="panel text-center">
 				<div class="panel-heading">	
-						<button class="btn btn-primary" onclick="window.location='team.html'"><i class="fa fa-lock fa-lg"></i> &nbsp;Name your battle unit</button>
+						<button class="btn btn-primary" id="namebattle"><i id="lock0" class="fa fa-lock fa-lg"></i> &nbsp;Name your battle unit</button>
 				</div>
 			</div>
 		</div>
@@ -130,8 +131,19 @@
     $('nav').removeClass('nav-hide');
   });
 });
+$("#namebattle").click(function() {
+	alertbox("Your team has to complete Watch Captain Sim to unlock this mission.");
+	return false;
+});
+function retryCheck() {
+	//alertbox("retrycheck! ");
+	if($("#info").length == 0) {
+		$("#d0q1").html("Click to refresh");
+	}
+}
 //var data = {userteam:userteam, day:0, question:1 }; 
 setTimeout(function(){ checkTeamAnswers(0,1) }, 1000);
+setTimeout(function(){ retryCheck() }, 5000);
 </script>
 
 </body>
