@@ -438,6 +438,11 @@ if (cluster.isMaster) {
       var lbdata = yield chatDb.loadLB(data);    
       io.to("/leaderboard").emit("loadlb", lbdata);      
     }));    
+    socket.on("loadchallenge", Q.async(function*(data) {
+      var lbdata = yield chatDb.loadLB(data);    
+      console.log("loadchallenge " + lbdata.length);
+      io.to(joinedRoom).emit("loadlb", lbdata);      
+    }));        
     
     socket.on("gethighscore", Q.async(function*(data) {
       console.log("gethighscore: " + data.day + ", " + data.question + ", " + socket.username);
@@ -555,7 +560,82 @@ if (cluster.isMaster) {
       answerUser.emit("checkteamscore", teamScore[0]);
 
     }));    
+    
+    socket.on("new challenge", Q.async(function*(data) {
+    		
+    	var teamdata = {userteamId:data.team1} 
+    	var team1 = yield chatDb.getTeam(teamdata);
+    	var team1name = team1[0].teamName;
 
+    	teamdata = {userteamId:data.team2} 
+    	var team2 = yield chatDb.getTeam(teamdata);
+    	var team2name = team2[0].teamName;
+    	
+		  var challengedata1 = {
+			team1: data.team1,
+			team1name: team1name,
+			team2: data.team2,
+			team2name: team2name,
+			round: data.round,
+			win: 0,
+			primary: true,
+			status: true,
+			time: new Date()
+		  };
+		  yield chatDb.addChallenge(challengedata1);
+		  
+		  var challengedata2 = {
+			team1: data.team2,
+			team1name: team2name,
+			team2: data.team1,
+			team2name: team1name,
+			round: data.round,
+			win: 0,
+			primary: false,
+			status: true,
+			time: new Date()
+		  };		  
+		  yield chatDb.addChallenge(challengedata2);
+		  
+      var answerUser = usernames[socket.username];
+      answerUser.emit("new challenge");
+		  
+    }));
+    
+    socket.on("checkteampairs", Q.async(function*(round) {
+      
+      var allteams = yield chatDb.getAllTeams();
+
+      var pairedlist=[];
+      var unpairedlist=[];
+
+      console.log("allteams: " + allteams.length + ", round: " + round);
+      for(var i in allteams) {
+      	//console.log("teamId: " + allteams[i].teamId);
+      	var data = {teamid:allteams[i].teamId, round:round}
+      	var challenge = yield chatDb.getChallenge(data);
+      	//console.log("challenge: " + challenge.length);
+      	if (challenge == null) {
+      		unpairedlist.push(allteams[i]);
+      	} else {
+      		pairedlist.push(challenge);
+      	}
+      };
+      
+      console.log("pairedlist: " + pairedlist.length + ", unpairedlist: " + unpairedlist.length);
+      var answerUser = usernames[socket.username];
+      answerUser.emit("checkteampairs", pairedlist, unpairedlist, round);
+
+    }));    
+    socket.on("checkteamchallenge", Q.async(function*(round) {
+      
+      var teamchallenge = yield chatDb.getTeamChallenge(round);
+
+      console.log("teamchallenge " + teamchallenge.length);
+      var answerUser = usernames[socket.username];
+      answerUser.emit("checkteamchallenge", teamchallenge, round);
+
+    }));        
     socket.on("getpollresults", Q.async(function*(data) {
       //logger.info("getpoolresults! " + data.day + ", " + data.question);
       var getResults1 = yield chatDb.getPollResults(data,1);

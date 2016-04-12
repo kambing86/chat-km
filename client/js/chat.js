@@ -10,7 +10,9 @@ $(function() {
   ];
   var daysarray = ["day1", "day2", "day3", "day4", "day5"];
 
-  var username, usertype, userteamId, userteamName, userId, joinedRoom, onProfile = false, onComments = false;
+  var username, userteamName, userId, joinedRoom, onProfile = false, onComments = false;
+  var userteamId = 0;
+  var usertype = 0;
   var sortbylike=false;
   var stopBlinking=false;
   var reconnect_count=0;
@@ -18,8 +20,8 @@ $(function() {
   var socket = io();
 
   var localusername = getCookie("username");
-  var localusertype = getCookie("usertype");
-  var localuserteamId = getCookie("userteamId");
+  //var localusertype = getCookie("usertype");
+  //var localuserteamId = getCookie("userteamId");
   var currentLoc = window.location.pathname;
   var viewingLB = 1;
 
@@ -536,7 +538,7 @@ $(function() {
     //$usernameInput.off("keydown");
     userId = user._id;
     usertype = user.userType;
-    userteamId = user.teamId;
+    userteamId = parseInt(user.teamId);
     userteamName = user.teamName;
     console.log("userId: " + userId);
     console.log("username: " + username);
@@ -816,6 +818,10 @@ $(function() {
         processAnswer(data);
       }
   });  
+  socket.on("new challenge", function() {
+  		  alertBox("Updated team pairs", {reload:true});
+  		  
+  });    
   socket.on("loadlb", function(data) {
   	console.log("loadlb data " + data.length);
     if(data == null || data.length==0)
@@ -826,22 +832,38 @@ $(function() {
     
     var members = "";
     for(var i = 0; i<data.length; i++) {
+    	
+    	members += "<div class='col-xs-9 col-sm-9 col-md-9 col-lg-9'>";
+    	
     	if(data[0].answer == 1) { 
-    		members += data[i].username + " - " + data[i].points + "<br>";
+    		members += data[i].username + "</div>";
     	} else {
-    		members += data[i].teamname + " - " + data[i].points + "<br>";
+    		members += data[i].teamname + "</div>";
     	}
+    	
+    	members += "<div class='col-xs-3 col-sm-3 col-md-3 col-lg-3'>";
+    	members += data[i].points+"</div>";
     }
+    
     if(data[0].answer == 1)
     	$("#lbdetails").html(members);
     else if(data[0].answer == 2)
   		$("#teamlbdetails").html(members);
     
     if(data[0].answer == 1) { // load team later
-    	var teamdata = {day:data[0].day, question:data[0].question, type:2};
-    	socket.emit("loadlb", teamdata);    	
+    	var teamdata = {day:data[0].day, question:data[0].question, type:2, limit:10};
+    	socket.emit("loadlb", teamdata);
     }
   });
+  socket.on("loadchallenge", function(data) {
+  	console.log("loadlb data " + data.length);
+    if(data == null || data.length==0)
+      return;
+  
+    for(var i = 0; i<data.length; i++) {
+    	$("#"+data[i].username).text(data[i].points);
+    }    
+  });  
   socket.on("gethighscore", function(data) {
     if(data == null)
       return;
@@ -910,6 +932,40 @@ $(function() {
     //console.log("checkteamanswers: " + data.length);
     $("#d"+data.day+"q"+data.question).html(data.points + " of 800 points earned");    	
   });  
+  socket.on("checkteampairs", function(pairedlist, unpairedlist, round) {
+    var teams = "";
+    for(var i = 0; i<pairedlist.length; i++) {
+    	if(pairedlist[i].primary == true)
+    		teams += pairedlist[i].team1name + " vs " + pairedlist[i].team2name + "<br>"; 
+    }
+    $("#pairedteams" + round).html(teams);
+
+    teams = "";
+    for(var i = 0; i<unpairedlist.length; i++) {
+    	teams += unpairedlist[i].teamName + " - " + unpairedlist[i].teamId+ "<br>"; 
+    }
+    $("#unpairedteams" + round).html(teams);
+  });  
+
+  socket.on("checkteamchallenge", function(data, round) {
+    var teams = "";
+    console.log("checkteamchallenge " + data.length);
+    for(var i = 0; i<data.length; i++) {
+    	teams += "<div class='col-xs-5 col-sm-5 col-md-5 col-lg-5 text-center'>" + data[i].team1name + "</div>";
+    	teams += "<div class='col-xs-2 col-sm-2 col-md-2 col-lg-2 text-center'>VS</div>";
+    	teams += "<div class='col-xs-5 col-sm-5 col-md-5 col-lg-5 text-center'>" + data[i].team2name + "</div>";
+    	var team1id = "team" + data[i].team1;
+    	var team2id = "team" + data[i].team2;
+    	teams += "<div class='col-xs-5 col-sm-5 col-md-5 col-lg-5 text-center red-text'><span id='"+team1id+"'></span></div>";
+    	teams += "<div class='col-xs-2 col-sm-2 col-md-2 col-lg-2 text-center'></div>";
+    	teams += "<div class='col-xs-5 col-sm-5 col-md-5 col-lg-5 text-center red-text'><span id='"+team2id+"'></div>";    	
+    }
+    $("#teamchallenge").html(teams);
+    
+    var data = {day:5, question:round, type:2, limit:100};      
+    socket.emit("loadchallenge", data); 
+    
+  });    
   socket.on("checkpoll", function(data) {
       if(data == null)
     	return;
@@ -1100,12 +1156,19 @@ $(function() {
         socket.emit("checkteamscore", data);
   }    
   window.loadLB = function(d,q,t) {
-  	  var data = {day:d, question:q, type:t};
+  	  var data = {day:d, question:q, type:t, limit:10};
   	  viewingLB = d;
   	  $("#lbdetails").empty();
   	  $("#teamlbdetails").empty();
       socket.emit("loadlb", data);
   }    
+  window.loadChallenge = function(d,q,t) {
+  	  var data = {day:d, question:q, type:t, limit:100};
+  	  //viewingLB = d;
+  	  //$("#lbdetails").empty();
+  	  //$("#teamlbdetails").empty();
+      socket.emit("loadchallenge", data);
+  }  
   window.getHighscore = function(level) {
   	  level = parseInt(level);
   	  var data = {day:level, question:1};
@@ -1125,6 +1188,32 @@ $(function() {
   	  var data = {userteamId:userteamId, username:username, teamname:teamname};
         socket.emit("updateteamname", data);
   }    
+  window.pairTeam = function(round) {
+
+  	  var team1, team2;
+  	  
+  	  if(round == 1) {
+  	  	  team1 = $("#team11").val();
+  	  	  team2 = $("#team12").val();
+  	  } else if(round == 2) {
+  	  	  team1 = $("#team21").val();
+  	  	  team2 = $("#team22").val();  	  	  
+  	  }
+  	  
+  	  if(team1.length==0 || team2.length==0) {
+  	  	  alertBox("Please enter correct values!");
+  	  	  return;
+  	  }
+  	  
+  	  var data = {team1:parseInt(team1), team2:parseInt(team2), round:parseInt(round)}
+  	  socket.emit("new challenge", data);
+  }
+  window.checkTeamPairs = function(round) {
+        socket.emit("checkteampairs", round);
+  }    
+  window.checkTeamChallenge = function(round) {
+        socket.emit("checkteamchallenge", round);
+  }      
   window.checkPoll = function(data) {
         socket.emit("checkpoll", data);
   }  

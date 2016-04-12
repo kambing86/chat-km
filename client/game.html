@@ -87,6 +87,8 @@
     <script src="assets/js/script.js"></script>
     <script>
       var level = 1;
+      var actuallevel = 1;
+      
       $(function() {
         $('#gamebutton, nav').click(function() {
           //$('.navbar-chat').toggleClass('navbar-on');
@@ -113,8 +115,9 @@
             var data = event.data;
             var option = (data.success) ? {goback:true}:{reload:true};
             if(data.success) {
-           		updateScore(level, data.score);
-           		loadLB(parseInt(level),1);
+           		updateScore(actuallevel, data.score);
+           		if(actuallevel <= 4)
+           			loadLB(parseInt(actuallevel),1);
             }            
             alertbox("You scored " + data.score + " and Mission " + ((data.success) ? "Success" : "Failed"), option);
           }
@@ -131,8 +134,12 @@
       };
 
       $(document).ready(function() {
-        level = decodeURIComponent($.urlParam('level'));
-                
+        level = decodeURIComponent($.urlParam('level'));        
+        actuallevel = level;
+        
+        if(level > 4)
+        	level = 4;
+        
         var targetscore = "Target: 100";
         if(level == 1) {
         	$("#targetscore").text(targetscore);

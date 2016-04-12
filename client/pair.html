@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+     <meta http-equiv="X-UA-Compatible" content="IE=9">
+    <meta charset="utf-8">
+    <title>DBS BE A CHAMPION</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link href="assets/css/theme-flat-ui.css" rel="stylesheet">
+    <link href="assets/css/style.css" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet">    
+   <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js" type="text/javascript"></script>
+    <![endif]-->
+<!-- Le fav and touch icons -->
+<link rel="shortcut icon" href="assets/ico/favicon.ico">
+</head>
+<body>
+<div class="fixed-img"></div>
+<div class="wrapper">
+<div class="navbar navbar-fixed-top">
+	<div class="navbar-toggle">
+		<a href="instructions.html"><b>Agenda</b></a>
+	</div>
+	<div class="navbar-toggle" id="gamebutton">
+		<b>Game</b>
+	</div>		
+	<div class="navbar-toggle">
+		<a href="pigeonholes.html"><b>Q&A</b></a>
+	</div>
+</div>
+<div class="modal fade" id="sm-alertbox" tabindex="-1" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title red-text">Alert</h4>
+      </div>
+      <div class="modal-body black-text" id="alertbox"></div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary btn-enabled" data-dismiss="modal">OK</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<nav class="nav-hide" id="navtest">
+  		<ul>
+            	<li><a href="menu.html">Missions</a></li>
+                <li><a href="team.html">My Team</a></li>            	
+           		<li><a href="leaderboard.html">Leaderboard</a></li>
+        </ul>
+</nav>
+<br><br>
+<div class="container">
+	<div>
+	<br><br>
+	  <!-- Nav tabs -->
+	  <ul class="nav nav-tabs" role="tablist">
+		<li role="presentation" class="active"><a href="#round1" aria-controls="round1" role="tab" data-toggle="tab">Round 1</a></li>
+		<li role="presentation"><a href="#round2" aria-controls="round2" role="tab" data-toggle="tab">Round 2</a></li>
+	  </ul>
+	
+	  <!-- Tab panes -->
+	  <div class="tab-content">
+		<div role="tabpanel" class="tab-pane active" id="round1">
+
+			<div class="row">
+				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+					<div class="panel">
+						<div class="panel-heading">
+							<h2>Round 1 - Pair up the teams!</h2>
+							<p>Team #1: <input type="text" id="team11"></p>
+							<p>Team #2: <input type="text" id="team12"></p>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+					<div class="panel text-center">
+						<div class="panel-heading">
+							<button class="btn btn-primary text-center" onclick="pairTeam(1);return false"><img src="images/dbs.png" style="height:20px;float:left"> Pair Up! <img src="images/dbs.png" style="height:20px;float:right"></button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+					<div class="panel">
+						<div class="panel-heading">
+							<h4>Paired Teams</h4>
+							<div id="pairedteams1"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+					<div class="panel">
+						<div class="panel-heading">
+							<h4>Un-Paired Teams</h4>
+							<div id="unpairedteams1"></div>
+						</div>
+					</div>
+				</div>
+			</div>	
+		</div>		
+		
+		
+		<div role="tabpanel" class="tab-pane" id="round2">
+			<div class="row">
+				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+					<div class="panel">
+						<div class="panel-heading">
+							<h2>Round 2 - Pair up the teams!</h2>
+							<p>Team #1: <input type="text" id="team21"></p>
+							<p>Team #2: <input type="text" id="team22"></p>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+					<div class="panel text-center">
+						<div class="panel-heading">
+							<button class="btn btn-primary text-center" onclick="pairTeam(2);return false"><img src="images/dbs.png" style="height:20px;float:left"> Pair Up! <img src="images/dbs.png" style="height:20px;float:right"></button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+					<div class="panel">
+						<div class="panel-heading">
+							<h4>Paired Teams</h4>
+							<div id="pairedteams2"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+					<div class="panel">
+						<div class="panel-heading">
+							<h4>Un-Paired Teams</h4>
+							<div id="unpairedteams2"></div>
+						</div>
+					</div>
+				</div>
+			</div>		
+		</div>
+	</div>
+</div><!-- /.container -->
+
+<div style="height:20px"></div>
+ 
+ <!-- call to action -->
+</div>
+
+<footer class="">
+</footer>
+</div>
+  <script src="js/lib/jquery-1.11.3.min.js"></script>
+  <script src="js/lib/jquery.browser.js"></script>
+  <script src="js/lib/jquery.ba-hashchange.min.js"></script>
+  <script src="js/lib/bootstrap.min.js"></script>
+  <script src="js/lib/modernizr-custom.js"></script>
+  <script src="js/lib/moment.min.js"></script>
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="js/mobile-sidebar.js"></script>
+  <script src="js/chat.js"></script>
+  <script src="assets/js/script.js"></script>
+<script>
+  $(function(){
+  $('#gamebutton, nav').click(function(){
+    //$('.navbar-chat').toggleClass('navbar-on');
+    $('nav').slideToggle();
+    $('nav').removeClass('nav-hide');
+  });
+});
+//var data = {userteam:userteam, day:0, question:1 }; 
+setTimeout(function(){ checkTeamPairs(1) }, 1000);
+</script>
+
+</body>
+</html>

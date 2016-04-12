@@ -4,6 +4,7 @@ var userCollection = null;
 var chatCollection = null;
 var roomCollection = null;
 var answerCollection = null;
+var challengeCollection = null;
 
 var Q = require("q");
 var MongoClient = require("mongodb").MongoClient;
@@ -17,6 +18,7 @@ MongoClient.connect(url, function(err, db) {
   chatCollection = db.collection("chat");
   roomCollection = db.collection("room");
   answerCollection = db.collection("answer");
+  challengeCollection = db.collection("challenge");
 });
 
 exports.getUserId = function(username) {
@@ -95,6 +97,9 @@ exports.addAnswer = function(answer) {
   return answerCollection.insertOne(answer);
 };
 
+exports.addChallenge = function(data) {
+  return challengeCollection.insertOne(data);
+};
 exports.updateAnswer = function(data) {
   return answerCollection.findOneAndUpdate({
       username: data.username
@@ -139,11 +144,28 @@ exports.updateTeamnameInAnswers = function(data) {
       multi: true     
   });
 };
+exports.getChallenge = function(data) {
+  return challengeCollection.findOne({
+    team1: data.teamid,
+    round: data.round
+  });
+};
+exports.getTeamChallenge = function(round) {
+  return challengeCollection.find({
+    round: round,
+    primary: true
+  }).toArray();
+};
 exports.getTeam = function(data) {
   return userCollection.find({
     teamId: data.userteamId
   }).sort({
   	points: -1
+  }).toArray();
+};
+exports.getAllTeams = function() {
+  return userCollection.find({
+    userType: 1
   }).toArray();
 };
 exports.loadLB = function(data) {
@@ -153,7 +175,7 @@ exports.loadLB = function(data) {
     answer: data.type
   }).sort({
   	points: -1
-  }).skip(0).limit(10).toArray();
+  }).skip(0).limit(data.limit).toArray();
 };
 exports.getAnswer = function(user,data) {
   return answerCollection.find({
