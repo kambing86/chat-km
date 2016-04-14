@@ -145,18 +145,18 @@ exports.updateTeamnameInAnswers = function(data) {
   });
 };
 exports.updateTeamnameInChallengeTeam1 = function(data) {
-  return answerCollection.update({
+  return challengeCollection.update({
       team1: data.userteamId
   }, {
     $set: {
-      teamn1ame: data.teamname
+      team1name: data.teamname
   }},
     { 
       multi: true     
   });
 };
 exports.updateTeamnameInChallengeTeam2 = function(data) {
-  return answerCollection.update({
+  return challengeCollection.update({
       team2: data.userteamId
   }, {
     $set: {

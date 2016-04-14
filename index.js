@@ -515,14 +515,15 @@ if (cluster.isMaster) {
     
     socket.on("updateteamname", Q.async(function*(data) {
       yield chatDb.updateTeamname(data);
+
+      yield chatDb.updateTeamnameInChallengeTeam1(data);
+      yield chatDb.updateTeamnameInChallengeTeam2(data);
       
       var userteam = "team" + data.userteamId;
       var teamdata = {userteamId:userteam, teamname:data.teamname};
       
       //console.log("teamdata: " + teamdata.userteamId + ", " + teamdata.teamname);
       yield chatDb.updateTeamnameInAnswers(teamdata);
-      yield chatDb.updateTeamnameInChallengeTeam1(teamdata);
-      yield chatDb.updateTeamnameInChallengeTeam2(teamdata);
       
       var answerUser = usernames[socket.username];
       answerUser.emit("updateteamname", data.teamname);
