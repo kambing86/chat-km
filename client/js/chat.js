@@ -995,22 +995,105 @@ $(function() {
   socket.on("checkteampairs", function(pairedlist, unpairedlist, round) {
     var teams = "";
     for(var i = 0; i<pairedlist.length; i++) {
-    	if(pairedlist[i].primary == true)
-    		teams += pairedlist[i].team1name + " vs " + pairedlist[i].team2name + "<br>"; 
+    	if(pairedlist[i].primary == true) {
+    		if(pairedlist[i].win > 0) {
+				//teams += pairedlist[i].team1name + " vs " + pairedlist[i].team2name + "<br>";
+				
+				if(pairedlist[i].win != pairedlist[i].team1)
+					teams += "<div class='col-xs-5 col-sm-5 col-md-5 col-lg-5 text-center black-text'>" + pairedlist[i].team1name + "</div>";
+				else 
+					teams += "<div class='col-xs-5 col-sm-5 col-md-5 col-lg-5 text-center'>" + pairedlist[i].team1name + "</div>";
+				
+				teams += "<div class='col-xs-2 col-sm-2 col-md-2 col-lg-2 text-center'>VS</div>";
+				
+				if(pairedlist[i].win != pairedlist[i].team2)
+					teams += "<div class='col-xs-5 col-sm-5 col-md-5 col-lg-5 text-center black-text'>" + pairedlist[i].team2name + "</div>";
+				else
+					teams += "<div class='col-xs-5 col-sm-5 col-md-5 col-lg-5 text-center'>" + pairedlist[i].team2name + "</div>";
+				
+				var team1id = "team" + pairedlist[i].team1;
+				var team2id = "team" + pairedlist[i].team2;
+				
+				if(pairedlist[i].win != pairedlist[i].team1)
+					teams += "<div class='col-xs-5 col-sm-5 col-md-5 col-lg-5 text-center black-text'><span id='"+team1id+"'>0</span></div>";
+				else
+					teams += "<div class='col-xs-5 col-sm-5 col-md-5 col-lg-5 text-center red-text'><span id='"+team1id+"'>0</span></div>";
+				
+				teams += "<div class='col-xs-2 col-sm-2 col-md-2 col-lg-2 text-center'></div>";
+				if(pairedlist[i].win != pairedlist[i].team2)
+					teams += "<div class='col-xs-5 col-sm-5 col-md-5 col-lg-5 text-center black-text'><span id='"+team2id+"'>0</span></div>";
+				else 
+					teams += "<div class='col-xs-5 col-sm-5 col-md-5 col-lg-5 text-center red-text'><span id='"+team2id+"'>0</span></div>";
+			} else {
+				teams += "<div class='col-xs-5 col-sm-5 col-md-5 col-lg-5 text-center'>" + pairedlist[i].team1name + "</div>";
+				teams += "<div class='col-xs-2 col-sm-2 col-md-2 col-lg-2 text-center'>VS</div>";
+				teams += "<div class='col-xs-5 col-sm-5 col-md-5 col-lg-5 text-center'>" + pairedlist[i].team2name + "</div>";
+				var team1id = "team" + pairedlist[i].team1;
+				var team2id = "team" + pairedlist[i].team2;
+				teams += "<div class='col-xs-5 col-sm-5 col-md-5 col-lg-5 text-center red-text'><span id='"+team1id+"'>0</span></div>";
+				teams += "<div class='col-xs-2 col-sm-2 col-md-2 col-lg-2 text-center'></div>";
+				teams += "<div class='col-xs-5 col-sm-5 col-md-5 col-lg-5 text-center red-text'><span id='"+team2id+"'>0</span></div>";				
+			}
+    	}
     }
     $("#pairedteams" + round).html(teams);
 
     teams = "";
     for(var i = 0; i<unpairedlist.length; i++) {
-    	teams += unpairedlist[i].teamName + " - " + unpairedlist[i].teamId+ "<br>"; 
+    	if(round > 1)
+    		teams += unpairedlist[i].team1name + " - " + unpairedlist[i].team1+ "<br>";
+    	else
+	    	teams += unpairedlist[i].teamName + " - " + unpairedlist[i].teamId+ "<br>"; 
     }
     $("#unpairedteams" + round).html(teams);
+    
+    var data = {day:5, question:round, type:2, limit:100};      
+    socket.emit("loadchallenge", data);     
   });  
 
   socket.on("checkteamchallenge", function(data, round) {
     var teams = "";
     console.log("checkteamchallenge " + data.length);
     for(var i = 0; i<data.length; i++) {
+    		if(data[i].win > 0) {
+				//teams += pairedlist[i].team1name + " vs " + pairedlist[i].team2name + "<br>";
+				
+				if(data[i].win != data[i].team1)
+					teams += "<div class='col-xs-5 col-sm-5 col-md-5 col-lg-5 text-center black-text'>" + data[i].team1name + "</div>";
+				else 
+					teams += "<div class='col-xs-5 col-sm-5 col-md-5 col-lg-5 text-center'>" + data[i].team1name + "</div>";
+				
+				teams += "<div class='col-xs-2 col-sm-2 col-md-2 col-lg-2 text-center'>VS</div>";
+				
+				if(data[i].win != data[i].team2)
+					teams += "<div class='col-xs-5 col-sm-5 col-md-5 col-lg-5 text-center black-text'>" + data[i].team2name + "</div>";
+				else
+					teams += "<div class='col-xs-5 col-sm-5 col-md-5 col-lg-5 text-center'>" + data[i].team2name + "</div>";
+				
+				var team1id = "team" + data[i].team1;
+				var team2id = "team" + data[i].team2;
+				
+				if(data[i].win != data[i].team1)
+					teams += "<div class='col-xs-5 col-sm-5 col-md-5 col-lg-5 text-center black-text'><span id='"+team1id+"'>0</span></div>";
+				else
+					teams += "<div class='col-xs-5 col-sm-5 col-md-5 col-lg-5 text-center red-text'><span id='"+team1id+"'>0</span></div>";
+				
+				teams += "<div class='col-xs-2 col-sm-2 col-md-2 col-lg-2 text-center'></div>";
+				if(data[i].win != data[i].team2)
+					teams += "<div class='col-xs-5 col-sm-5 col-md-5 col-lg-5 text-center black-text'><span id='"+team2id+"'>0</span></div>";
+				else 
+					teams += "<div class='col-xs-5 col-sm-5 col-md-5 col-lg-5 text-center red-text'><span id='"+team2id+"'>0</span></div>";
+			} else {
+				teams += "<div class='col-xs-5 col-sm-5 col-md-5 col-lg-5 text-center'>" + data[i].team1name + "</div>";
+				teams += "<div class='col-xs-2 col-sm-2 col-md-2 col-lg-2 text-center'>VS</div>";
+				teams += "<div class='col-xs-5 col-sm-5 col-md-5 col-lg-5 text-center'>" + data[i].team2name + "</div>";
+				var team1id = "team" + data[i].team1;
+				var team2id = "team" + data[i].team2;
+				teams += "<div class='col-xs-5 col-sm-5 col-md-5 col-lg-5 text-center red-text'><span id='"+team1id+"'>0</span></div>";
+				teams += "<div class='col-xs-2 col-sm-2 col-md-2 col-lg-2 text-center'></div>";
+				teams += "<div class='col-xs-5 col-sm-5 col-md-5 col-lg-5 text-center red-text'><span id='"+team2id+"'>0</span></div>";				
+			}    	
+    	/*
     	teams += "<div class='col-xs-5 col-sm-5 col-md-5 col-lg-5 text-center'>" + data[i].team1name + "</div>";
     	teams += "<div class='col-xs-2 col-sm-2 col-md-2 col-lg-2 text-center'>VS</div>";
     	teams += "<div class='col-xs-5 col-sm-5 col-md-5 col-lg-5 text-center'>" + data[i].team2name + "</div>";
@@ -1018,7 +1101,8 @@ $(function() {
     	var team2id = "team" + data[i].team2;
     	teams += "<div class='col-xs-5 col-sm-5 col-md-5 col-lg-5 text-center red-text'><span id='"+team1id+"'>0</span></div>";
     	teams += "<div class='col-xs-2 col-sm-2 col-md-2 col-lg-2 text-center'></div>";
-    	teams += "<div class='col-xs-5 col-sm-5 col-md-5 col-lg-5 text-center red-text'><span id='"+team2id+"'>0</span></div>";    	
+    	teams += "<div class='col-xs-5 col-sm-5 col-md-5 col-lg-5 text-center red-text'><span id='"+team2id+"'>0</span></div>";
+    	*/
     }
     $("#teamchallenge").html(teams);
     
@@ -1026,6 +1110,9 @@ $(function() {
     socket.emit("loadchallenge", data); 
     
   });    
+  socket.on("closeround", function(round, wincount) {
+    alertBox("Total updated: " + wincount, {reload:true});    
+  });      
   socket.on("checkpoll", function(data) {
       if(data == null)
     	return;
@@ -1250,24 +1337,27 @@ $(function() {
   }    
   window.pairTeam = function(round) {
 
-  	  var team1, team2;
+  	  var team1val, team2val;
   	  
   	  if(round == 1) {
-  	  	  team1 = $("#team11").val();
-  	  	  team2 = $("#team12").val();
+  	  	  team1val = $("#team11val").val();
+  	  	  team2val = $("#team12val").val();
   	  } else if(round == 2) {
-  	  	  team1 = $("#team21").val();
-  	  	  team2 = $("#team22").val();  	  	  
+  	  	  team1val = $("#team21val").val();
+  	  	  team2val = $("#team22val").val();  	  	  
   	  }
   	  
-  	  if(team1.length==0 || team2.length==0) {
-  	  	  alertBox("Please enter correct values!");
+  	  if(team1val.length==0 || team2val.length==0) {
+  	  	  alertBox("Please enter correct values!" + team1val + ", " + team2val);
   	  	  return;
   	  }
   	  
-  	  var data = {team1:parseInt(team1), team2:parseInt(team2), round:parseInt(round)}
+  	  var data = {team1:parseInt(team1val), team2:parseInt(team2val), round:parseInt(round)}
   	  socket.emit("new challenge", data);
   }
+  window.closeRound = function(round) {
+  	  socket.emit("closeround", round);
+  }  
   window.checkTeamPairs = function(round) {
         socket.emit("checkteampairs", round);
   }    

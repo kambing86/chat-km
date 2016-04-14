@@ -59,8 +59,8 @@
 	<br><br>
 	  <!-- Nav tabs -->
 	  <ul class="nav nav-tabs" role="tablist">
-		<li role="presentation" class="active"><a href="#round1" aria-controls="round1" role="tab" data-toggle="tab">Round 1</a></li>
-		<li role="presentation"><a href="#round2" aria-controls="round2" role="tab" data-toggle="tab">Round 2</a></li>
+		<li role="presentation" class="active"><a href="#round1" id="r1tab" aria-controls="round1" role="tab" data-toggle="tab">Round 1</a></li>
+		<li role="presentation"><a href="#round2" id="r2tab" aria-controls="round2" role="tab" data-toggle="tab">Round 2</a></li>
 	  </ul>
 	
 	  <!-- Tab panes -->
@@ -72,8 +72,8 @@
 					<div class="panel">
 						<div class="panel-heading">
 							<h2>Round 1 - Pair up the teams!</h2>
-							<p>Team #1: <input type="text" id="team11"></p>
-							<p>Team #2: <input type="text" id="team12"></p>
+							<p>Team #1: <input type="text" id="team11val"></p>
+							<p>Team #2: <input type="text" id="team12val"></p>
 						</div>
 					</div>
 				</div>
@@ -83,11 +83,13 @@
 					<div class="panel text-center">
 						<div class="panel-heading">
 							<button class="btn btn-primary text-center" onclick="pairTeam(1);return false"><img src="images/dbs.png" style="height:20px;float:left"> Pair Up! <img src="images/dbs.png" style="height:20px;float:right"></button>
+							<br><br>
+							<button class="btn btn-primary text-center" onclick="closeRound(1);return false"><img src="images/dbs.png" style="height:20px;float:left"> Times Up! <img src="images/dbs.png" style="height:20px;float:right"></button>
 						</div>
 					</div>
 				</div>
 			</div>
-			<div class="row">
+			<div class="row agenda">
 				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 					<div class="panel">
 						<div class="panel-heading">
@@ -97,7 +99,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="row">
+			<div class="row agenda">
 				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 					<div class="panel">
 						<div class="panel-heading">
@@ -116,8 +118,8 @@
 					<div class="panel">
 						<div class="panel-heading">
 							<h2>Round 2 - Pair up the teams!</h2>
-							<p>Team #1: <input type="text" id="team21"></p>
-							<p>Team #2: <input type="text" id="team22"></p>
+							<p>Team #1: <input type="text" id="team21val"></p>
+							<p>Team #2: <input type="text" id="team22val"></p>
 						</div>
 					</div>
 				</div>
@@ -127,6 +129,8 @@
 					<div class="panel text-center">
 						<div class="panel-heading">
 							<button class="btn btn-primary text-center" onclick="pairTeam(2);return false"><img src="images/dbs.png" style="height:20px;float:left"> Pair Up! <img src="images/dbs.png" style="height:20px;float:right"></button>
+							<br><br>
+							<button class="btn btn-primary text-center" onclick="closeRound(2);return false"><img src="images/dbs.png" style="height:20px;float:left"> Times Up! <img src="images/dbs.png" style="height:20px;float:right"></button>
 						</div>
 					</div>
 				</div>
@@ -183,6 +187,12 @@
 });
 //var data = {userteam:userteam, day:0, question:1 }; 
 setTimeout(function(){ checkTeamPairs(1) }, 1000);
+$("#r1tab").click(function() {
+		checkTeamPairs(1);
+});
+$("#r2tab").click(function() {
+		checkTeamPairs(2);
+});
 </script>
 
 </body>

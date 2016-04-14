@@ -166,6 +166,17 @@ exports.updateTeamnameInChallengeTeam2 = function(data) {
       multi: true     
   });
 };
+exports.updateTeamChallenge = function(team1, winner) {
+  return challengeCollection.findOneAndUpdate({
+      team1: team1,
+      primary: true
+  }, {
+    $set: {
+      win: winner,
+      time: new Date()
+    }
+  });
+};
 exports.getChallenge = function(data) {
   return challengeCollection.findOne({
     team1: data.teamid,
@@ -176,6 +187,15 @@ exports.getTeamChallenge = function(round) {
   return challengeCollection.find({
     round: round,
     primary: true
+  }).toArray();
+};
+exports.getWinnerTeamChallenge = function(round) {
+  return challengeCollection.find({
+    round: round,
+    primary: true,
+    win: {
+    	$gt:0
+    }
   }).toArray();
 };
 exports.getTeam = function(data) {

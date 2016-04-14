@@ -442,7 +442,10 @@ if (cluster.isMaster) {
       var lbdata = yield chatDb.loadLB(data);    
       //console.log("loadchallenge " + lbdata.length);
       //io.to(joinedRoom).emit("loadchallenge", lbdata);
-      io.to("/page5").emit("loadchallenge", lbdata);
+      if(joinedRoom == "/pair")
+      	  io.to(joinedRoom).emit("loadchallenge", lbdata);
+      else
+      	  io.to("/page5").emit("loadchallenge", lbdata);
     }));        
     
     socket.on("gethighscore", Q.async(function*(data) {
@@ -608,24 +611,34 @@ if (cluster.isMaster) {
     
     socket.on("checkteampairs", Q.async(function*(round) {
       
-      var allteams = yield chatDb.getAllTeams();
+      var allteams;
+      if(round > 1) {
+      	  allteams = yield chatDb.getWinnerTeamChallenge(round-1);
+      } else {
+      	  allteams = yield chatDb.getAllTeams();
+      }
 
       var pairedlist=[];
       var unpairedlist=[];
 
-      console.log("allteams: " + allteams.length + ", round: " + round);
-      for(var i in allteams) {
-      	//console.log("teamId: " + allteams[i].teamId);
-      	var data = {teamid:allteams[i].teamId, round:round}
-      	var challenge = yield chatDb.getChallenge(data);
-      	//console.log("challenge: " + challenge.length);
-      	if (challenge == null) {
-      		unpairedlist.push(allteams[i]);
-      	} else {
-      		pairedlist.push(challenge);
-      	}
-      };
+      var challenge; 
       
+      console.log("allteams: " + allteams.length + ", round: " + round); 
+	  for(var i in allteams) {
+		if(round > 1) 
+			var data = {teamid:allteams[i].team1, round:round}
+		else
+			var data = {teamid:allteams[i].teamId, round:round}
+		
+		challenge = yield chatDb.getChallenge(data);
+		//console.log("challenge: " + challenge.length);
+		if (challenge == null) {
+			unpairedlist.push(allteams[i]);
+		} else {
+			pairedlist.push(challenge);
+		}
+	  };
+     
       console.log("pairedlist: " + pairedlist.length + ", unpairedlist: " + unpairedlist.length);
       var answerUser = usernames[socket.username];
       answerUser.emit("checkteampairs", pairedlist, unpairedlist, round);
@@ -640,6 +653,52 @@ if (cluster.isMaster) {
       answerUser.emit("checkteamchallenge", teamchallenge, round);
 
     }));        
+    
+    socket.on("closeround", Q.async(function*(round) {
+      var day = 5;
+      if(round == 2)
+      	  day = 6;
+      
+      var teams = yield chatDb.getTeamChallenge(round);
+      console.log("total paired teams " + teams.length);
+      var wincount = 0;
+      var team1score = team2score = 0;
+      for(var i=0; i<teams.length; i++) {
+      	  console.log("team1: " + teams[i].team1 + ", team2: " + teams[i].team2);
+      	  var team1score = team2score = 0;
+      	  if(teams[i].win == 0) {
+			  var team1 = "team" + teams[i].team1;
+			  var data = {day:day,question:1}
+			  var team1answer = yield chatDb.getAnswer(team1, data);
+			  if(team1answer[0] != null)
+			  	  team1score = team1answer[0].points;
+			  console.log("team1score: " + team1score);
+			  
+			  var team2 = "team" + teams[i].team2;
+			  var data = {day:day,question:1}
+			  var team2answer = yield chatDb.getAnswer(team2, data);
+			  if(team2answer[0] != null)
+			  	  team2score = team2answer[0].points;  
+			  console.log("team2score: " + team2score);
+			  
+			  var winner = 0;
+			  if(team1score > team2score) {
+				  winner = teams[i].team1;
+			  } else if (team2score > team1score){
+				  winner = teams[i].team2;
+			  }
+			  if(winner > 0) { 
+			  	  console.log("team1: " + teams[i].team1 + ", winner: " + winner);
+			  	  yield chatDb.updateTeamChallenge(teams[i].team1, winner);
+			  	  wincount++;
+			  } 
+		  }
+	  }
+	  
+	  console.log("wincount: " + wincount);
+	  var answerUser = usernames[socket.username];
+	  answerUser.emit("closeround", round, wincount);	  
+    }));            
     socket.on("getpollresults", Q.async(function*(data) {
       //logger.info("getpoolresults! " + data.day + ", " + data.question);
       var getResults1 = yield chatDb.getPollResults(data,1);
