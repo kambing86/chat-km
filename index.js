@@ -441,7 +441,8 @@ if (cluster.isMaster) {
     socket.on("loadchallenge", Q.async(function*(data) {
       var lbdata = yield chatDb.loadLB(data);    
       //console.log("loadchallenge " + lbdata.length);
-      io.to(joinedRoom).emit("loadchallenge", lbdata);      
+      //io.to(joinedRoom).emit("loadchallenge", lbdata);
+      io.to("/page5").emit("loadchallenge", lbdata);
     }));        
     
     socket.on("gethighscore", Q.async(function*(data) {

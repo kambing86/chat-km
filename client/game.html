@@ -119,7 +119,7 @@
            		if(actuallevel <= 4)
            			loadLB(parseInt(actuallevel),1,1);
            		else 
-           			loadLB(loadchallenge(actuallevel),1,2);
+           			loadChallenge(parseInt(actuallevel),1,1);
             }            
             alertbox("You scored " + data.score + " and Mission " + ((data.success) ? "Success" : "Failed"), option);
           }
