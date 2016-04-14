@@ -316,3 +316,10 @@ nav ul li a, a:hover{
 .nav-tabs {
     border-bottom: 1px solid #cc0000;
 }
+
+.past-main {
+  background-color: rgba(0,0,0,0.8);
+  -webkit-transition: all 1s ease 0s;
+  -o-transition: all 1s ease 0s;
+  transition: all 1s ease 0s;
+}
