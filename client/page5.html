@@ -75,8 +75,8 @@
 	<div>	
 	  <!-- Nav tabs -->
 	  <ul class="nav nav-tabs" role="tablist">
-		<li role="presentation" class="active"><a href="#round1" aria-controls="round1" role="tab" data-toggle="tab">Round 1</a></li>
-		<li role="presentation"><a href="#round2" aria-controls="round2" role="tab" data-toggle="tab">Round 2</a></li>
+		<li role="presentation" class="active"><a href="#round1" id="r1tab" aria-controls="round1" role="tab" data-toggle="tab">Round 1</a></li>
+		<li role="presentation"><a href="#round2" id="r2tab" aria-controls="round2" role="tab" data-toggle="tab">Round 2</a></li>
 	  </ul>
 	
 	  <!-- Tab panes -->
@@ -105,7 +105,7 @@
 			<div class="row agenda">
 				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 					<div class="panel">
-							<div id="teamchallenge"></div>
+							<div id="teamchallenge1"></div>
 					</div>
 				</div>
 			 </div>	 
@@ -131,7 +131,7 @@
 			<div class="row agenda">
 				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 					<div class="panel">
-							<div id="teamchallenge"></div>
+							<div id="teamchallenge2"></div>
 					</div>
 				</div>
 			 </div>	 
@@ -162,6 +162,14 @@
   });
 });
 //var data = {userteam:userteam, day:0, question:1 }; 
+
+$("#r1tab").click(function() {
+		checkTeamChallenge(1);
+});
+$("#r2tab").click(function() {
+		checkTeamChallenge(2);
+});
+
 setTimeout(function(){ checkTeamChallenge(1) }, 1000);
 </script>
 

@@ -1104,7 +1104,7 @@ $(function() {
     	teams += "<div class='col-xs-5 col-sm-5 col-md-5 col-lg-5 text-center red-text'><span id='"+team2id+"'>0</span></div>";
     	*/
     }
-    $("#teamchallenge").html(teams);
+    $("#teamchallenge" + round).html(teams);
     
     var data = {day:5, question:round, type:2, limit:100};      
     socket.emit("loadchallenge", data); 
