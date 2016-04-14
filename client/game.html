@@ -87,6 +87,7 @@
     <script src="assets/js/script.js"></script>
     <script>
       var level = 1;
+      var actuallevel = 1;
       
       $(function() {
         $('#gamebutton, nav').click(function() {
@@ -114,11 +115,11 @@
             var data = event.data;
             var option = (data.success) ? {goback:true}:{reload:true};
             if(data.success) {
-           		updateScore(level, data.score);
-           		if(level <= 4)
-           			loadLB(parseInt(level),1);
+           		updateScore(actuallevel, data.score);
+           		if(actuallevel <= 4)
+           			loadLB(parseInt(actuallevel),1,1);
            		else 
-           			loadchallenge(parseInt(level),1);
+           			loadLB(loadchallenge(actuallevel),1,2);
             }            
             alertbox("You scored " + data.score + " and Mission " + ((data.success) ? "Success" : "Failed"), option);
           }
@@ -136,7 +137,11 @@
 
       $(document).ready(function() {
         level = decodeURIComponent($.urlParam('level'));        
-                
+        actuallevel = level;
+        
+        if(level > 4)
+        	level = 4;
+        
         var targetscore = "Target: 100";
         if(level == 1) {
         	$("#targetscore").text(targetscore);
