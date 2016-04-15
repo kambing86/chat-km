@@ -18,7 +18,7 @@
 <!-- Le fav and touch icons -->
 <link rel="shortcut icon" href="assets/ico/favicon.ico">
 </head>
-<body>
+<body onpageshow="initPage()">
 <div class="fixed-img"></div>
 <div class="wrapper">
 <div class="navbar navbar-fixed-top back">
@@ -142,7 +142,10 @@ $("#submitLyrics").click(function() {
 	return false;
 });  
 
-setTimeout(function(){ checkTeamScore(1,1) }, 1500);
+function initPage() {
+	setTimeout(function(){ checkTeamScore(1,1) }, 1500);
+	//checkTeamScore(1,1);
+}
 </script>
 
 </body>

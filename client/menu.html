@@ -17,7 +17,7 @@
 <!-- Le fav and touch icons -->
 <link rel="shortcut icon" href="assets/ico/favicon.ico">
 </head>
-<body>
+<body onpageshow="initPage()">
 <div class="fixed-img"></div>
 
 <div class="wrapper">
@@ -178,7 +178,10 @@ $("#menubtn5").click(function() {
 	return false;
 });
 
-setTimeout(function(){ checkMenu() }, 1000);
+function initPage() {
+	//setTimeout(function(){ checkMenu() }, 500);
+	checkMenu();
+}
 </script>
 
 </body>

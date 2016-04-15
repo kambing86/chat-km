@@ -17,7 +17,7 @@
 <!-- Le fav and touch icons -->
 <link rel="shortcut icon" href="assets/ico/favicon.ico">
 </head>
-<body>
+<body onpageshow="initPage()">
 <div class="fixed-img"></div>
 <div class="wrapper">
 <div class="navbar navbar-fixed-top">
@@ -169,8 +169,10 @@ $("#r1tab").click(function() {
 $("#r2tab").click(function() {
 		checkTeamChallenge(2);
 });
-
-setTimeout(function(){ checkTeamChallenge(1) }, 1000);
+function initPage() {
+	setTimeout(function(){ checkTeamChallenge(1) }, 1000);
+	//checkTeamChallenge(1);
+}
 </script>
 
 </body>

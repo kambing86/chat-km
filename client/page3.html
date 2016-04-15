@@ -17,7 +17,7 @@
 <!-- Le fav and touch icons -->
 <link rel="shortcut icon" href="assets/ico/favicon.ico">
 </head>
-<body>
+<body onpageshow="initPage()">
 <div class="fixed-img"></div>
 <div class="wrapper">
 <div class="navbar navbar-fixed-top">
@@ -133,7 +133,10 @@
 $("#mission3").click(function() {
 	alertbox("Mission 3: Your team has to earn at least 8000 points to unlock this mission."); 
 }); 
-setTimeout(function(){ checkTeamScore(3,1) }, 1000);
+function initPage() {
+	setTimeout(function(){ checkTeamScore(3,1) }, 1000);
+	//checkTeamScore(3,1);
+}
 </script>
 
 </body>

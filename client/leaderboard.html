@@ -17,7 +17,7 @@
 <!-- Le fav and touch icons -->
 <link rel="shortcut icon" href="assets/ico/favicon.ico">
 </head>
-<body>
+<body onpageshow="initPage()">
 <div class="fixed-img"></div>
 <div class="wrapper">
 <div class="navbar navbar-fixed-top">
@@ -123,9 +123,10 @@ function loadLeaderboard(d,q) {
 	loadLB(d,q,1);
 	return false;
 }
-$( document ).ready(function() {
-	setTimeout(function(){ loadLB(1,1,1) }, 1500);
-});
+function initPage() {
+	setTimeout(function(){ loadLB(1,1,1) }, 1000);
+	loadLB(1,1,1);
+};
 </script>
 
 </body>

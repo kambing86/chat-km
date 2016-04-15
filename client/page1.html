@@ -17,7 +17,7 @@
 <!-- Le fav and touch icons -->
 <link rel="shortcut icon" href="assets/ico/favicon.ico">
 </head>
-<body>
+<body onpageshow="initPage()">
 <div class="fixed-img"></div>
 <div class="wrapper">
 <div class="navbar navbar-fixed-top">
@@ -124,9 +124,11 @@
 $("#mission1").click(function() {
 	alertbox("Mission 1: Your team has to earn at least 800 points to unlock this mission."); 
 });
-//var data = {userteam:userteam, day:0, question:1 }; 
-setTimeout(function(){ checkTeamScore(1,1) }, 1000);
-//setTimeout(function(){ checkTeamAnswers(1,1) }, 1000);
+
+function initPage() {
+	setTimeout(function(){ checkTeamScore(1,1) }, 1000);
+	//checkTeamScore(1,1);
+}
 </script>
 
 </body>

@@ -17,7 +17,7 @@
 <!-- Le fav and touch icons -->
 <link rel="shortcut icon" href="assets/ico/favicon.ico">
 </head>
-<body>
+<body onpageshow="initPage()">
 <div class="fixed-img"></div>
 <div class="wrapper">
 <div class="navbar navbar-fixed-top">
@@ -135,15 +135,10 @@ $("#namebattle").click(function() {
 	alertbox("Your team has to complete Watch Captain Sim to unlock this mission.");
 	return false;
 });
-function retryCheck() {
-	//alertbox("retrycheck! ");
-	if($("#info").length == 0) {
-		$("#d0q1").html("Click to refresh");
-	}
+function initPage() {
+	setTimeout(function(){ checkTeamAnswers(0,1) }, 1000);
+	//checkTeamAnswers(0,1);
 }
-//var data = {userteam:userteam, day:0, question:1 }; 
-setTimeout(function(){ checkTeamAnswers(0,1) }, 1000);
-setTimeout(function(){ retryCheck() }, 5000);
 </script>
 
 </body>

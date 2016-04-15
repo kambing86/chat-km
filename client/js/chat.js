@@ -953,7 +953,7 @@ $(function() {
 				$("#lockteam").empty().remove();
 				$("#updateteam").unbind("click");				
 				
-				if(usertype == 1) {	
+				if(usertype >= 1) {	
 					$("#updateteam").click(function() {
 						updateTeam();
 						return false;
@@ -982,7 +982,10 @@ $(function() {
   	}
   	//data = {day:4,question:1,points:16200}
     if(data == null) {
-    	$("#d"+oridata.day+"q"+oridata.question).html("0 of "+minpoints+" points earned");
+    	if(joinedRoom != "/quiz")
+    		$("#d"+oridata.day+"q"+oridata.question).html("0 of "+minpoints+" points earned");
+    	else 
+    		alertBox("Your team has to earn at least "+minpoints+" points to unlock this mission.", {goback:true});
     	return;
     }
     
@@ -999,7 +1002,7 @@ $(function() {
 				$("#locklyrics").empty().remove();
 				$("#submitLyrics").unbind("click");
 				
-				if(usertype == 1) {	
+				if(usertype >= 1) {	
 					$("#submitLyrics").click(function() {
 							sendMessage("inputComment",joinedRoom);
 						    typing = false;
@@ -1012,10 +1015,18 @@ $(function() {
 					});									
 				}				
 			}
+		} else {
+    		$("#mission"+data.day).unbind("click");
+    		$("#mission"+data.day).click(function() {
+    			window.location = "quiz.html?level="+ data.day + "&user="+username;
+    		});			
+		}
+		/*
     	} else if(data.day == 2) {
     		$("#mission2").unbind("click");
     		$("#mission2").click(function() {
-    			window.location = "https://dev-sg-app.vocohub.com/sgConf/main/app/index.html?id="+username+"&quiz=1908"; 
+    			//window.location = "https://dev-sg-app.vocohub.com/sgConf/main/app/index.html?id="+username+"&quiz=1908";
+    			window.location = "quiz.html?level="+ data.day;
     		});
     	} else if(data.day == 3) {
     		$("#mission3").unbind("click");
@@ -1027,9 +1038,13 @@ $(function() {
     		$("#mission4").click(function() {
     			window.location = "https://dev-sg-app.vocohub.com/sgConf/main/app/index.html?id="+username+"&quiz=1909"; 
     		});    		    		
-    	}    		
+    	} 
+   		*/
 		$("#lock"+data.day).empty().remove();		
-    }    
+    } else {
+    	alertBox("Your team has to earn at least "+minpoints+" points to unlock this mission.", {goback:true});
+    	return;
+    }
 
 	var data = {userteamId:userteamId, username:username, day:data.day, question:data.question};
     socket.emit("checkteamanswers", data);

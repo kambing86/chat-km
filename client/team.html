@@ -17,7 +17,7 @@
 <!-- Le fav and touch icons -->
 <link rel="shortcut icon" href="assets/ico/favicon.ico">
 </head>
-<body>
+<body onpageshow="initPage()">
 <div class="fixed-img"></div>
 
 <div class="wrapper">
@@ -136,7 +136,10 @@ $("#updateteam").click(function() {
 	return false;
 });
 
-setTimeout(function(){ getTeam() }, 1000);
+function initPage() {
+	setTimeout(function(){ getTeam() }, 1000);
+	//getTeam();
+}
 </script>
 
 </body>
