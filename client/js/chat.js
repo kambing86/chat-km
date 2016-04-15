@@ -940,7 +940,7 @@ $(function() {
     if(day == 0) {
     	$("#d"+day+"q"+question).html(count + " of " + data.length + " members completed <i class='fa fa-info-circle'></i>");
     
-    	if(count >= data.length) {
+    	if(count >= data.length || usertype == 2) {
     		
     		if(joinedRoom == "/page0") { 
 				$("#namebattle").unbind("click");
@@ -981,7 +981,7 @@ $(function() {
   		minpoints = 16000;  		
   	}
   	//data = {day:4,question:1,points:16200}
-    if(data == null) {
+    if(data == null && usertype < 2) {
     	if(joinedRoom != "/quiz")
     		$("#d"+oridata.day+"q"+oridata.question).html("0 of "+minpoints+" points earned");
     	else 
@@ -989,9 +989,12 @@ $(function() {
     	return;
     }
     
+    if(data == null) {
+    	data = {day:oridata.day, question:oridata.question, points:0};
+    }
     $("#d"+data.day+"q"+data.question).html(data.points + " of "+minpoints+" points earned <i class='fa fa-info-circle'></i>");
     
-    if(data.points >= minpoints) {
+    if(data.points >= minpoints || usertype == 2) {
     	if(data.day == 1) {
     		if(joinedRoom == "/page1") {
 				$("#mission1").unbind("click");
@@ -1015,31 +1018,34 @@ $(function() {
 					});									
 				}				
 			}
+		/*
 		} else {
     		$("#mission"+data.day).unbind("click");
     		$("#mission"+data.day).click(function() {
     			window.location = "quiz.html?level="+ data.day + "&user="+username;
     		});			
 		}
-		/*
+		*/
     	} else if(data.day == 2) {
     		$("#mission2").unbind("click");
     		$("#mission2").click(function() {
-    			//window.location = "https://dev-sg-app.vocohub.com/sgConf/main/app/index.html?id="+username+"&quiz=1908";
-    			window.location = "quiz.html?level="+ data.day;
+    			var data = Base64.encodeURI(username+":"+1908+":"+Date.now().toString());
+    			window.location = "https://dev-sg-app.vocohub.com/sgConf/main/app/index.html?data="+data;
+    			//window.location = "quiz.html?level="+ data.day;
     		});
     	} else if(data.day == 3) {
     		$("#mission3").unbind("click");
     		$("#mission3").click(function() {
-    			window.location = "https://dev-sg-app.vocohub.com/sgConf/main/app/index.html?id="+username+"&quiz=1910"; 
+    			var data = Base64.encodeURI(username+":"+1910+":"+Date.now().toString());
+    			window.location = "https://dev-sg-app.vocohub.com/sgConf/main/app/index.html?data="+data; 
     		});    		
     	} else if(data.day == 4) {
     		$("#mission4").unbind("click");
     		$("#mission4").click(function() {
-    			window.location = "https://dev-sg-app.vocohub.com/sgConf/main/app/index.html?id="+username+"&quiz=1909"; 
+    			var data = Base64.encodeURI(username+":"+1909+":"+Date.now().toString());
+    			window.location = "https://dev-sg-app.vocohub.com/sgConf/main/app/index.html?data="+data; 
     		});    		    		
     	} 
-   		*/
 		$("#lock"+data.day).empty().remove();		
     } else {
     	alertBox("Your team has to earn at least "+minpoints+" points to unlock this mission.", {goback:true});
@@ -1112,44 +1118,49 @@ $(function() {
   socket.on("checkteamchallenge", function(data, round) {
     var teams = "";
     console.log("checkteamchallenge " + data.length);
+    var onboard = 0;
     for(var i = 0; i<data.length; i++) {
+    	console.log("team1: " + data[i].team1 + ", team2: " + data[i].team2);
+    	if(userteamId == data[i].team1 || userteamId == data[i].team2)
+    		onboard = 1;
+    	
     		if(data[i].win > 0) {
 				//teams += pairedlist[i].team1name + " vs " + pairedlist[i].team2name + "<br>";
 				
 				if(data[i].win != data[i].team1)
-					teams += "<div class='col-xs-5 col-sm-5 col-md-5 col-lg-5 text-center black-text'>" + data[i].team1name + "</div>";
+					teams += "<div class='row'><div class='col-xs-5 col-sm-5 col-md-5 col-lg-5 text-center black-text'>" + data[i].team1name + "</div>";
 				else 
-					teams += "<div class='col-xs-5 col-sm-5 col-md-5 col-lg-5 text-center'>" + data[i].team1name + "</div>";
+					teams += "<div class='row'><div class='col-xs-5 col-sm-5 col-md-5 col-lg-5 text-center'>" + data[i].team1name + "</div>";
 				
 				teams += "<div class='col-xs-2 col-sm-2 col-md-2 col-lg-2 text-center'>VS</div>";
 				
 				if(data[i].win != data[i].team2)
-					teams += "<div class='col-xs-5 col-sm-5 col-md-5 col-lg-5 text-center black-text'>" + data[i].team2name + "</div>";
+					teams += "<div class='col-xs-5 col-sm-5 col-md-5 col-lg-5 text-center black-text'>" + data[i].team2name + "</div></div>";
 				else
-					teams += "<div class='col-xs-5 col-sm-5 col-md-5 col-lg-5 text-center'>" + data[i].team2name + "</div>";
+					teams += "<div class='col-xs-5 col-sm-5 col-md-5 col-lg-5 text-center'>" + data[i].team2name + "</div></div>";
 				
 				var team1id = "team" + data[i].team1;
 				var team2id = "team" + data[i].team2;
 				
 				if(data[i].win != data[i].team1)
-					teams += "<div class='col-xs-5 col-sm-5 col-md-5 col-lg-5 text-center black-text'><span id='"+team1id+"'>0</span></div>";
+					teams += "<div class='row'><div class='col-xs-5 col-sm-5 col-md-5 col-lg-5 text-center black-text'><span id='"+team1id+"'>0</span></div>";
 				else
-					teams += "<div class='col-xs-5 col-sm-5 col-md-5 col-lg-5 text-center red-text'><span id='"+team1id+"'>0</span></div>";
+					teams += "<div class='row'><div class='col-xs-5 col-sm-5 col-md-5 col-lg-5 text-center red-text'><span id='"+team1id+"'>0</span></div>";
 				
 				teams += "<div class='col-xs-2 col-sm-2 col-md-2 col-lg-2 text-center'></div>";
 				if(data[i].win != data[i].team2)
-					teams += "<div class='col-xs-5 col-sm-5 col-md-5 col-lg-5 text-center black-text'><span id='"+team2id+"'>0</span></div>";
+					teams += "<div class='col-xs-5 col-sm-5 col-md-5 col-lg-5 text-center black-text'><span id='"+team2id+"'>0</span></div></div>";
 				else 
-					teams += "<div class='col-xs-5 col-sm-5 col-md-5 col-lg-5 text-center red-text'><span id='"+team2id+"'>0</span></div>";
+					teams += "<div class='col-xs-5 col-sm-5 col-md-5 col-lg-5 text-center red-text'><span id='"+team2id+"'>0</span></div></div>";
 			} else {
-				teams += "<div class='col-xs-5 col-sm-5 col-md-5 col-lg-5 text-center'>" + data[i].team1name + "</div>";
+				teams += "<div class='row'><div class='col-xs-5 col-sm-5 col-md-5 col-lg-5 text-center'>" + data[i].team1name + "</div>";
 				teams += "<div class='col-xs-2 col-sm-2 col-md-2 col-lg-2 text-center'>VS</div>";
-				teams += "<div class='col-xs-5 col-sm-5 col-md-5 col-lg-5 text-center'>" + data[i].team2name + "</div>";
+				teams += "<div class='col-xs-5 col-sm-5 col-md-5 col-lg-5 text-center'>" + data[i].team2name + "</div></div>";
 				var team1id = "team" + data[i].team1;
 				var team2id = "team" + data[i].team2;
-				teams += "<div class='col-xs-5 col-sm-5 col-md-5 col-lg-5 text-center red-text'><span id='"+team1id+"'>0</span></div>";
+				teams += "<div class='row'><div class='col-xs-5 col-sm-5 col-md-5 col-lg-5 text-center red-text'><span id='"+team1id+"'>0</span></div>";
 				teams += "<div class='col-xs-2 col-sm-2 col-md-2 col-lg-2 text-center'></div>";
-				teams += "<div class='col-xs-5 col-sm-5 col-md-5 col-lg-5 text-center red-text'><span id='"+team2id+"'>0</span></div>";				
+				teams += "<div class='col-xs-5 col-sm-5 col-md-5 col-lg-5 text-center red-text'><span id='"+team2id+"'>0</span></div></div>";				
 			}    	
     	/*
     	teams += "<div class='col-xs-5 col-sm-5 col-md-5 col-lg-5 text-center'>" + data[i].team1name + "</div>";
@@ -1164,6 +1175,31 @@ $(function() {
     }
     $("#teamchallenge" + round).html(teams);
     
+    var pairlink = $("<button id='pairlink' />");
+    pairlink.html("Go to PAIR");
+    pairlink.addClass("btn btn-primary text-center");
+    pairlink.click(function() {
+   		window.location="pair.html";
+    });
+    if(usertype == 2) {
+    	$("#pairlink").empty().remove();
+    	$("#teamchallenge" + round).after(pairlink);
+    }
+    
+    if(onboard || usertype == 2) {
+    	var level = 0;
+    	if(round == 1)
+    		level = 5;
+    	else if (round == 2)
+    		level = 6;
+    	
+    	$("#startr"+round+"lock").empty().remove();
+    	$("#startr"+round).unbind("click");
+    	$("#startr"+round).click(function() {
+    			window.location = "game.html?level="+level;
+    	});
+    }
+    
     var data = {day:5, question:round, type:2, limit:100};      
     socket.emit("loadchallenge", data); 
     
@@ -1172,9 +1208,10 @@ $(function() {
     alertBox("Total updated: " + wincount, {reload:true});    
   });      
   socket.on("checkmenu", function(day) {
+  	if(usertype == 2)
+  		day = 5;
     for(var i=1; i<=day; i++) {
     	var step = i;
-    	console.log("i = " + i + ", step: " + step);
     	$("#menu"+step).empty().remove();
     	$("#menubtn"+step).unbind("click");
     	$("#menubtn"+step).addClass("btn-enabled");
@@ -1401,12 +1438,30 @@ $(function() {
   	  var data = {day:level, question:1, score:score, userteamId:userteamId, userteamName:userteamName};
         socket.emit("updatescore", data);
   }  
+  window.updateQuiz = function(uid, score, d, q) {
+  	  if(uid != username) {
+  	  	  alertBox("Invalid user!!! ");
+  	  	  return;
+  	  }
+  	  
+  	  var data = {day:d, question:q, score:score, userteamId:userteamId, userteamName:userteamName};
+        socket.emit("updatescore", data);
+
+  	  /*
+  	  var data = {day:level, question:1, score:score, userteamId:userteamId, userteamName:userteamName};
+        socket.emit("updatescore", data);
+        */
+  }    
   window.updateTeamname = function() {
   	  var teamname = $("#teamname").val();
   	  if(teamname.length == 0) {
   	  	  alertBox("Please enter a valid name.");
   	  	  return;
   	  }
+  	  if(teamname.length > 20) {
+  	  	  alertBox("Please enter a name that is shorter than 25 characters.");
+  	  	  return;
+  	  }  	  
   	  var data = {userteamId:userteamId, username:username, teamname:teamname};
         socket.emit("updateteamname", data);
   }    

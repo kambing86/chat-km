@@ -112,6 +112,7 @@
   <script src="js/mobile-sidebar.js"></script>
   <script src="js/chat.js"></script>
   <script src="js/custom.js"></script>
+  <script src="js/base64.min.js"></script>
 <script>
   $(function(){
   $('#gamebutton, nav').click(function(){
@@ -128,7 +129,25 @@ $("#mission2").click(function() {
 function initPage() {
 	setTimeout(function(){ checkTeamScore(2,1) }, 1000);
 	//checkTeamScore(2,1);
+	var score = decodeURIComponent($.urlParam('score'));
+	if(score.length > 0) {
+		var data = Base64.decode(score);
+		var dataarr = data.split(":");
+		var uid = dataarr[0];
+		var score = dataarr[1];
+	
+		updateQuiz(uid, score, 2, 2);
+	}	
 }
+
+$.urlParam = function(name) {
+	var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
+    if (results === null) {
+    	return '';
+    } else {
+        return results[1] || '';
+    }
+};
 </script>
 
 </body>

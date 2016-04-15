@@ -458,10 +458,11 @@ if (cluster.isMaster) {
     
     socket.on("updatescore", Q.async(function*(data) {
       var highscore = yield chatDb.getAnswer(socket.username, data);
-      //console.log("highscore: " + highscore + ", len " + highscore.length);
+      console.log("data question: " + data.question);
 
       var updateteam = 0;
       var user_highscore = 0;
+      var score_diff = 0;
       if(highscore == "undefined" || highscore.length == 0) {
 		  var answerdata = {
 			username: socket.username,
@@ -488,7 +489,7 @@ if (cluster.isMaster) {
       	  var team_username = "team"+data.userteamId;
       	  
       	  var teamscore = yield chatDb.getAnswer(team_username, data);
-      	  var score_diff = data.score - user_highscore;
+      	  score_diff = data.score - user_highscore;
       	  console.log("Adding points for " + team_username + " - " + score_diff);
       	  
       	  if(teamscore == "undefined" || teamscore.length == 0) {
@@ -514,6 +515,13 @@ if (cluster.isMaster) {
       	  	  console.log("Error! Score_diff is less than 0! " + data.score + " - " + user_highscore);
       	  	  //do nothing!
       	  }      	  
+      }
+      console.log("data question2: " + data.question);
+      if(data.question == 2) {
+      	  if(score_diff > 0)
+      	  	  alertBox("Congratulations! You've earned " + data.score + " points.");
+      	  else
+      	  	  alertBox("You may try play the quiz again.");
       }
     }));
     
@@ -573,6 +581,7 @@ if (cluster.isMaster) {
       var menustep = yield chatDb.getMenu("menu");
       if(menustep != null)
       	  step = menustep.day;
+      
       console.log("step now: " + step + ", " + menustep.day);
       var answerUser = usernames[socket.username];
       answerUser.emit("checkmenu", step);
@@ -664,7 +673,15 @@ if (cluster.isMaster) {
       answerUser.emit("checkteamchallenge", teamchallenge, round);
 
     }));        
-    
+    socket.on("updatequiz", Q.async(function*(data) {
+      
+      var teamchallenge = yield chatDb.getTeamChallenge(round);
+
+      console.log("teamchallenge " + teamchallenge.length);
+      var answerUser = usernames[socket.username];
+      answerUser.emit("checkteamchallenge", teamchallenge, round);
+
+    }));            
     socket.on("closeround", Q.async(function*(round) {
       var day = 5;
       if(round == 2)
