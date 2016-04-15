@@ -137,14 +137,14 @@
       $(document).ready(function() {
         level = decodeURIComponent($.urlParam('level'));
         username = decodeURIComponent($.urlParam('user'));
-        var url = "";
+        var url = "http://dev-sg-app.vocohub.com:3020/sgConf/main/app/index.html?id="+username+"&quiz=";
         
         if(level == 2) {
-        	url = "https://dev-sg-app.vocohub.com/sgConf/main/app/index.html?id="+username+"&quiz=1908";
+        	url += "1908";
         } else if (level == 3) {
-        	url = "https://dev-sg-app.vocohub.com/sgConf/main/app/index.html?id="+username+"&quiz=1910";
+        	url += "1910";
         } else if (level == 4) {
-        	url = "https://dev-sg-app.vocohub.com/sgConf/main/app/index.html?id="+username+"&quiz=1908";        } else if (level == 4) {
+        	url += "1909";
         }
         //setTimeout(function(){ getHighscore(level); }, 1000); 
         setTimeout(function(){ checkTeamScore(parseInt(level),1) }, 1000);
