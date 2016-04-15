@@ -509,7 +509,7 @@ if (cluster.isMaster) {
       	  } else if(score_diff > 0) {
       	  	  data.score = teamscore[0].points + score_diff;
       	  	  yield chatDb.updateScore(team_username, data);
-      	  	  yield chatDb.updateUserpoints(socket.username, data.score);
+      	  	  yield chatDb.updateUserpoints(socket.username, score_diff);
       	  } else {
       	  	  console.log("Error! Score_diff is less than 0! " + data.score + " - " + user_highscore);
       	  	  //do nothing!
@@ -567,6 +567,17 @@ if (cluster.isMaster) {
       answerUser.emit("checkteamscore", teamScore[0], data);
 
     }));    
+    socket.on("checkmenu", Q.async(function*() {
+      var step = 0;
+      
+      var menustep = yield chatDb.getMenu("menu");
+      if(menustep != null)
+      	  step = menustep.day;
+      console.log("step now: " + step + ", " + menustep.day);
+      var answerUser = usernames[socket.username];
+      answerUser.emit("checkmenu", step);
+
+    }));     
     
     socket.on("new challenge", Q.async(function*(data) {
     		

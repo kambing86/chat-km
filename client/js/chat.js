@@ -845,6 +845,9 @@ $(function() {
     	members += data[i].points+"</div>";
     }
     
+    if(members == "")
+    	members = "No record found";
+  
     if(data[0].answer == 1)
     	$("#lbdetails").html(members);
     else if(data[0].answer == 2)
@@ -882,7 +885,7 @@ $(function() {
   	$("#teamname").val("");
     $("#myteam").text(userteamName);
     
-    alertBox("Your battleship is now named as \"" + userteamName + "\"");
+    alertBox("Your battle unit is now \"" + userteamName + "\"");
   });    
   socket.on("getteam", function(data) {
     if(data == null)
@@ -908,7 +911,10 @@ $(function() {
     	members += "</div>";
     }
     $("#myteam").text(userteamName);
-    $("#teammembers").html(members);    	
+    $("#teammembers").html(members);   
+
+    var data = {userteamId:userteamId, username:username, day:0, question:1};
+    socket.emit("checkteamanswers", data);
   });  
   socket.on("checkteamanswers", function(data) {
     if(data == null)
@@ -930,16 +936,35 @@ $(function() {
     }
     
     $("#info").html(completed);
-    
+    //count=data.length;
     if(day == 0) {
     	$("#d"+day+"q"+question).html(count + " of " + data.length + " members completed <i class='fa fa-info-circle'></i>");
     
-    	if(count == data.length) {
-    		$("#namebattle").unbind("click");
-			$("#namebattle").click(function() {
-				window.location = "team.html"; 
-			});
-			$("#lock0").empty().remove();
+    	if(count >= data.length) {
+    		
+    		if(joinedRoom == "/page0") { 
+				$("#namebattle").unbind("click");
+				$("#namebattle").click(function() {
+					window.location = "team.html"; 
+				});
+				$("#lock0").empty().remove();
+				
+			} else if(joinedRoom == "/team") {
+				$("#lockteam").empty().remove();
+				$("#updateteam").unbind("click");				
+				
+				if(usertype == 1) {	
+					$("#updateteam").click(function() {
+						updateTeam();
+						return false;
+					});				
+				} else {
+					$("#updateteam").click(function() {
+						alertBox("Only Team Leader is allowed to update the Team Name.");
+						return false;
+					});									
+				}
+			}
 		}
     }
     	
@@ -965,10 +990,28 @@ $(function() {
     
     if(data.points >= minpoints) {
     	if(data.day == 1) {
-    		$("#mission1").unbind("click");
-    		$("#mission1").click(function() {
-    			window.location = "unbelievable.html"; 
-    		});
+    		if(joinedRoom == "/page1") {
+				$("#mission1").unbind("click");
+				$("#mission1").click(function() {
+					window.location = "unbelievable.html"; 
+				});
+			} else if (joinedRoom == "/unbelievable") {
+				$("#locklyrics").empty().remove();
+				$("#submitLyrics").unbind("click");
+				
+				if(usertype == 1) {	
+					$("#submitLyrics").click(function() {
+							sendMessage("inputComment",joinedRoom);
+						    typing = false;
+						    return false
+					});				
+				} else {
+					$("#submitLyrics").click(function() {
+						alertBox("Only Team Leader is allowed to submit the lyrics.");
+						return false;
+					});									
+				}				
+			}
     	} else if(data.day == 2) {
     		$("#mission2").unbind("click");
     		$("#mission2").click(function() {
@@ -1113,6 +1156,23 @@ $(function() {
   socket.on("closeround", function(round, wincount) {
     alertBox("Total updated: " + wincount, {reload:true});    
   });      
+  socket.on("checkmenu", function(day) {
+    for(var i=1; i<=day; i++) {
+    	var step = i;
+    	console.log("i = " + i + ", step: " + step);
+    	$("#menu"+step).empty().remove();
+    	$("#menubtn"+step).unbind("click");
+    	$("#menubtn"+step).addClass("btn-enabled");
+    	$("#menubtn"+step).attr("href", "page"+step+".html");
+    }
+    var topx = $("#step"+day).offset().top;
+    topx = topx - 200;
+    var speed = topx + 1000;
+    //console.log("top: " + topx);
+    $('html, body').animate({
+    		scrollTop: topx 
+    }, speed);
+  });        
   socket.on("checkpoll", function(data) {
       if(data == null)
     	return;
@@ -1303,7 +1363,7 @@ $(function() {
         socket.emit("checkteamscore", data);
   }    
   window.loadLB = function(d,q,t) {
-  	  var data = {day:d, question:q, type:t, limit:10};
+  	  var data = {day:d, question:q, type:t, limit:20};
   	  viewingLB = d;
   	  $("#lbdetails").empty();
   	  $("#teamlbdetails").empty();
@@ -1363,6 +1423,9 @@ $(function() {
   }    
   window.checkTeamChallenge = function(round) {
         socket.emit("checkteamchallenge", round);
+  }      
+  window.checkMenu = function() {
+        socket.emit("checkmenu");
   }      
   window.checkPoll = function(data) {
         socket.emit("checkpoll", data);

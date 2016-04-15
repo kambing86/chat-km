@@ -75,10 +75,16 @@
 				<div class="panel-heading">
 				
 				
-				  <h5 class="">Submit your unbelievable Lyrics here!</h5>
-                	<div class="row text-center">
+				  <h5 class="">Submit your unbelievable lyrics here!</h5>
+                	<div class="row">
 						  	<textarea rows="5" type="text" class="inputComment form-control"></textarea> 
-						  	<button class="btn btn-primary btn-enabled" type="button" id="submitComment" style="margin-top:20px"><strong>Submit</strong></button>                	
+						  	<button class="btn btn-primary btn-enabled" type="button" id="submitLyrics" style="margin-top:20px"><i id="locklyrics" class="fa fa-lock fa-lg"></i> Submit</button>
+						  	<br><br>
+						  	<div class="small">
+						  		<p>Note: Only Team Leader is allowed to submit the lyrics</p>
+						  		<a href="#" onclick="$('#info').slideToggle();return false"><div id="d1q1">...</div></a>
+						  		<div id="info" style="display:none"></div>
+						  	</div>
                     </div>	
                 </div>
             </div>
@@ -125,11 +131,18 @@
 <script>
   $(function(){
   $('#gamebutton, nav').click(function(){
-    $('.navbar-toggle').toggleClass('navbar-on');
+    //$('.navbar-toggle').toggleClass('navbar-on');
     $('nav').slideToggle();
     $('nav').removeClass('nav-hide');
   });
 });
+  
+$("#submitLyrics").click(function() {
+	alertbox("Mission 1: Your team has to earn at least 800 points to unlock this mission.");
+	return false;
+});  
+
+setTimeout(function(){ checkTeamScore(1,1) }, 1500);
 </script>
 
 </body>

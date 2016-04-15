@@ -68,9 +68,9 @@
 
     <nav class="nav-hide" id="navtest">
   		<ul>
-            	<li><a href="menu.html">Missions</a></li>
-                <li><a href="team.html">My Team</a></li>            	
-           		<li><a href="leaderboard.html">Leaderboard</a></li>
+            	<li><a href="menu.html"><i class="fa fa-tasks"></i> Missions</a></li>
+                <li><a href="team.html"><i class="fa fa-group"></i> My Team</a></li>            	
+           		<li><a href="leaderboard.html"><i class="fa fa-bar-chart-o"></i> Leaderboard</a></li>
         </ul>
     </nav>
     <iframe id="gameiframe" class="pigeonholes" frameborder="0" overflow="auto" scrolling="no" style="position:absolute;top:50px;left:0;width:1px;min-width:100%;"></iframe>
@@ -87,7 +87,6 @@
     <script src="js/custom.js"></script>
     <script>
       var level = 1;
-      var actuallevel = 1;
       
       $(function() {
         $('#gamebutton, nav').click(function() {
@@ -115,11 +114,11 @@
             var data = event.data;
             var option = (data.success) ? {goback:true}:{reload:true};
             if(data.success) {
-           		updateScore(actuallevel, data.score);
-           		if(actuallevel <= 4)
-           			loadLB(parseInt(actuallevel),1,1);
+           		updateScore(level, data.score);
+           		if(level <= 4)
+           			loadLB(parseInt(level),1,1);
            		else 
-           			loadChallenge(parseInt(actuallevel),1,2);
+           			loadChallenge(parseInt(level),1,2);
             }            
             alertbox("You scored " + data.score + " and Mission " + ((data.success) ? "Success" : "Failed"), option);
           }
@@ -137,10 +136,6 @@
 
       $(document).ready(function() {
         level = decodeURIComponent($.urlParam('level'));        
-        actuallevel = level;
-        
-        if(level > 4)
-        	level = 4;
         
         var targetscore = "Target: 100";
         if(level == 1) {
@@ -154,6 +149,8 @@
         } else if (level == 4) {
         	targetscore = "Target: 2000";
         	$("#targetscore").text(targetscore);
+        } else {
+        	$("#targetscore").empty();
         }
         setTimeout(function(){ getHighscore(level); }, 1000); 
         $("#gameiframe").attr("src", "space/?level=" + level);

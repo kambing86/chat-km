@@ -23,7 +23,7 @@
 <div class="wrapper">
 <div class="navbar navbar-fixed-top">
 	<div class="navbar-toggle">
-		<a href="instructions.html"><b>Agenda</b></a>
+		<a href="agenda.html"><b>Agenda</b></a>
 	</div>
 	<div class="navbar-toggle" id="gamebutton">
 		<b>Game</b>
@@ -50,9 +50,9 @@
 
 <nav class="nav-hide" id="navtest">
   		<ul>
-            	<li><a href="menu.html">Missions</a></li>
-                <li><a href="team.html">My Team</a></li>            	
-           		<li><a href="leaderboard.html">Leaderboard</a></li>
+            	<li><a href="menu.html"><i class="fa fa-tasks"></i> Missions</a></li>
+                <li><a href="team.html"><i class="fa fa-group"></i> My Team</a></li>            	
+           		<li><a href="leaderboard.html"><i class="fa fa-bar-chart-o"></i> Leaderboard</a></li>
         </ul>
 </nav>
 <br><br><br>
@@ -62,9 +62,9 @@
        	<div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
 			<div class="panel">
 				<div class="panel-heading text-center">
-					<a class="btn btn-primary btn-menu btn-enabled" href="page5.html"><strong><h5>5</h5></strong></a>
+					<a class="btn btn-primary btn-menu" id="menubtn5" href="#"><strong><h5>5</h5></strong></a>
 					<br>
-					<span id="step5" class="menutext">Success and onward!</span>
+					<span id="step5" class="menutext"><i id="menu5" class="fa fa-lock"></i> Success and onward!</span>
 				</div>
 			</div>
 		</div>
@@ -74,9 +74,9 @@
        	<div style="margin-top: -50px;" class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
 			<div class="panel">
 				<div class="panel-heading text-center">
-					<a class="btn btn-primary btn-menu btn-enabled" href="page4.html"><strong><h5>4</h5></strong></a>
+					<a class="btn btn-primary btn-menu" id="menubtn4" href="#"><strong><h5>4</h5></strong></a>
 					<br>
-					<span id="step4" class="menutext">Taking Charge</span>
+					<span id="step4" class="menutext"><i id="menu4" class="fa fa-lock"></i> Taking Charge</span>
 				</div>
 			</div>
 		</div>
@@ -86,9 +86,9 @@
        	<div style="margin-top: -5px;" class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
 			<div class="panel">
 				<div class="panel-heading text-center">
-					<a class="btn btn-primary btn-menu btn-enabled" href="page3.html"><strong><h5>3</h5></strong></a>
+					<a class="btn btn-primary btn-menu" id="menubtn3" href="#"><strong><h5>3</h5></strong></a>
 					<br>
-					<span id="step3" class="menutext">Journey Thinking</span>
+					<span id="step3" class="menutext"><i id="menu3" class="fa fa-lock"></i> Journey Thinking</span>
 				</div>
 			</div>
 		</div>
@@ -98,9 +98,9 @@
        	<div style="margin-top: 15px;" class="col-xs-6 col-sm-6 col-md-6 col-lg-6 text-center">
 			<div class="panel">
 				<div class="panel-heading text-center">
-					<a class="btn btn-primary btn-menu btn-enabled" href="page2.html"><strong><h5>2</h5></strong></a>
+					<a class="btn btn-primary btn-menu" id="menubtn2" href="#"><strong><h5>2</h5></strong></a>
 					<br>
-					<span id="step2" class="menutext">Make a difference</span>
+					<span id="step2" class="menutext"><i id="menu2" class="fa fa-lock"></i> Make a difference</span>
 				</div>
 			</div>
 		</div>
@@ -110,9 +110,9 @@
        	<div style="margin-top: 5px;" class="col-xs-6 col-sm-6 col-md-6 col-lg-6 text-center">
 			<div class="panel">
 				<div class="panel-heading text-center">
-					<a class="btn btn-primary btn-menu btn-enabled" href="page1.html"><strong><h5>1</h5></strong></a>
+					<a class="btn btn-primary btn-menu" id="menubtn1" href="#"><strong><h5>1</h5></strong></a>
 					<br>
-					<span id="step1" class="menutext">Unbelievable!</span>
+					<span id="step1" class="menutext"><i id="menu1" class="fa fa-lock"></i> Unbelievable!</span>
 				</div>
 			</div>
 		</div>
@@ -157,13 +157,28 @@
   });
 });
   
-var topx = $("#step4").offset().top;
-topx = topx - 200;
-var speed = topx + 1000;
-console.log("top: " + topx);
-$('html, body').animate({
-    scrollTop: topx 
-}, speed);
+$("#menubtn1").click(function() {
+	alertbox("This mission is currently locked!"); 
+	return false;
+});
+$("#menubtn2").click(function() {
+	alertbox("This mission is currently locked!"); 
+	return false;
+});
+$("#menubtn3").click(function() {
+	alertbox("This mission is currently locked!"); 
+	return false;
+});
+$("#menubtn4").click(function() {
+	alertbox("This mission is currently locked!"); 
+	return false;
+});
+$("#menubtn5").click(function() {
+	alertbox("This mission is currently locked!"); 
+	return false;
+});
+
+setTimeout(function(){ checkMenu() }, 1000);
 </script>
 
 </body>

@@ -34,7 +34,11 @@ exports.getUser = function(username) {
     username: username
   });
 };
-
+exports.getMenu = function(name) {
+  return answerCollection.findOne({
+    username: name
+  });
+};
 exports.addUsers = Q.async(function*(userArray) {
   for (var i in userArray) {
     var user = userArray[i];

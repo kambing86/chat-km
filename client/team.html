@@ -23,7 +23,7 @@
 <div class="wrapper">
 <div class="navbar navbar-fixed-top">
 	<div class="navbar-toggle">
-		<a href="instructions.html"><b>Agenda</b></a>
+		<a href="agenda.html"><b>Agenda</b></a>
 	</div>
 	<div class="navbar-toggle" id="gamebutton">
 		<b>Game</b>
@@ -50,9 +50,9 @@
 
 <nav class="nav-hide" id="navtest">
   		<ul>
-            	<li><a href="menu.html">Missions</a></li>
-                <li><a href="team.html">My Team</a></li>            	
-           		<li><a href="leaderboard.html">Leaderboard</a></li>
+            	<li><a href="menu.html"><i class="fa fa-tasks"></i> Missions</a></li>
+                <li><a href="team.html"><i class="fa fa-group"></i> My Team</a></li>            	
+           		<li><a href="leaderboard.html"><i class="fa fa-bar-chart-o"></i> Leaderboard</a></li>
         </ul>
 </nav>
 <br><br><br>
@@ -74,7 +74,7 @@
 					<h4>Name your battleship</h4>
 					<p>
 					<input type="text" class="form-control" id="teamname" placeholder="Your Team Name here"	><br>
-					<button class="btn btn-primary" onclick="updateTeamname();return false;"><b>Submit </b></button>
+					<button class="btn btn-primary" id="updateteam"><i id="lockteam" class="fa fa-lock fa-lg"></i> Submit</button>
 					</p>
 				</form>
 				</div>
@@ -95,7 +95,8 @@
        	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 			<div class="panel">
 				<div class="panel-heading">
-					* Team Leader
+					<p>* Team Leader</p>
+					<p>Note: Only Team Leader is allowed to update the Team Name</p>
 				</div>
 			</div>
 		</div>
@@ -129,6 +130,12 @@
     $('nav').removeClass('nav-hide');
   });
 });
+  
+$("#updateteam").click(function() {
+	alertbox("Your team has to complete Watch Captain Sim to unlock this mission.");
+	return false;
+});
+
 setTimeout(function(){ getTeam() }, 1000);
 </script>
 
