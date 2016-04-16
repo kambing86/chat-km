@@ -136,7 +136,7 @@ function initPage() {
 		var uid = dataarr[0];
 		var score = dataarr[1];
 	
-		updateQuiz(uid, score, 2, 2);
+		setTimeout(function(){ updateQuiz(uid, score, 2, 2) }, 1000);
 	}	
 }
 

@@ -457,25 +457,27 @@ if (cluster.isMaster) {
     }));        
     
     socket.on("updatescore", Q.async(function*(data) {
+    		
       var highscore = yield chatDb.getAnswer(socket.username, data);
       console.log("data question: " + data.question);
 
       var updateteam = 0;
       var user_highscore = 0;
       var score_diff = 0;
+      var score = parseInt(data.score);
       if(highscore == "undefined" || highscore.length == 0) {
 		  var answerdata = {
 			username: socket.username,
 			day: data.day,
 			question: data.question,
 			answer: 1,
-			points: data.score,
+			points: score,
 			status: true,
 			time: new Date()
 		  };
 		  yield chatDb.addAnswer(answerdata);
       	  updateteam = 1;
-      } else if(highscore[0].points < data.score) {
+      } else if(highscore[0].points < score) {
       	  user_highscore = highscore[0].points;
       	  yield chatDb.updateScore(socket.username, data);
       	  updateteam = 1;
@@ -487,9 +489,8 @@ if (cluster.isMaster) {
       if(updateteam === 1) {
       	  // for team, make username= "team"+teamId, answer=2 
       	  var team_username = "team"+data.userteamId;
-      	  
       	  var teamscore = yield chatDb.getAnswer(team_username, data);
-      	  score_diff = data.score - user_highscore;
+      	  score_diff = score - user_highscore;
       	  console.log("Adding points for " + team_username + " - " + score_diff);
       	  
       	  if(teamscore == "undefined" || teamscore.length == 0) {
@@ -500,12 +501,13 @@ if (cluster.isMaster) {
       	  	  	  day: data.day,
       	  	  	  question: data.question,
       	  	  	  answer: 2,
-      	  	  	  points: data.score,
+      	  	  	  points: score,
       	  	  	  status: true,
       	  	  	  time: new Date()
       	  	  };
+      	  	  
       	  	  yield chatDb.addAnswer(answerdata);
-      	  	  yield chatDb.updateUserpoints(socket.username, data.score);
+      	  	  yield chatDb.updateUserpoints(socket.username, score);
       	  	  
       	  } else if(score_diff > 0) {
       	  	  data.score = teamscore[0].points + score_diff;
@@ -516,12 +518,13 @@ if (cluster.isMaster) {
       	  	  //do nothing!
       	  }      	  
       }
-      console.log("data question2: " + data.question);
-      if(data.question == 2) {
-      	  if(score_diff > 0)
-      	  	  alertBox("Congratulations! You've earned " + data.score + " points.");
-      	  else
-      	  	  alertBox("You may try play the quiz again.");
+      
+      var question = parseInt(data.question);
+      console.log(question);
+      if(question == 2) {
+      	  var data = {score:score, diff:score_diff, team:updateteam};
+      	  var answerUser = usernames[socket.username];
+      	  answerUser.emit("updatescore", data);
       }
     }));
     

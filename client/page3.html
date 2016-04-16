@@ -137,7 +137,24 @@ $("#mission3").click(function() {
 function initPage() {
 	setTimeout(function(){ checkTeamScore(3,1) }, 1000);
 	//checkTeamScore(3,1);
+	var score = decodeURIComponent($.urlParam('score'));
+	if(score.length > 0) {
+		var data = Base64.decode(score);
+		var dataarr = data.split(":");
+		var uid = dataarr[0];
+		var score = dataarr[1];
+	
+		setTimeout(function(){ updateQuiz(uid, score, 3, 2) }, 1000);
+	}		
 }
+$.urlParam = function(name) {
+	var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
+    if (results === null) {
+    	return '';
+    } else {
+        return results[1] || '';
+    }
+};
 </script>
 
 </body>

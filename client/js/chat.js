@@ -1204,6 +1204,24 @@ $(function() {
     socket.emit("loadchallenge", data); 
     
   });    
+  socket.on("updatescore", function(data) {
+    //console.log("Something wrong?");
+    //console.log("updatescore: " + data.score + ", score_diff: " + data.diff + ", update_team: " + data.team);
+    if(data.score == 0) {
+    	alertBox("Please try again!");
+    } if(data.team == 0 && data.score > 0) {
+    	alertBox("You've previously scored the same or higher than " + data.score + " points. No additional points earned.");
+    	//alertBox("Congratulations! You've earned " + data.score + " points");
+    } else if ( data.diff > 0 ) {          
+    	
+    	if(data.diff == data.score) 
+    		alertBox("Congratulations! You've earned " + data.diff + " points.");
+    	else {
+    		var previous_score = data.score - data.diff;
+    		alertBox("Congratulations! You've earned additional " + data.diff + " points. Your previous score was " + previous_score + " points.");
+    	}
+    }
+  });        
   socket.on("closeround", function(round, wincount) {
     alertBox("Total updated: " + wincount, {reload:true});    
   });      
@@ -1440,17 +1458,13 @@ $(function() {
   }  
   window.updateQuiz = function(uid, score, d, q) {
   	  if(uid != username) {
+  	  	  console.log("uid: " + uid + ", username: " + username + ", score: " +score);
   	  	  alertBox("Invalid user!!! ");
   	  	  return;
   	  }
   	  
   	  var data = {day:d, question:q, score:score, userteamId:userteamId, userteamName:userteamName};
         socket.emit("updatescore", data);
-
-  	  /*
-  	  var data = {day:level, question:1, score:score, userteamId:userteamId, userteamName:userteamName};
-        socket.emit("updatescore", data);
-        */
   }    
   window.updateTeamname = function() {
   	  var teamname = $("#teamname").val();
