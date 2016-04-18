@@ -112,15 +112,19 @@
           var origin = event.origin;
           if (origin == location.origin) {
             var data = event.data;
-            var option = (data.success) ? {goback:true}:{reload:true};
+            //var option = (data.success) ? {goback:true}:{reload:true};
             if(data.success) {
            		updateScore(level, data.score);
            		if(level <= 4)
            			loadLB(parseInt(level),1,1);
            		else 
            			loadChallenge(parseInt(level),1,2);
-            }            
-            alertbox("Mission " + ((data.success) ? "Successful." : "Failed.") + "<br><br>You scored " + data.score + " points.", option);
+            }
+            if(data.success) {
+            	alertbox("Mission Successful.<br><br>You scored " + data.score + " points.", {goback:true});
+            } else {
+            	alertbox("Mission Failed.<br><br>You scored " + data.score + " points.<br><br>Please try again.", {reload:true});
+            }
           }
         }
       });
