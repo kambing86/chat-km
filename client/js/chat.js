@@ -85,7 +85,7 @@ $(function() {
   var $submitComment = $("#submitComment");
   
   $submitComment.on("click", function() {
-	console.log("Comment clicked " + joinedRoom);
+	//console.log("Comment clicked " + joinedRoom);
       sendMessage("inputComment",joinedRoom);
       //socket.emit("stop typing");
       typing = false;
@@ -178,7 +178,7 @@ $(function() {
       var dayRoom = window.location.pathname.split(".html");
       dayRoom = dayRoom[0];
 
-      console.log("socket emit login: " + username + ", room: " + dayRoom);
+      //console.log("socket emit login: " + username + ", room: " + dayRoom);
       socket.emit("login", username, dayRoom);
 
     } else {
@@ -266,7 +266,7 @@ $(function() {
       if(room == "/ask" || room == "/haiku" || room == "/day2quiz" || room == "/day3quiz" || room == "/day4quiz" )
 	givepoints = 10;
 	
-	console.log("new message: " + message + ": " + room);
+	//console.log("new message: " + message + ": " + room);
       socket.emit("new message", message, room, givepoints);
     }
   }
@@ -540,12 +540,12 @@ $(function() {
     usertype = user.userType;
     userteamId = parseInt(user.teamId);
     userteamName = user.teamName;
-    console.log("userId: " + userId);
-    console.log("username: " + username);
-    console.log("usertype: " + usertype);
-    console.log("userteamId: " + userteamId);
-    console.log("userteamName: " + userteamName);
-    console.log("joinedRoom: " + data.roomName);
+    //console.log("userId: " + userId);
+    //console.log("username: " + username);
+    //console.log("usertype: " + usertype);
+    //console.log("userteamId: " + userteamId);
+    //console.log("userteamName: " + userteamName);
+    //console.log("joinedRoom: " + data.roomName);
     joinedRoom = data.roomName;
 
     /*
@@ -592,8 +592,8 @@ $(function() {
   // Whenever the server emits "new message", update the chat body
   socket.on("new message", function(data, givepoints) {
   		  
-  	console.log("data.room: ", data.room);
-  	console.log("joinedRoom: ", joinedRoom);
+  	//console.log("data.room: ", data.room);
+  	//console.log("joinedRoom: ", joinedRoom);
     if(data.room == joinedRoom) {
 	if(data.username == username) {
 		if(givepoints>0)
@@ -823,7 +823,7 @@ $(function() {
   		  
   });    
   socket.on("loadlb", function(data) {
-  	console.log("loadlb data " + data.length);
+  	//console.log("loadlb data " + data.length);
     if(data == null || data.length==0)
       return;
   
@@ -859,7 +859,7 @@ $(function() {
     }
   });
   socket.on("loadchallenge", function(data) {
-  	console.log("loadchallenge data " + data.length);
+  	//console.log("loadchallenge data " + data.length);
     if(data == null || data.length==0)
       return;
   
@@ -918,10 +918,11 @@ $(function() {
   });  
   socket.on("checkteamanswers", function(data) {
     if(data == null)
-      return;      
+      return;
     
     var count = 0;
-    var day = question = 0;
+    var day = 0;
+    var question = 1;
     var completed = "";
     for(var i = 0; i<data.length; i++) {
     	if(data[i] && data[i].status === true) {
@@ -1117,10 +1118,10 @@ $(function() {
 
   socket.on("checkteamchallenge", function(data, round) {
     var teams = "";
-    console.log("checkteamchallenge " + data.length);
+    //console.log("checkteamchallenge " + data.length);
     var onboard = 0;
     for(var i = 0; i<data.length; i++) {
-    	console.log("team1: " + data[i].team1 + ", team2: " + data[i].team2);
+    	//console.log("team1: " + data[i].team1 + ", team2: " + data[i].team2);
     	if(userteamId == data[i].team1 || userteamId == data[i].team2)
     		onboard = 1;
     	
@@ -1458,7 +1459,7 @@ $(function() {
   }  
   window.updateQuiz = function(uid, score, d, q) {
   	  if(uid != username) {
-  	  	  console.log("uid: " + uid + ", username: " + username + ", score: " +score);
+  	  	  //console.log("uid: " + uid + ", username: " + username + ", score: " +score);
   	  	  alertBox("Invalid user!!! ");
   	  	  return;
   	  }
