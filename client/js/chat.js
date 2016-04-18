@@ -888,6 +888,7 @@ $(function() {
     alertBox("Your battle unit is now \"" + userteamName + "\"");
   });    
   socket.on("getteam", function(data) {
+    $("#tableid").html("Table " + userteamId);
     if(data == null)
       return;
     var members = "";
