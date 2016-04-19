@@ -17,7 +17,7 @@
 <!-- Le fav and touch icons -->
 <link rel="shortcut icon" href="assets/ico/favicon.ico">
 </head>
-<body onpageshow="initPage()">
+<body>
 <div class="fixed-img"></div>
 <div class="wrapper">
 <div class="navbar navbar-fixed-top">
@@ -135,10 +135,6 @@ $("#namebattle").click(function() {
 	alertbox("Your team has to complete Watch Captain Sim to unlock this mission.");
 	return false;
 });
-function initPage() {
-	setTimeout(function(){ checkTeamAnswers(0,1) }, 1000);
-	//checkTeamAnswers(0,1);
-}
 </script>
 
 </body>

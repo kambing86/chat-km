@@ -18,7 +18,7 @@
 <!-- Le fav and touch icons -->
 <link rel="shortcut icon" href="assets/ico/favicon.ico">
 </head>
-<body onpageshow="initPage()">
+<body>
 <div class="fixed-img"></div>
 <div class="wrapper">
 <div class="navbar navbar-fixed-top back">
@@ -141,11 +141,6 @@ $("#submitLyrics").click(function() {
 	alertbox("Mission 1: Your team has to earn at least 800 points to unlock this mission.");
 	return false;
 });  
-
-function initPage() {
-	setTimeout(function(){ checkTeamScore(1,1) }, 1500);
-	//checkTeamScore(1,1);
-}
 </script>
 
 </body>

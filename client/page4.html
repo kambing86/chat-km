@@ -17,7 +17,7 @@
 <!-- Le fav and touch icons -->
 <link rel="shortcut icon" href="assets/ico/favicon.ico">
 </head>
-<body onpageshow="initPage()">
+<body>
 <div class="fixed-img"></div>
 <div class="wrapper">
 <div class="navbar navbar-fixed-top">
@@ -134,19 +134,6 @@
 $("#mission4").click(function() {
 	alertbox("Mission 4: Your team has to earn at least 16000 points to unlock this mission."); 
 });  
-function initPage() {
-	setTimeout(function(){ checkTeamScore(4,1) }, 1000);
-	//checkTeamScore(4,1);
-	var score = decodeURIComponent($.urlParam('score'));
-	if(score.length > 0) {
-		var data = Base64.decode(score);
-		var dataarr = data.split(":");
-		var uid = dataarr[0];
-		var score = dataarr[1];
-	
-		setTimeout(function(){ updateQuiz(uid, score, 4, 2) }, 1000);
-	}		
-}
 $.urlParam = function(name) {
 	var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
     if (results === null) {

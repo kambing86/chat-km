@@ -572,6 +572,62 @@ $(function() {
       toChatPage(data);
     else
     */
+    
+    if(joinedRoom == "/page0") {
+    	checkTeamAnswers(0,1);
+    } else if(joinedRoom == "/page1") {
+    	checkTeamScore(1,1);
+    } else if(joinedRoom == "/page2") {
+    	checkTeamScore(2,1); 
+		var score = decodeURIComponent($.urlParam('score'));
+		if(score.length > 0) {
+			var data = Base64.decode(score);
+			var dataarr = data.split(":");
+			var uid = dataarr[0];
+			var score = dataarr[1];
+		
+			updateQuiz(uid, score, 2, 2);
+		}    	
+    } else if(joinedRoom == "/page3") {
+    	checkTeamScore(3,1); 
+		var score = decodeURIComponent($.urlParam('score'));
+		if(score.length > 0) {
+			var data = Base64.decode(score);
+			var dataarr = data.split(":");
+			var uid = dataarr[0];
+			var score = dataarr[1];
+		
+			updateQuiz(uid, score, 3, 2);
+		} 
+    } else if(joinedRoom == "/page4") {
+    	checkTeamScore(4,1); 
+		var score = decodeURIComponent($.urlParam('score'));
+		if(score.length > 0) {
+			var data = Base64.decode(score);
+			var dataarr = data.split(":");
+			var uid = dataarr[0];
+			var score = dataarr[1];
+		
+			updateQuiz(uid, score, 4, 2);
+		} 
+    } else if(joinedRoom == "/page5") {
+    	checkTeamChallenge(1);		
+    } else if(joinedRoom == "/menu") {
+    	checkMenu();
+    } else if(joinedRoom == "/team") {
+    	getTeam();    	
+    } else if(joinedRoom == "/unbelievable") {
+    	checkTeamScore(1,1);
+    } else if(joinedRoom == "/game") {
+    	var level = decodeURIComponent($.urlParam('level'));
+    	getHighscore(level);
+    } else if(joinedRoom == "/leaderboard") {
+    	console.log("in leaderboard");
+    	setTimeout(function(){loadLB(1,1,1);},500);
+    } else if(joinedRoom == "/pair") {
+    	checkTeamPairs(1);
+    }     
+    
       toCorrectPage();
 
   });
