@@ -824,25 +824,29 @@ $(function() {
   });    
   socket.on("loadlb", function(data) {
   	//console.log("loadlb data " + data.length);
-    if(data == null || data.length==0)
+    if(data == null || data.length==0) {
+    	$("#lbdetails").html("No record found");
+  		$("#teamlbdetails").html("No record found");
       return;
+    }
   
     if(viewingLB != data[0].day)
     	return;
     
     var members = "";
     for(var i = 0; i<data.length; i++) {
-    	
-    	members += "<div class='col-xs-9 col-sm-9 col-md-9 col-lg-9'>";
-    	
-    	if(data[0].answer == 1) { 
-    		members += data[i].username + "</div>";
-    	} else {
-    		members += data[i].teamname + "</div>";
-    	}
-    	
-    	members += "<div class='col-xs-3 col-sm-3 col-md-3 col-lg-3'>";
-    	members += data[i].points+"</div>";
+    	if(data[i].teamId < 100) {
+			members += "<div class='col-xs-9 col-sm-9 col-md-9 col-lg-9'>";
+			
+			if(data[0].answer == 1) { 
+				members += data[i].username + "</div>";
+			} else {
+				members += data[i].teamname + "</div>";
+			}
+			
+			members += "<div class='col-xs-3 col-sm-3 col-md-3 col-lg-3'>";
+			members += data[i].points+"</div>";
+		}
     }
     
     if(members == "")
