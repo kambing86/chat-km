@@ -978,7 +978,7 @@ $(function() {
     socket.emit("checkteamanswers", data);
   });  
   socket.on("checkteamanswers", function(data) {
-    if(data == null)
+  	if(data == null)
       return;
     
     var count = 0;
@@ -1110,9 +1110,10 @@ $(function() {
     	} 
 		$("#lock"+data.day).empty().remove();		
     } else {
-    	if(joinedRoom == "/unbelievable")
+    	if(joinedRoom == "/unbelievable") {
     		alertBox("Your team has to earn at least "+minpoints+" points to unlock this mission.", {goback:true});
-    	return;
+    		return;
+    	}
     }
 
 	var data = {userteamId:userteamId, username:username, day:data.day, question:data.question};
