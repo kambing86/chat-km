@@ -685,6 +685,12 @@ if (cluster.isMaster) {
       answerUser.emit("checkteamchallenge", teamchallenge, round);
 
     }));            
+    socket.on("updatemenu", Q.async(function*(step) {
+      yield chatDb.updateMenu(step);
+      var answerUser = usernames[socket.username];
+      answerUser.emit("updatemenu");
+
+    }));    
     socket.on("closeround", Q.async(function*(round) {
       var day = 5;
       if(round == 2)

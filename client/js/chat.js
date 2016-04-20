@@ -1287,9 +1287,14 @@ $(function() {
   socket.on("closeround", function(round, wincount) {
     alertBox("Total updated: " + wincount, {reload:true});    
   });      
+  socket.on("updatemenu", function() {
+    alertBox("Menu updated!", {reload:true});    
+  });        
   socket.on("checkmenu", function(day) {
-  	if(usertype == 2)
+  	if(usertype == 2) {
   		day = 5;
+  		$("#updatemenudiv").show();
+  	}
     for(var i=1; i<=day; i++) {
     	var step = i;
     	$("#menu"+step).empty().remove();
@@ -1573,6 +1578,11 @@ $(function() {
   window.checkMenu = function() {
         socket.emit("checkmenu");
   }      
+  window.updateMenu = function(step) {
+  	  if(usertype!=2)
+  	  	  return;
+  	  socket.emit("updatemenu", step);
+  }        
   window.checkPoll = function(data) {
         socket.emit("checkpoll", data);
   }  

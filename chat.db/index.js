@@ -114,6 +114,16 @@ exports.updateAnswer = function(data) {
     }
   });
 };
+exports.updateMenu = function(step) {
+  return answerCollection.findOneAndUpdate({
+      username: "menu"
+  }, {
+    $set: {
+      day: step,
+      time: new Date()
+    }
+  });
+};
 exports.updateScore = function(username, data) {
   return answerCollection.findOneAndUpdate({
       username: username,
