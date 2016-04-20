@@ -1110,7 +1110,8 @@ $(function() {
     	} 
 		$("#lock"+data.day).empty().remove();		
     } else {
-    	alertBox("Your team has to earn at least "+minpoints+" points to unlock this mission.", {goback:true});
+    	if(joinedRoom == "/unbelievable")
+    		alertBox("Your team has to earn at least "+minpoints+" points to unlock this mission.", {goback:true});
     	return;
     }
 
