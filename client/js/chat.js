@@ -891,7 +891,7 @@ $(function() {
     
     var members = "";
     for(var i = 0; i<data.length; i++) {
-    	if(data[i].teamId < 100) {
+    	//if(data[i].teamId < 100) {
 			members += "<div class='col-xs-9 col-sm-9 col-md-9 col-lg-9'>";
 			
 			if(data[0].answer == 1) { 
@@ -902,7 +902,7 @@ $(function() {
 			
 			members += "<div class='col-xs-3 col-sm-3 col-md-3 col-lg-3'>";
 			members += data[i].points+"</div>";
-		}
+		//}
     }
     
     if(members == "")
