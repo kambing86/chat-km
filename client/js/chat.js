@@ -1042,6 +1042,7 @@ $(function() {
   	} else if(oridata.day == 4) {
   		minpoints = 16000;  		
   	}
+  	
   	//data = {day:4,question:1,points:16200}
     if(data == null && usertype < 2) {
     	if(joinedRoom != "/quiz")
@@ -1096,11 +1097,26 @@ $(function() {
     			//window.location = "quiz.html?level="+ data.day;
     		});
     	} else if(data.day == 3) {
+    		var datenow = new Date();
+    		var datenow2 = new Date(2016,3,22);
+    		datenow2.setHours(12);
+    		datenow2.setMinutes(0);
+    		datenow2.setSeconds(0);
+    		//console.log("datenow: " + datenow);
+    		//console.log("datenow2: " + datenow2);
+    		
     		$("#mission3").unbind("click");
-    		$("#mission3").click(function() {
-    			var data = Base64.encodeURI(username+":"+1910+":"+Date.now().toString());
-    			window.location = "https://dev-sg-app.vocohub.com/sgConf/main/app/index.html?data="+data; 
-    		});    		
+    		if(datenow>datenow2) {
+				$("#mission3").click(function() {
+					var data = Base64.encodeURI(username+":"+1910+":"+Date.now().toString());
+					window.location = "https://dev-sg-app.vocohub.com/sgConf/main/app/index.html?data="+data; 
+				});    		
+			} else {
+				$("#mission3").click(function() {
+					alertBox("The mission will be available after lunch.");
+					return false;
+				});    						
+			}
     	} else if(data.day == 4) {
     		$("#mission4").unbind("click");
     		$("#mission4").click(function() {
