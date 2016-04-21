@@ -914,7 +914,7 @@ $(function() {
   		$("#teamlbdetails").html(members);
     
     if(data[0].answer == 1) { // load team later
-    	var teamdata = {day:data[0].day, question:data[0].question, type:2, limit:10};
+    	var teamdata = {day:data[0].day, question:data[0].question, type:2, limit:20};
     	socket.emit("loadlb", teamdata);
     }
   });
