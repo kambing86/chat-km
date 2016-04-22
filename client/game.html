@@ -121,7 +121,12 @@
            			loadChallenge(parseInt(level),1,2);
             }
             if(data.success) {
-            	alertbox("Mission Successful.<br><br>You scored " + data.score + " points.", {goback:true});
+            	if(level < 5) 
+            		alertbox("Mission Successful.<br><br>You scored " + data.score + " points.", {goback:true});
+            	else if(level == 5)
+            		alertbox("You scored " + data.score + " points.", {goback:true});
+            	else if(level == 6)
+            		alertbox("You scored " + data.score + " points.", {page5r2:true});
             } else {
             	alertbox("Mission Failed.<br><br>You scored " + data.score + " points.<br><br>Please try again.", {reload:true});
             }

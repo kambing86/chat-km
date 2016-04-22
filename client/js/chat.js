@@ -132,6 +132,10 @@ $(function() {
       $('#sm-alertbox').on('hidden.bs.modal', function (e) {
         window.history.back();
       })
+    } else if(options.page5r2 == true) {
+      $('#sm-alertbox').on('hidden.bs.modal', function (e) {
+        window.location = "page5.html?round=2";
+      })      
     }
     
   }
@@ -611,7 +615,13 @@ $(function() {
 			updateQuiz(uid, score, 4, 2);
 		} 
     } else if(joinedRoom == "/page5") {
-    	checkTeamChallenge(1);		
+		var round = decodeURIComponent($.urlParam('round'));
+		if(round == 2) {
+			$("#r2tab").tab('show');
+			checkTeamChallenge(2);
+		} else {
+			checkTeamChallenge(1);
+		}
     } else if(joinedRoom == "/menu") {
     	checkMenu();
     } else if(joinedRoom == "/team") {

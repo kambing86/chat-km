@@ -196,6 +196,14 @@ $("#startr1").click(function() {
 $("#startr2").click(function() {
 	alertbox("Level5 Round2: Your team need to be on the challenge board to start."); 
 });
+$.urlParam = function(name) {
+  var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
+  if (results === null) {
+    return '';
+  } else {
+    return results[1] || '';
+  }
+};
 </script>
 
 </body>
