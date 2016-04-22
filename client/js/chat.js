@@ -923,8 +923,12 @@ $(function() {
     if(data == null || data.length==0)
       return;
   
+    var round = 1;
+    if(data[0].day == 6)
+    	round = 2;
+    
     for(var i = 0; i<data.length; i++) {
-    	$("#"+data[i].username).text(data[i].points);
+    	$("#r"+round+data[i].username).text(data[i].points);
     }    
   });  
   socket.on("gethighscore", function(data) {
@@ -1159,24 +1163,24 @@ $(function() {
 				var team2id = "team" + pairedlist[i].team2;
 				
 				if(pairedlist[i].win != pairedlist[i].team1)
-					teams += "<div class='col-xs-5 col-sm-5 col-md-5 col-lg-5 text-center black-text'><span id='"+team1id+"'>0</span></div>";
+					teams += "<div class='col-xs-5 col-sm-5 col-md-5 col-lg-5 text-center black-text'><span id='r"+round+team1id+"'>0</span></div>";
 				else
-					teams += "<div class='col-xs-5 col-sm-5 col-md-5 col-lg-5 text-center red-text'><span id='"+team1id+"'>0</span></div>";
+					teams += "<div class='col-xs-5 col-sm-5 col-md-5 col-lg-5 text-center red-text'><span id='r"+round+team1id+"'>0</span></div>";
 				
 				teams += "<div class='col-xs-2 col-sm-2 col-md-2 col-lg-2 text-center'></div>";
 				if(pairedlist[i].win != pairedlist[i].team2)
-					teams += "<div class='col-xs-5 col-sm-5 col-md-5 col-lg-5 text-center black-text'><span id='"+team2id+"'>0</span></div>";
+					teams += "<div class='col-xs-5 col-sm-5 col-md-5 col-lg-5 text-center black-text'><span id='r"+round+team2id+"'>0</span></div>";
 				else 
-					teams += "<div class='col-xs-5 col-sm-5 col-md-5 col-lg-5 text-center red-text'><span id='"+team2id+"'>0</span></div>";
+					teams += "<div class='col-xs-5 col-sm-5 col-md-5 col-lg-5 text-center red-text'><span id='r"+round+team2id+"'>0</span></div>";
 			} else {
 				teams += "<div class='col-xs-5 col-sm-5 col-md-5 col-lg-5 text-center'>" + pairedlist[i].team1name + "</div>";
 				teams += "<div class='col-xs-2 col-sm-2 col-md-2 col-lg-2 text-center'>VS</div>";
 				teams += "<div class='col-xs-5 col-sm-5 col-md-5 col-lg-5 text-center'>" + pairedlist[i].team2name + "</div>";
 				var team1id = "team" + pairedlist[i].team1;
 				var team2id = "team" + pairedlist[i].team2;
-				teams += "<div class='col-xs-5 col-sm-5 col-md-5 col-lg-5 text-center red-text'><span id='"+team1id+"'>0</span></div>";
+				teams += "<div class='col-xs-5 col-sm-5 col-md-5 col-lg-5 text-center red-text'><span id='r"+round+team1id+"'>0</span></div>";
 				teams += "<div class='col-xs-2 col-sm-2 col-md-2 col-lg-2 text-center'></div>";
-				teams += "<div class='col-xs-5 col-sm-5 col-md-5 col-lg-5 text-center red-text'><span id='"+team2id+"'>0</span></div>";				
+				teams += "<div class='col-xs-5 col-sm-5 col-md-5 col-lg-5 text-center red-text'><span id='r"+round+team2id+"'>0</span></div>";				
 			}
     	}
     }
@@ -1191,7 +1195,11 @@ $(function() {
     }
     $("#unpairedteams" + round).html(teams);
     
-    var data = {day:5, question:round, type:2, limit:100};      
+    if(round == 1) {
+    	var data = {day:5, question:1, type:2, limit:100};
+    } else if (round == 2) {
+    	var data = {day:6, question:1, type:2, limit:100};
+    }
     socket.emit("loadchallenge", data);     
   });  
 
@@ -1223,24 +1231,24 @@ $(function() {
 				var team2id = "team" + data[i].team2;
 				
 				if(data[i].win != data[i].team1)
-					teams += "<div class='row'><div class='col-xs-5 col-sm-5 col-md-5 col-lg-5 text-center black-text'><span id='"+team1id+"'>0</span></div>";
+					teams += "<div class='row'><div class='col-xs-5 col-sm-5 col-md-5 col-lg-5 text-center black-text'><span id='r"+round+team1id+"'>0</span></div>";
 				else
-					teams += "<div class='row'><div class='col-xs-5 col-sm-5 col-md-5 col-lg-5 text-center red-text'><span id='"+team1id+"'>0</span></div>";
+					teams += "<div class='row'><div class='col-xs-5 col-sm-5 col-md-5 col-lg-5 text-center red-text'><span id='r"+round+team1id+"'>0</span></div>";
 				
 				teams += "<div class='col-xs-2 col-sm-2 col-md-2 col-lg-2 text-center'></div>";
 				if(data[i].win != data[i].team2)
-					teams += "<div class='col-xs-5 col-sm-5 col-md-5 col-lg-5 text-center black-text'><span id='"+team2id+"'>0</span></div></div>";
+					teams += "<div class='col-xs-5 col-sm-5 col-md-5 col-lg-5 text-center black-text'><span id='r"+round+team2id+"'>0</span></div></div>";
 				else 
-					teams += "<div class='col-xs-5 col-sm-5 col-md-5 col-lg-5 text-center red-text'><span id='"+team2id+"'>0</span></div></div>";
+					teams += "<div class='col-xs-5 col-sm-5 col-md-5 col-lg-5 text-center red-text'><span id='r"+round+team2id+"'>0</span></div></div>";
 			} else {
 				teams += "<div class='row'><div class='col-xs-5 col-sm-5 col-md-5 col-lg-5 text-center'>" + data[i].team1name + "</div>";
 				teams += "<div class='col-xs-2 col-sm-2 col-md-2 col-lg-2 text-center'>VS</div>";
 				teams += "<div class='col-xs-5 col-sm-5 col-md-5 col-lg-5 text-center'>" + data[i].team2name + "</div></div>";
 				var team1id = "team" + data[i].team1;
 				var team2id = "team" + data[i].team2;
-				teams += "<div class='row'><div class='col-xs-5 col-sm-5 col-md-5 col-lg-5 text-center red-text'><span id='"+team1id+"'>0</span></div>";
+				teams += "<div class='row'><div class='col-xs-5 col-sm-5 col-md-5 col-lg-5 text-center red-text'><span id='r"+round+team1id+"'>0</span></div>";
 				teams += "<div class='col-xs-2 col-sm-2 col-md-2 col-lg-2 text-center'></div>";
-				teams += "<div class='col-xs-5 col-sm-5 col-md-5 col-lg-5 text-center red-text'><span id='"+team2id+"'>0</span></div></div>";				
+				teams += "<div class='col-xs-5 col-sm-5 col-md-5 col-lg-5 text-center red-text'><span id='r"+round+team2id+"'>0</span></div></div>";				
 			}    	
     	/*
     	teams += "<div class='col-xs-5 col-sm-5 col-md-5 col-lg-5 text-center'>" + data[i].team1name + "</div>";
@@ -1280,7 +1288,11 @@ $(function() {
     	});
     }
     
-    var data = {day:5, question:round, type:2, limit:100};      
+    if(round == 1) {
+    	var data = {day:5, question:1, type:2, limit:100};
+    } else if (round == 2) {
+    	var data = {day:6, question:1, type:2, limit:100};
+    }
     socket.emit("loadchallenge", data); 
     
   });    

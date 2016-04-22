@@ -726,7 +726,7 @@ if (cluster.isMaster) {
 			  }
 			  if(winner > 0) { 
 			  	  console.log("team1: " + teams[i].team1 + ", winner: " + winner);
-			  	  yield chatDb.updateTeamChallenge(teams[i].team1, winner);
+			  	  yield chatDb.updateTeamChallenge(teams[i].team1, winner, round);
 			  	  wincount++;
 			  } 
 		  }

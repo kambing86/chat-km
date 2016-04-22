@@ -180,9 +180,10 @@ exports.updateTeamnameInChallengeTeam2 = function(data) {
       multi: true     
   });
 };
-exports.updateTeamChallenge = function(team1, winner) {
+exports.updateTeamChallenge = function(team1, winner, round) {
   return challengeCollection.findOneAndUpdate({
       team1: team1,
+      round: round,
       primary: true
   }, {
     $set: {
