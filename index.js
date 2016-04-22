@@ -678,12 +678,12 @@ if (cluster.isMaster) {
     }));        
     socket.on("loadr2winners", Q.async(function*() {
     		
-      var data = {day:6, question:1, type:2, limit:100};
+      var data = {day:5, question:1, type:2, limit:100};
       var lbdata = yield chatDb.loadLB(data);
       
       console.log("r2winner LB " + lbdata.length);
       
-      var teamchallenge = yield chatDb.getWinnerTeamChallenge(2);
+      var teamchallenge = yield chatDb.getWinnerTeamChallenge(1);
       console.log("r2winner length " + teamchallenge.length);
       
       var answerUser = usernames[socket.username];
