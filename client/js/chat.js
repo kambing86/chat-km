@@ -1295,7 +1295,39 @@ $(function() {
     }
     socket.emit("loadchallenge", data); 
     
-  });    
+  });         
+  socket.on("loadr2winners", function(lbdata, teams) {
+  	//console.log("loadlb data " + data.length);
+    if(lbdata == null || lbdata.length==0) {
+    	$("#teamchallenge2winners").html("No record found");
+      return;
+    }
+  
+    var members = "";
+    for(var i = 0; i<lbdata.length; i++) {
+    	for(var j=0; j<teams.length; j++) {
+    		var teamusername = "team" + teams[j].win;
+    		
+    		if(lbdata[i].username == teamusername) {
+				members += "<div class='col-xs-9 col-sm-9 col-md-9 col-lg-9'>";
+				
+				if(lbdata[0].answer == 1) { 
+					members += lbdata[i].username + "</div>";
+				} else {
+					members += lbdata[i].teamname + "</div>";
+				}
+				
+				members += "<div class='col-xs-3 col-sm-3 col-md-3 col-lg-3'>";
+				members += lbdata[i].points+"</div>";
+			}
+		}
+    }
+    
+    if(members == "")
+    	members = "No record found";
+  
+	$("#teamchallenge2winners").html(members);    
+  });  
   socket.on("updatescore", function(data) {
     //console.log("Something wrong?");
     //console.log("updatescore: " + data.score + ", score_diff: " + data.diff + ", update_team: " + data.team);
@@ -1605,6 +1637,9 @@ $(function() {
   window.checkTeamChallenge = function(round) {
         socket.emit("checkteamchallenge", round);
   }      
+  window.loadR2Winners = function() {
+        socket.emit("loadr2winners");
+  }        
   window.checkMenu = function() {
         socket.emit("checkmenu");
   }      

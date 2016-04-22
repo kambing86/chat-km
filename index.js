@@ -676,6 +676,20 @@ if (cluster.isMaster) {
       answerUser.emit("checkteamchallenge", teamchallenge, round);
 
     }));        
+    socket.on("loadr2winners", Q.async(function*() {
+    		
+      var data = {day:6, question:1, type:2, limit:100};
+      var lbdata = yield chatDb.loadLB(data);
+      
+      console.log("r2winner LB " + lbdata.length);
+      
+      var teamchallenge = yield chatDb.getWinnerTeamChallenge(2);
+      console.log("r2winner length " + teamchallenge.length);
+      
+      var answerUser = usernames[socket.username];
+      answerUser.emit("loadr2winners", lbdata, teamchallenge);
+
+    }));    
     socket.on("updatequiz", Q.async(function*(data) {
       
       var teamchallenge = yield chatDb.getTeamChallenge(round);
