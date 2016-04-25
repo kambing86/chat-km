@@ -577,6 +577,11 @@ $(function() {
     else
     */
     
+    if(usertype < 2) {
+    	alertBox("Login failed. Please try again.", {relogin:true});
+    	return;
+    }
+    
     if(joinedRoom == "/page0") {
     	checkTeamAnswers(0,1);
     } else if(joinedRoom == "/page1") {
