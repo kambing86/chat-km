@@ -1,4 +1,4 @@
-var db;
+use dbs;
 db.dropDatabase();
 db.chat.createIndex( { room: 1, msg: "text" }, { default_language: "none" } );
 db.chat.createIndex( { room: 1, time: 1 } );

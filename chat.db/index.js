@@ -1,5 +1,5 @@
-//var url = "mongodb://" + process.env.IP;
-var url = "mongodb://develop-sg";
+var url = "mongodb://" + process.env.IP + "/dbs";
+// var url = "mongodb://develop-sg/dbs";
 var userCollection = null;
 var chatCollection = null;
 var roomCollection = null;
@@ -8,7 +8,7 @@ var challengeCollection = null;
 
 var Q = require("q");
 var MongoClient = require("mongodb").MongoClient;
-var ObjectID = require('mongodb').ObjectID;
+var ObjectID = require("mongodb").ObjectID;
 var assert = require("assert");
 
 MongoClient.connect(url, function(err, db) {
